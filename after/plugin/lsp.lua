@@ -1,10 +1,12 @@
 local lsp = require('lsp-zero')
-require('lspconfig').lua_ls.setup({})
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-	ensure_installed = {'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jedi_language_server', 'java_language_server'},
+	ensure_installed = {'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jedi_language_server', 'jdtls'},
 })
+require('lspconfig').lua_ls.setup({})
+require('lspconfig').jedi_language_server.setup({})
+require('lspconfig').jdtls.setup({})
 
 -- Primeagen
 -- local cmp = require('cmp')

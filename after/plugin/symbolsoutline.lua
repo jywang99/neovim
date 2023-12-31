@@ -33,7 +33,7 @@ local opts = {
   lsp_blacklist = {},
   symbol_blacklist = {},
   symbols = {
-    File = { icon = "", hl = "@text.uri" },
+    File = { icon = "Ƒ", hl = "@text.uri" },
     Module = { icon = "", hl = "@namespace" },
     Namespace = { icon = "", hl = "@namespace" },
     Package = { icon = "", hl = "@namespace" },

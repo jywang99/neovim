@@ -1,4 +1,3 @@
--- vim.opt.guicursor = ""
 local vim = vim
 
 vim.opt.nu = true
@@ -10,9 +9,9 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
+vim.opt.cursorline = true
 vim.opt.smartindent = true
-
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
