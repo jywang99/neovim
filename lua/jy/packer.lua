@@ -20,13 +20,14 @@ return require('packer').startup(function(use)
             'nvim-tree/nvim-web-devicons',
         },
     }
-    use ('vim-airline/vim-airline')
     use 'nvim-tree/nvim-web-devicons' -- OPTIONAL: for file icons
     use 'lewis6991/gitsigns.nvim' -- OPTIONAL: for git status
     use 'romgrk/barbar.nvim'
 
-    -- appearance
+    -- UI/UX
+    use ('vim-airline/vim-airline')
     use({ 'rose-pine/neovim', as = 'rose-pine' })
+    use "folke/which-key.nvim"
 
     -- editing
 	use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})

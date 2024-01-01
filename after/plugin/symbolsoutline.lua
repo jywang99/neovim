@@ -5,8 +5,8 @@ local opts = {
   show_guides = true,
   auto_preview = false,
   position = 'right',
-  relative_width = true,
-  width = 25,
+  relative_width = false,
+  width = 40,
   auto_close = false,
   show_numbers = false,
   show_relative_numbers = false,
@@ -64,9 +64,6 @@ local opts = {
   },
 }
 require("symbols-outline").setup(opts)
-
--- shortcuts
-vim.keymap.set("n", "<leader>o", vim.cmd.SymbolsOutline)
 
 -- startup
 -- vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {

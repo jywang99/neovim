@@ -10,7 +10,3 @@ vim.opt.termguicolors = true
 -- empty setup using defaults
 require("nvim-tree").setup()
 
--- shortcuts
-vim.keymap.set("n", "<leader>ee", vim.cmd.NvimTreeToggle)
-vim.keymap.set("n", "<leader>ef", vim.cmd.NvimTreeFindFile)
-
