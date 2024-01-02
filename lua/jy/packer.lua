@@ -26,14 +26,14 @@ return require('packer').startup(function(use)
 
     -- UI/UX
     use ('vim-airline/vim-airline')
-    use({ 'rose-pine/neovim', as = 'rose-pine' })
     use "folke/which-key.nvim"
+    use { 'Mofiqul/vscode.nvim', as = 'vscode' }
 
     -- editing
 	use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 	use ('mbbill/undotree')
-	use ('tpope/vim-fugitive')
     use ('simrat39/symbols-outline.nvim')
+    use ('lewis6991/gitsigns.nvim')
 
     -- LSP
 	use {

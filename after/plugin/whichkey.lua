@@ -89,12 +89,16 @@ local mappings = {
             f = { "<Cmd>NvimTreeFindFile<CR>", "Show file in tree" },
             t = { "<Cmd>NvimTreeToggle<CR>", "Toggle file in tree" },
         },
-        -- find
+        -- find in workspace
         f = {
             name = "Find",
             o = { "<Cmd>Telescope find_files<CR>", "Open file" },
             s = { "<Cmd>Telescope live_grep<CR>", "Live grep" },
             g = { "<Cmd>Telescope git_files<CR>", "Open git file" },
+        },
+        -- find/replace in file
+        s = {
+            c = { [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Replace word" },
         },
         -- undotree
         u = { "<Cmd>UndotreeToggle<CR>", "Toggle Undotree" },
@@ -107,10 +111,17 @@ local mappings = {
         },
         -- LSP
         l = {
-            f = { vim.lsp.buf.format, "Format file" }
+            -- editing
+            f = { vim.lsp.buf.format, "Format file" },
+            r = { vim.lsp.buf.rename, "Rename" },
+            -- info
+            i = { vim.lsp.buf.hover, "Info" },
+            c = { vim.lsp.buf.implementation, "Implementations" },
+            u = { vim.lsp.buf.references, "References" },
+            d = { vim.diagnostic.open_float, "Diagnostics" },
         },
     },
-    -- buffers
+    -- buffers, some lsp
     ["g"] = {
         name = "Buffer",
         -- navigation
@@ -142,8 +153,25 @@ local mappings = {
             ["d"] = { '<Cmd>BufferOrderByDirectory<CR>', "Sort automatically by directory" },
             ["l"] = { '<Cmd>BufferOrderByLanguage<CR>', "Sort automatically by language" },
             ["w"] = { '<Cmd>BufferOrderByWindowNumber<CR>', "Sort automatically by window number" },
-        }
+        },
+        -- lsp
+        d = { '<Cmd>lua vim.lsp.buf.definition()<CR>', "Go to definition" },
+        D = { '<Cmd>lua vim.lsp.buf.declaration()<CR>', "Go to declaration" },
     }
 }
-
 which_key.register(mappings, opts)
+
+local v_opts = {
+    mode = "v",     -- NORMAL mode
+    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true,  -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = true,  -- use `nowait` when creating keymaps
+}
+local v_mappings = {
+    ["<leader>"] = {
+        s = { [["hy:%s/<C-r>h//gc<left><left><left>]], "Find and replace" },
+    }
+}
+which_key.register(v_mappings, v_opts)
+
