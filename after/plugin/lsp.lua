@@ -2,7 +2,7 @@ local lsp = require('lsp-zero')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-	ensure_installed = {'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jedi_language_server', 'jdtls'},
+	ensure_installed = {'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jdtls'},
 })
 require('lspconfig').lua_ls.setup({})
 require('lspconfig').jedi_language_server.setup({})

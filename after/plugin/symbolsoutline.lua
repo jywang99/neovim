@@ -15,7 +15,7 @@ local opts = {
   autofold_depth = nil,
   auto_unfold_hover = true,
   fold_markers = { '', '' },
-  wrap = false,
+  wrap = true,
   keymaps = { -- These keymaps can be a string or a table for multiple keys
     close = {"q"},
     goto_location = "<Cr>",
@@ -34,13 +34,13 @@ local opts = {
   symbol_blacklist = {},
   symbols = {
     File = { icon = "Ƒ", hl = "@text.uri" },
-    Module = { icon = "", hl = "@namespace" },
-    Namespace = { icon = "", hl = "@namespace" },
+    Module = { icon = "M", hl = "@namespace" },
+    Namespace = { icon = "N", hl = "@namespace" },
     Package = { icon = "", hl = "@namespace" },
     Class = { icon = "𝓒", hl = "@type" },
     Method = { icon = "ƒ", hl = "@method" },
     Property = { icon = "", hl = "@method" },
-    Field = { icon = "", hl = "@field" },
+    Field = { icon = "f", hl = "@field" },
     Constructor = { icon = "", hl = "@constructor" },
     Enum = { icon = "ℰ", hl = "@type" },
     Interface = { icon = "ﰮ", hl = "@type" },
@@ -50,26 +50,18 @@ local opts = {
     String = { icon = "𝓐", hl = "@string" },
     Number = { icon = "#", hl = "@number" },
     Boolean = { icon = "⊨", hl = "@boolean" },
-    Array = { icon = "", hl = "@constant" },
+    Array = { icon = "[", hl = "@constant" },
     Object = { icon = "⦿", hl = "@type" },
     Key = { icon = "🔐", hl = "@type" },
     Null = { icon = "NULL", hl = "@type" },
     EnumMember = { icon = "", hl = "@field" },
     Struct = { icon = "𝓢", hl = "@type" },
-    Event = { icon = "🗲", hl = "@type" },
+    Event = { icon = "E", hl = "@type" },
     Operator = { icon = "+", hl = "@operator" },
     TypeParameter = { icon = "𝙏", hl = "@parameter" },
-    Component = { icon = "", hl = "@function" },
-    Fragment = { icon = "", hl = "@constant" },
+    Component = { icon = "c", hl = "@function" },
+    Fragment = { icon = ";", hl = "@constant" },
   },
 }
 require("symbols-outline").setup(opts)
-
--- startup
--- vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
---     pattern = "*.*",
---     callback = function()
---         vim.cmd("doautocmd :SymbolsOutlineOpen")
---     end
--- })
 

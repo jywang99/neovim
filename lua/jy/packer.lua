@@ -20,13 +20,13 @@ return require('packer').startup(function(use)
             'nvim-tree/nvim-web-devicons',
         },
     }
-    use 'nvim-tree/nvim-web-devicons' -- OPTIONAL: for file icons
-    use 'lewis6991/gitsigns.nvim' -- OPTIONAL: for git status
+    use 'nvim-tree/nvim-web-devicons'
     use 'romgrk/barbar.nvim'
 
     -- UI/UX
     use ('vim-airline/vim-airline')
     use "folke/which-key.nvim"
+    use "lukas-reineke/indent-blankline.nvim"
     use { 'Mofiqul/vscode.nvim', as = 'vscode' }
 
     -- editing
@@ -34,6 +34,10 @@ return require('packer').startup(function(use)
 	use ('mbbill/undotree')
     use ('simrat39/symbols-outline.nvim')
     use ('lewis6991/gitsigns.nvim')
+    use({
+        "kylechui/nvim-surround",
+        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    })
 
     -- LSP
 	use {
