@@ -1,5 +1,8 @@
 local vim = vim
 local status_ok, which_key = pcall(require, "which-key")
+local dapui = require('dapui')
+local tree = require("nvim-tree")
+
 if not status_ok then
     return
 end
@@ -79,15 +82,35 @@ local opts = {
     nowait = true,  -- use `nowait` when creating keymaps
 }
 
+local function close_left_bufs()
+    dapui.close()
+    vim.cmd [[NvimTreeClose]]
+end
+
+local function close_right_bufs ()
+    pcall(vim.cmd, 'UndotreeHide')
+    pcall(vim.cmd, 'SymbolsOutlineClose')
+end
+
+local function go_to_previous_window()
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>p", true, true, true), "n", true)
+end
+
 local mappings = {
     -- main menu
     ["<leader>"] = {
         -- explorer
         e = {
             name = "Explorer",
-            e = { "<Cmd>NvimTreeFocus<CR>", "Focus tree" },
-            f = { "<Cmd>NvimTreeFindFile<CR>", "Show file in tree" },
-            t = { "<Cmd>NvimTreeToggle<CR>", "Toggle file in tree" },
+            e = { function ()
+                close_left_bufs()
+                vim.cmd [[NvimTreeFocus]]
+                go_to_previous_window()
+            end, "Focus tree" },
+            f = { function ()
+                close_left_bufs()
+                vim.cmd [[NvimTreeFindFile]]
+            end, "Show file in tree" },
         },
         -- find in workspace
         f = {
@@ -101,9 +124,15 @@ local mappings = {
             c = { [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Replace word" },
         },
         -- undotree
-        u = { "<Cmd>UndotreeToggle<CR>", "Toggle Undotree" },
+        u = { function ()
+            close_right_bufs()
+            vim.cmd [[UndotreeShow]]
+        end, "Toggle Undotree" },
         -- symbols-outline
-        o = { "<Cmd>SymbolsOutline<CR>", "Toggle SymbolsOutline" },
+        o = { function ()
+            close_right_bufs()
+            vim.cmd [[SymbolsOutlineOpen]]
+        end, "Toggle SymbolsOutline" },
         -- git
         g = {
             name = "Git",
@@ -111,6 +140,7 @@ local mappings = {
         },
         -- LSP
         l = {
+            name = "LSP",
             -- editing
             f = { vim.lsp.buf.format, "Format file" },
             r = { vim.lsp.buf.rename, "Rename" },
@@ -120,9 +150,28 @@ local mappings = {
             u = { vim.lsp.buf.references, "References" },
             d = { vim.diagnostic.open_float, "Diagnostics" },
         },
+        -- debug
+        r = {
+            name = "Debug",
+            i = { function ()
+                close_right_bufs()
+                close_left_bufs()
+                dapui.open()
+            end, "Show debug view" }
+        },
+        -- close panes
+        p = {
+            name = "Close pane",
+            a = { function ()
+                close_right_bufs()
+                close_left_bufs()
+            end, "Close side panes" },
+            l = { close_left_bufs, "Close left pane" },
+            r = { close_right_bufs, "Close right pane" },
+        }
     },
     -- buffers, some lsp
-    ["g"] = {
+    g = {
         name = "Buffer",
         -- navigation
         [","] = { '<Cmd>BufferPrevious<CR>', "Previous tab" },

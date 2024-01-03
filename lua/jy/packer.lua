@@ -57,6 +57,10 @@ return require('packer').startup(function(use)
 		}
 	}
 
+    -- Debug
+    use "theHamsta/nvim-dap-virtual-text"
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+
     -- Git
     use {"akinsho/toggleterm.nvim", tag = '*', config = function()
         require("toggleterm").setup()
