@@ -25,8 +25,8 @@ return require('packer').startup(function(use)
 
     -- UI/UX
     use ('vim-airline/vim-airline')
-    use "folke/which-key.nvim"
-    use "lukas-reineke/indent-blankline.nvim"
+    use 'folke/which-key.nvim'
+    use 'lukas-reineke/indent-blankline.nvim'
     use { 'Mofiqul/vscode.nvim', as = 'vscode' }
 
     -- editing
@@ -38,6 +38,7 @@ return require('packer').startup(function(use)
         "kylechui/nvim-surround",
         tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     })
+    use 'dnlhc/glance.nvim'
 
     -- LSP
 	use {
@@ -58,12 +59,13 @@ return require('packer').startup(function(use)
 	}
 
     -- Debug
-    use "theHamsta/nvim-dap-virtual-text"
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    use 'mfussenegger/nvim-jdtls'
+    use 'theHamsta/nvim-dap-virtual-text'
+    use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
 
     -- Git
-    use {"akinsho/toggleterm.nvim", tag = '*', config = function()
-        require("toggleterm").setup()
+    use {'akinsho/toggleterm.nvim', tag = '*', config = function()
+        require('toggleterm').setup()
     end}
 end)
 

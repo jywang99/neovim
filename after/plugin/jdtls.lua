@@ -126,7 +126,6 @@ local function enable_debugger(bufnr)
 end
 
 local function jdtls_on_attach(client, bufnr)
-    print('java init')
   if features.debugger then
     enable_debugger(bufnr)
   end

@@ -1,7 +1,6 @@
 local vim = vim
 local status_ok, which_key = pcall(require, "which-key")
 local dapui = require('dapui')
-local tree = require("nvim-tree")
 
 if not status_ok then
     return
@@ -116,7 +115,8 @@ local mappings = {
         f = {
             name = "Find",
             o = { "<Cmd>Telescope find_files<CR>", "Open file" },
-            s = { "<Cmd>Telescope live_grep<CR>", "Live grep" },
+            s = { TelescopeResume, "Live grep" },
+            r = { "<Cmd>Telescope live_grep<CR>", "Live grep (reset)" },
             g = { "<Cmd>Telescope git_files<CR>", "Open git file" },
         },
         -- find/replace in file
@@ -145,10 +145,12 @@ local mappings = {
             f = { vim.lsp.buf.format, "Format file" },
             r = { vim.lsp.buf.rename, "Rename" },
             -- info
-            i = { vim.lsp.buf.hover, "Info" },
-            c = { vim.lsp.buf.implementation, "Implementations" },
-            u = { vim.lsp.buf.references, "References" },
-            d = { vim.diagnostic.open_float, "Diagnostics" },
+            I = { vim.lsp.buf.hover, "Info" },
+            c = { [[:Glance implementations<CR>]], "Implementations" },
+            u = { [[:Glance references<CR>]], "References" },
+            t = { [[:Glance type_definitions<CR>]], "Type definitions" },
+            i = { [[:Glance implementations<CR>]], "Implementations" },
+            D = { vim.diagnostic.open_float, "Diagnostics" },
         },
         -- debug
         r = {
