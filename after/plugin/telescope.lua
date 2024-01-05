@@ -1,12 +1,21 @@
-local telescope = require('telescope.builtin')
+local telescope = require('telescope')
+local builtin = require('telescope.builtin')
 local telescope_last = 0
+
+telescope.setup({
+    pickers = {
+        find_files = {
+            hidden = true
+        }
+    }
+})
 
 function TelescopeResume()
   if telescope_last == 0 then
     telescope_last = 1
-    telescope.live_grep()
+    builtin.live_grep()
   else
-    telescope.resume()
+    builtin.resume()
   end
 end
 
