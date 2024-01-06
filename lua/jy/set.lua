@@ -4,6 +4,7 @@ vim.opt.nu = true
 
 vim.opt.relativenumber = true
 
+-- whitespace
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
@@ -13,6 +14,7 @@ vim.opt.cursorline = true
 vim.opt.smartindent = true
 vim.opt.wrap = true
 
+-- backups
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
@@ -30,4 +32,8 @@ vim.opt.colorcolumn = "80"
 
 -- airline
 vim.opt.laststatus = 3
+
+-- splits
+vim.opt.splitkeep = 'topline'
+vim.opt.equalalways = false
 

@@ -20,7 +20,7 @@ return require('packer').startup(function(use)
         },
     }
     use 'nvim-tree/nvim-web-devicons'
-    use 'romgrk/barbar.nvim'
+    use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
 
     -- UI/UX
     use ('vim-airline/vim-airline')

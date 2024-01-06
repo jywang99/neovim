@@ -9,7 +9,7 @@ vim.opt.termguicolors = true
 
 require("nvim-tree").setup({
     view = {
-        width = 40,
+        width = 30,
     }
 })
 
