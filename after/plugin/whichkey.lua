@@ -1,6 +1,7 @@
 local status_ok, which_key = pcall(require, "which-key")
 local dapui = require('dapui')
 local gitsigns = require('gitsigns')
+local comment = require('Comment.api')
 
 if not status_ok then
     return
@@ -169,6 +170,8 @@ local mappings = {
             i = { [[:Glance implementations<CR>]], "Implementations" },
             D = { vim.diagnostic.open_float, "Diagnostics" },
         },
+        -- Comments
+        ['/'] = { comment.toggle.linewise.current, 'Toggle line comment' },
         -- debug
         r = {
             name = "Debug",
@@ -252,7 +255,9 @@ local v_opts = {
 local v_mappings = {
     ["<leader>"] = {
         s = { [["hy:%s/<C-r>h//gc<left><left><left>]], "Find and replace" },
-    }
+    },
+    -- Comments
+    ['/'] = { '<Plug>(comment_toggle_linewise_visual)', 'Toggle line comment' },
 }
 which_key.register(v_mappings, v_opts)
 

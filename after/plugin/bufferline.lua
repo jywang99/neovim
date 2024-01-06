@@ -39,6 +39,7 @@ require("bufferline").setup{
         },
         numbers = 'ordinal',
         diagnostics = "nvim_lsp",
+        sort_by = 'insert_after_current',
     }
 }
 

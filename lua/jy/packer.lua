@@ -33,6 +33,7 @@ return require('packer').startup(function(use)
         tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     })
     use 'dnlhc/glance.nvim'
+    use 'numToStr/Comment.nvim'
 
     -- LSP
 	use {
