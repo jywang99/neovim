@@ -26,6 +26,12 @@ require("bufferline").setup{
                 separator = true,
             },
             {
+                filetype = "DiffviewFiles",
+                text = "DiffviewFiles",
+                text_align = "center",
+                separator = true,
+            },
+            {
                 filetype = "dapui",
                 text = "Debug",
                 text_align = "center",

@@ -32,7 +32,6 @@ return require('packer').startup(function(use)
 	use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 	use ('mbbill/undotree')
     use ('simrat39/symbols-outline.nvim')
-    use ('lewis6991/gitsigns.nvim')
     use({
         "kylechui/nvim-surround",
         tag = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -63,8 +62,9 @@ return require('packer').startup(function(use)
     use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
 
     -- Git
-    use {'akinsho/toggleterm.nvim', tag = '*', config = function()
-        require('toggleterm').setup()
-    end}
+    use ('lewis6991/gitsigns.nvim')
+    use "sindrets/diffview.nvim"
+    use {'akinsho/toggleterm.nvim'}
+
 end)
 

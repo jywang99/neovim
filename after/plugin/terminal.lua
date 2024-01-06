@@ -1,31 +1,5 @@
 local vim = vim
 
-local Terminal  = require('toggleterm.terminal').Terminal
-local lazygit = Terminal:new({
-    cmd = "lazygit",
-    direction = "float",
-})
-
-function ToggleLazyGit()
-  lazygit:toggle()
-end
-
--- Function to check if a buffer is a terminal buffer
-local function is_terminal(bufnr)
-    local buftype = vim.api.nvim_buf_get_option(bufnr, 'buftype')
-    return buftype == 'terminal'
-end
-
--- Function to find a terminal buffer by name
-local function find_terminal_buffer()
-    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-        if is_terminal(bufnr) then
-            return true
-        end
-    end
-    return false
-end
-
 TermWinInd = nil
 local function create_term_if_none()
     if TermWinInd then

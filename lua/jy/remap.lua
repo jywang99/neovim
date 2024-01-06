@@ -22,20 +22,17 @@ map("n", "<leader>Y", [["+Y]])
 map({ "n", "v" }, "<leader>d", [["_d]])
 
 map("n", "Q", "<nop>")
-map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+-- map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
-map("n", "<C-k>", "<cmd>cnext<CR>zz")
-map("n", "<C-j>", "<cmd>cprev<CR>zz")
-map("n", "<leader>k", "<cmd>lnext<CR>zz")
-map("n", "<leader>j", "<cmd>lprev<CR>zz")
+-- map("n", "<C-k>", "<cmd>cnext<CR>zz")
+-- map("n", "<C-j>", "<cmd>cprev<CR>zz")
+-- map("n", "<leader>k", "<cmd>lnext<CR>zz")
+-- map("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- Terminal
 map("t", "<C-e>", [[<C-\><C-n><C-w>p]] ,{ noremap = true })
--- map("t", "<C-d>", function ()
---    vim.api.nvim_feedkeys('i<C-d>i<C-d>', 'n', true)
--- end,{ noremap = true })
 map("t", "<C-t>", [[<C-b>c]], { noremap = true })
 map("t", "<C-x>", [[<C-b>x]],{ noremap = true })
 map("t", "<C-w>", [[<C-\><C-n><C-w>]],{ noremap = true })

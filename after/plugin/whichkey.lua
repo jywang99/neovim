@@ -1,6 +1,7 @@
 local vim = vim
 local status_ok, which_key = pcall(require, "which-key")
 local dapui = require('dapui')
+local gitsigns = require('gitsigns')
 
 if not status_ok then
     return
@@ -146,7 +147,14 @@ local mappings = {
         -- git
         g = {
             name = "Git",
-            i = { "<cmd>lua ToggleLazyGit()<CR>", "LazyGit" },
+            j = { gitsigns.next_hunk, "Next Hunk" },
+            k = { gitsigns.prev_hunk, "Prev Hunk" },
+            l = { gitsigns.blame_line, "Blame" },
+            u = { gitsigns.undo_stage_hunk, "Undo Stage Hunk" },
+            o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+            b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+            c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+            d = { ToggleDiffview, "Toggle diff view", },
         },
         -- LSP
         l = {
