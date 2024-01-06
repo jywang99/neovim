@@ -1,4 +1,3 @@
-local vim = vim
 local dapui = require('dapui')
 dapui.setup()
 

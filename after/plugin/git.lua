@@ -1,5 +1,3 @@
-local vim = vim
-
 require('gitsigns').setup()
 
 local dv_open = false

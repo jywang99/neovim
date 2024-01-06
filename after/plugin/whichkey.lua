@@ -1,4 +1,3 @@
-local vim = vim
 local status_ok, which_key = pcall(require, "which-key")
 local dapui = require('dapui')
 local gitsigns = require('gitsigns')

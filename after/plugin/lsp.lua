@@ -1,4 +1,3 @@
-local vim = vim
 local lsp = require('lsp-zero')
 
 require('mason').setup({})
@@ -9,7 +8,15 @@ require('mason-lspconfig').setup({
         jdtls = lsp.noop,
     }
 })
-require('lspconfig').lua_ls.setup({})
+require('lspconfig').lua_ls.setup({
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+})
 require('lspconfig').jedi_language_server.setup({})
 
 lsp.on_attach(function(client, bufnr)

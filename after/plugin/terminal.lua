@@ -1,5 +1,3 @@
-local vim = vim
-
 TermWinInd = nil
 local function create_term_if_none()
     if TermWinInd then

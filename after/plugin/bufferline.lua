@@ -1,4 +1,3 @@
-local vim = vim
 require("bufferline").setup{
     options = {
         custom_filter = function(buf_number, buf_numbers)
