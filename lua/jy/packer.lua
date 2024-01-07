@@ -54,9 +54,19 @@ return require('packer').startup(function(use)
 	}
 
     -- Debug
-    use 'mfussenegger/nvim-jdtls'
     use 'theHamsta/nvim-dap-virtual-text'
     use { 'rcarriga/nvim-dap-ui', requires = {'mfussenegger/nvim-dap'} }
+    use 'mfussenegger/nvim-jdtls'
+    use {
+        'mfussenegger/nvim-dap-python',
+        requires = {
+            'mfussenegger/nvim-dap',
+            'rcarriga/nvim-dap-ui'
+        },
+        config = function (_, opts)
+            require('dap-python').setup('~/.local/share/nvim/mason/packages/debugpy/venv/bin/python')
+        end
+    }
 
     -- Git
     use ('lewis6991/gitsigns.nvim')

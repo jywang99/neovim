@@ -1,14 +1,15 @@
-local lsp = require('lsp-zero')
+local lsp_zero = require('lsp-zero')
+local lsp_config = require('lspconfig')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-	ensure_installed = {'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jdtls'},
+	ensure_installed = {'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jdtls', 'pyright'},
     handlers = {
-        lsp.deefault_setup,
-        jdtls = lsp.noop,
+        lsp_zero.deefault_setup,
+        jdtls = lsp_zero.noop,
     }
 })
-require('lspconfig').lua_ls.setup({
+lsp_config.lua_ls.setup({
     settings = {
         Lua = {
             diagnostics = {
@@ -17,10 +18,10 @@ require('lspconfig').lua_ls.setup({
         }
     }
 })
-require('lspconfig').jedi_language_server.setup({})
+lsp_config.pyright.setup({})
 
-lsp.on_attach(function(client, bufnr)
-    lsp.default_keymaps({buffer = bufnr})
+lsp_zero.on_attach(function(client, bufnr)
+    lsp_zero.default_keymaps({buffer = bufnr})
     if client.name == "jdt.ls" then
         require("jdtls").setup_dap { hotcodereplace = "auto" }
         require("jdtls.dap").setup_dap_main_class_configs()
@@ -28,5 +29,5 @@ lsp.on_attach(function(client, bufnr)
     end
 end)
 
-lsp.setup()
+lsp_zero.setup()
 
