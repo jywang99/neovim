@@ -7,21 +7,18 @@ local view = require('nvim-tree.view')
 
 tree.setup({
     view = {
-        width = 30,
-    }
-})
+preserve_window_proportions = true,
+        number = true,
+        relativenumber = true,
 
-local function focus_file()
-    if not view.is_visible() then
-        return
-    end
-    vim.api.nvim_command(':NvimTreeFindFile')
-    vim.api.nvim_command(':wincmd p')
-end
-
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = {'*'},
-  desc = 'Focus file in tree',
-  callback = focus_file,
+    },
+    update_focused_file = {
+        enable = true,
+    },
+    renderer = {
+        indent_markers = {
+          enable = true,
+      }
+  }
 })
 
