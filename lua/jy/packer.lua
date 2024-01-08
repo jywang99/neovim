@@ -19,19 +19,19 @@ return require('packer').startup(function(use)
     use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
 
     -- UI/UX
-    use ('vim-airline/vim-airline')
+    use 'vim-airline/vim-airline'
     use 'folke/which-key.nvim'
     use 'lukas-reineke/indent-blankline.nvim'
     use { 'Mofiqul/vscode.nvim', as = 'vscode' }
 
     -- editing
-	use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-	use ('mbbill/undotree')
-    use ('simrat39/symbols-outline.nvim')
-    use({
+	use { 'nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'} }
+	use 'mbbill/undotree'
+    use { 'simrat39/symbols-outline.nvim' }
+    use {
         "kylechui/nvim-surround",
         tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-    })
+    }
     use 'dnlhc/glance.nvim'
     use 'numToStr/Comment.nvim'
 

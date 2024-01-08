@@ -1,9 +1,20 @@
+local function isInList(str, list)
+    for _, value in ipairs(list) do
+        if value == str then
+            return true
+        end
+    end
+    return false
+end
+
 require("bufferline").setup{
     options = {
         custom_filter = function(buf_number, buf_numbers)
-            if vim.bo[buf_number].filetype ~= "" then -- stuff like terminal
-                return true
+            local filetp = vim.bo[buf_number].filetype
+            if isInList(filetp, {'', 'nvimterm'}) then -- stuff like terminal
+                return false
             end
+            return true
         end,
         offsets = {
             {

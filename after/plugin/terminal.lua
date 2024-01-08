@@ -1,53 +1,65 @@
-TermWinInd = nil
+function IsNvimTermBufferOpen()
+    local buffers = vim.api.nvim_list_bufs()
+    for _, buf in ipairs(buffers) do
+        local buf_name = vim.api.nvim_buf_get_name(buf)
+        local buf_ft = vim.api.nvim_buf_get_option(buf, 'filetype')
+        if buf_ft == "nvimterm" and buf_name ~= "" then
+            return true
+        end
+    end
+    return false
+end
+
+-- Function to check if buffer with filetype=nvimterm is open and return window number
+function GetNvimTermWindow()
+    local buffers = vim.api.nvim_list_bufs()
+    for _, buf in ipairs(buffers) do
+        local buf_name = vim.api.nvim_buf_get_name(buf)
+        local buf_ft = vim.api.nvim_buf_get_option(buf, 'filetype')
+        if buf_ft == "nvimterm" and buf_name ~= "" then
+            local wins = vim.fn.getbufinfo(buf)[1].windows
+            if #wins > 0 then
+                return wins[1]
+            end
+        end
+    end
+    return -1
+end
+
+
 local function create_term_if_none()
-    if TermWinInd then
+    if GetNvimTermWindow() > 0 then
         return
     end
 
+    -- create a split for terminal buffer
     vim.cmd('split') -- Create a horizontal split
     vim.cmd('wincmd j') -- Switch to the new split
-    TermWinInd = vim.api.nvim_win_get_number(vim.api.nvim_get_current_win())
 
+    -- settings for terminal buffer
     vim.cmd('resize 20') -- 20% height
     vim.cmd('term') -- Open a terminal
-    vim.api.nvim_feedkeys('i', 'n', true) -- Switch to insert mode
-    vim.api.nvim_feedkeys('tmux new-session -A -s nvim-term\n', 'n', true) -- Send 'tmux' command to the terminal
-end
-
-local function focus_term()
-    local cur_win_ind = vim.api.nvim_win_get_number(vim.api.nvim_get_current_win())
-    local distance = TermWinInd - cur_win_ind
-    local w = 'w'
-    if distance < 0 then
-        w = 'W'
-        distance = -distance
-    end
-    for _ = 1, distance, 1 do
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>" .. w, true, false, true), "n", true)
-    end
+    vim.cmd('set filetype=nvimterm')
 end
 
 function SwitchToTerm()
     create_term_if_none()
-    focus_term()
+    vim.api.nvim_set_current_win(GetNvimTermWindow())
     vim.api.nvim_feedkeys('i', 'n', true)
 end
 
 function KillTerm()
-    if not TermWinInd then
+    local termInd = GetNvimTermWindow()
+    if termInd < 0 then
         return
     end
 
-    focus_term()
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", true)
-
+    vim.api.nvim_set_current_win(GetNvimTermWindow())
     vim.defer_fn(function()
         local success, _ = pcall(vim.cmd, [[bd!]])
         if not success then
             print("Error executing :bd!")
         end
     end, 50)
-
-    TermWinInd = nil
 end
 

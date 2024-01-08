@@ -7,7 +7,8 @@ local view = require('nvim-tree.view')
 
 tree.setup({
     view = {
-preserve_window_proportions = true,
+        width = 40,
+        preserve_window_proportions = true,
         number = true,
         relativenumber = true,
 
@@ -17,8 +18,8 @@ preserve_window_proportions = true,
     },
     renderer = {
         indent_markers = {
-          enable = true,
-      }
-  }
+            enable = true,
+        }
+    }
 })
 
