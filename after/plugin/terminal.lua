@@ -1,37 +1,47 @@
-function IsNvimTermBufferOpen()
-    local buffers = vim.api.nvim_list_bufs()
-    for _, buf in ipairs(buffers) do
-        local buf_name = vim.api.nvim_buf_get_name(buf)
-        local buf_ft = vim.api.nvim_buf_get_option(buf, 'filetype')
-        if buf_ft == "nvimterm" and buf_name ~= "" then
-            return true
-        end
+local bufUtils = require('bufferUtils')
+
+local termFt = 'nvimterm'
+local termTabFt = 'nvimterm_tab'
+
+local function findTermBuf()
+    local termBuf = -1
+    -- window mode
+    termBuf = bufUtils.getFiletypeBuffer(termFt)
+    if termBuf < 0 then
+        -- tab mode
+        termBuf = bufUtils.getFiletypeBuffer(termTabFt)
     end
-    return false
+    return termBuf
 end
 
--- Function to check if buffer with filetype=nvimterm is open and return window number
-function GetNvimTermWindow()
-    local buffers = vim.api.nvim_list_bufs()
-    for _, buf in ipairs(buffers) do
-        local buf_name = vim.api.nvim_buf_get_name(buf)
-        local buf_ft = vim.api.nvim_buf_get_option(buf, 'filetype')
-        if buf_ft == "nvimterm" and buf_name ~= "" then
-            local wins = vim.fn.getbufinfo(buf)[1].windows
-            if #wins > 0 then
-                return wins[1]
-            end
-        end
-    end
-    return -1
+local function termToBottom(buf)
+    bufUtils.openBufferInSplit(buf, 'h')
+    vim.cmd('resize 20') -- 20% height
+    vim.cmd('set filetype=' .. termFt)
 end
 
-
-local function create_term_if_none()
-    if GetNvimTermWindow() > 0 then
+local function createTermNew(termStyle)
+    -- Check if the winType is valid
+    if termStyle ~= 'split' and termStyle ~= 'tab' then
+        print('Invalid terminal style. Valid: "split" or "tab".')
         return
     end
 
+    -- create a new buffer and run terminal
+    local termBuf = vim.api.nvim_create_buf(true, false)
+    vim.cmd('term')
+    -- split
+    if termStyle == 'split' then
+        termToBottom(termBuf)
+    else
+        vim.cmd('set filetype=' .. termTabFt)
+    end
+    vim.api.nvim_feedkeys('i', 'n', true)
+end
+
+createTermNew('tab')
+
+local function createTerm()
     -- create a split for terminal buffer
     vim.cmd('split') -- Create a horizontal split
     vim.cmd('wincmd j') -- Switch to the new split
@@ -39,22 +49,28 @@ local function create_term_if_none()
     -- settings for terminal buffer
     vim.cmd('resize 20') -- 20% height
     vim.cmd('term') -- Open a terminal
-    vim.cmd('set filetype=nvimterm')
+    vim.cmd('set filetype=' .. termFt)
+    return vim.api.nvim_get_current_buf()
 end
 
-function SwitchToTerm()
-    create_term_if_none()
-    vim.api.nvim_set_current_win(GetNvimTermWindow())
-    vim.api.nvim_feedkeys('i', 'n', true)
+function CreateAndSwitchToTerm()
+    local buf = findTermBuf()
+    -- create terminal only if it doesn't exist yet
+    if buf < 0 then
+        buf = createTerm()
+    end
+    bufUtils.switchToWinOrBuf(buf)
 end
 
 function KillTerm()
-    local termInd = GetNvimTermWindow()
-    if termInd < 0 then
+    -- do nothing if terminal not open
+    local termBuf = findTermBuf()
+    if termBuf < 0 then
         return
     end
 
-    vim.api.nvim_set_current_win(GetNvimTermWindow())
+    -- switch to terminal and kill it
+    bufUtils.switchToWinOrBuf(termBuf)
     vim.defer_fn(function()
         local success, _ = pcall(vim.cmd, [[bd!]])
         if not success then

@@ -193,7 +193,7 @@ local mappings = {
         b = { [[:DapToggleBreakpoint<CR>]], "Toggle breakpoint" },
         -- terminal
         t = {
-            t = { SwitchToTerm, 'Open terminal' },
+            t = { CreateAndSwitchToTerm, 'Open terminal' },
             x = { KillTerm, 'Close terminal' },
         },
         -- close panes
