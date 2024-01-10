@@ -49,12 +49,6 @@ function M.openBufferInSplit(buffer, splitDirection)
         return
     end
 
-    -- Check if the buffer is valid
-    if buffer == nil or vim.api.nvim_buf_is_valid(buffer) == false then
-        print('Invalid buffer.')
-        return
-    end
-
     -- If the buffer doesn't have any window open, open a new split
     local wins = vim.fn.getbufinfo(buffer)[1].windows
     if #wins == 0 then
@@ -65,6 +59,15 @@ function M.openBufferInSplit(buffer, splitDirection)
         end
         -- Switch to the buffer in the newly created split
         vim.api.nvim_set_current_buf(buffer)
+    end
+end
+
+-- close all windows for buffer
+-- FORCE closes all of them
+function M.closeBufWins(buffer)
+    local wins = vim.fn.getbufinfo(buffer)[1].windows
+    for _, win in ipairs(wins) do
+        vim.api.nvim_win_close(win, true)
     end
 end
 

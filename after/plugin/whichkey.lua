@@ -180,8 +180,10 @@ local mappings = {
                 close_left_bufs()
                 dapui.open()
             end, "Show debug view" },
+            -- breakpoint
+            p = { [[:DapToggleBreakpoint<CR>]], "Toggle breakpoint" },
             -- debugging controls
-            p = { [[:DapLoadLaunchJson<CR>]], "Load launch json" },
+            c = { [[:DapLoadLaunchJson<CR>]], "Load launch json" },
             ["<Space>"] = { [[:DapContinue<CR>]], "Resume" },
             t = { [[:DapTerminate<CR>]], "Terminate" },
             l = { [[:DapStepInto<CR>]], "Step into" },
@@ -189,12 +191,11 @@ local mappings = {
             j = { [[:DapStepOver<CR>]], "Step over" },
             r = { [[:DapRestartFrame<CR>]], "Restart frame" },
         },
-        -- breakpoint
-        b = { [[:DapToggleBreakpoint<CR>]], "Toggle breakpoint" },
         -- terminal
         t = {
             t = { CreateAndSwitchToTerm, 'Open terminal' },
-            x = { KillTerm, 'Close terminal' },
+            m = { function() CloseTerm(false) end, 'Hide terminal' },
+            x = { function() CloseTerm(true) end, 'Kill terminal' },
         },
         -- close panes
         p = {

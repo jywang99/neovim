@@ -1,6 +1,6 @@
 local opts = {
-    relative_width = false,
-    width = 40,
+    relative_width = true,
+    width = 15,
     show_numbers = true,
     show_relative_numbers = true,
     wrap = true,

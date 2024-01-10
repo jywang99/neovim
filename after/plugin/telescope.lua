@@ -5,7 +5,7 @@ local telescope_last = 0
 telescope.setup({
     pickers = {
         find_files = {
-            hidden = true
+            hidden = false
         }
     }
 })

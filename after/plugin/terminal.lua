@@ -1,4 +1,4 @@
-local bufUtils = require('bufferUtils')
+local bufUtils = require('lua.jy.bufferUtils')
 
 local termFt = 'nvimterm'
 local termTabFt = 'nvimterm_tab'
@@ -20,26 +20,27 @@ local function termToBottom(buf)
     vim.cmd('set filetype=' .. termFt)
 end
 
-local function createTermNew(termStyle)
-    -- Check if the winType is valid
+function CreateTermNew(termStyle)
+    -- Check if the termStyle is valid
     if termStyle ~= 'split' and termStyle ~= 'tab' then
         print('Invalid terminal style. Valid: "split" or "tab".')
         return
     end
 
+    local origBuf = vim.api.nvim_get_current_buf()
+
     -- create a new buffer and run terminal
-    local termBuf = vim.api.nvim_create_buf(true, false)
+    local termBuf = vim.api.nvim_create_buf(false, false)
     vim.cmd('term')
     -- split
     if termStyle == 'split' then
+        vim.api.nvim_set_current_buf(origBuf)
         termToBottom(termBuf)
     else
         vim.cmd('set filetype=' .. termTabFt)
     end
     vim.api.nvim_feedkeys('i', 'n', true)
 end
-
-createTermNew('tab')
 
 local function createTerm()
     -- create a split for terminal buffer
@@ -62,20 +63,16 @@ function CreateAndSwitchToTerm()
     bufUtils.switchToWinOrBuf(buf)
 end
 
-function KillTerm()
+function CloseTerm(kill)
     -- do nothing if terminal not open
     local termBuf = findTermBuf()
     if termBuf < 0 then
         return
     end
 
-    -- switch to terminal and kill it
-    bufUtils.switchToWinOrBuf(termBuf)
-    vim.defer_fn(function()
-        local success, _ = pcall(vim.cmd, [[bd!]])
-        if not success then
-            print("Error executing :bd!")
-        end
-    end, 50)
+    bufUtils.closeBufWins(termBuf)
+    if kill then
+        vim.api.nvim_buf_delete(termBuf, { force = true })
+    end
 end
 
