@@ -17,6 +17,7 @@ return require('packer').startup(function(use)
     }
     use 'nvim-tree/nvim-web-devicons'
     use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
+    use { 'yorickpeterse/nvim-window' }
 
     -- UI/UX
     use 'vim-airline/vim-airline'

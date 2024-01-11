@@ -10,7 +10,35 @@ vim.fn.sign_define('DapBreakpointRejected', { text='◯', texthl='DapBreakpoint'
 vim.fn.sign_define('DapLogPoint', { text='⚪️', texthl='DapLogPoint', linehl='DapLogPoint', numhl= 'DapLogPoint' })
 vim.fn.sign_define('DapStopped', { text='🟡', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
 
-dapui.setup()
+dapui.setup({
+    layouts = {{
+        elements = {{
+            id = "repl",
+            size = 0.5
+        }, {
+            id = "console",
+            size = 0.5
+        }},
+        position = "bottom",
+        size = 10
+    }, {
+        elements = {{
+            id = "scopes",
+            size = 0.4
+        }, {
+            id = "breakpoints",
+            size = 0.2
+        }, {
+            id = "stacks",
+            size = 0.2
+        }, {
+            id = "watches",
+            size = 0.2
+        }},
+        position = "left",
+        size = 40
+    }, },
+})
 dap.listeners.after.event_initialized['dapui_config'] = function()
     dapui.open()
 end

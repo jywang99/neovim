@@ -25,7 +25,20 @@ function M.getFiletypeBuffer(bufFileType)
             return buf
         end
     end
-    return -1 -- If no buffer with the specified filetype is found
+    return -1
+end
+
+-- get buffer with matching partial filename (including path)
+function M.getPartialFilenameBuffer(partial_path)
+    local buffers = vim.api.nvim_list_bufs()
+    for _, buf in ipairs(buffers) do
+        local full_path = vim.fn.expand('%')
+        print(full_path)
+        if full_path:find(partial_path, 1, true) then
+            return buf
+        end
+    end
+    return -1
 end
 
 -- switch to window if open, otherwise switch to buffer in current window
