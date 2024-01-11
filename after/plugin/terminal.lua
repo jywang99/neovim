@@ -76,3 +76,7 @@ function CloseTerm(kill)
     end
 end
 
+function TermSplitToTab()
+    -- TODO
+end
+

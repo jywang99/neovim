@@ -1,7 +1,9 @@
-local status_ok, which_key = pcall(require, "which-key")
 local dapui = require('dapui')
 local gitsigns = require('gitsigns')
 local comment = require('Comment.api')
+local sidebar = require('utils.sidebarUtils')
+
+local status_ok, which_key = pcall(require, "which-key")
 
 if not status_ok then
     return
@@ -16,16 +18,6 @@ local opts = {
     noremap = true, -- use `noremap` when creating keymaps
     nowait = true,  -- use `nowait` when creating keymaps
 }
-
-local function close_left_bufs()
-    dapui.close()
-    vim.cmd [[NvimTreeClose]]
-end
-
-local function close_right_bufs ()
-    pcall(vim.cmd, 'UndotreeHide')
-    pcall(vim.cmd, 'SymbolsOutlineClose')
-end
 
 local function go_to_previous_window()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>p", true, true, true), "n", true)
@@ -46,12 +38,12 @@ local mappings = {
         e = {
             name = "Explorer",
             e = { function ()
-                close_left_bufs()
+                sidebar.closeLeftBufs()
                 vim.cmd [[NvimTreeFocus]]
                 go_to_previous_window()
             end, "Focus tree" },
             f = { function ()
-                close_left_bufs()
+                sidebar.closeLeftBufs()
                 vim.cmd [[NvimTreeFindFile]]
             end, "Show file in tree" },
         },
@@ -71,13 +63,13 @@ local mappings = {
         },
         -- undotree
         u = { function ()
-            close_right_bufs()
+            sidebar.closeRightBufs()
             vim.cmd [[UndotreeShow]]
         end, "Toggle Undotree" },
         -- symbols-outline
         o = { function ()
             DoAndSwitchBackWindow(function()
-                close_right_bufs()
+                sidebar.closeRightBufs()
                 vim.cmd [[SymbolsOutlineOpen]]
             end)
         end, "Toggle SymbolsOutline" },
@@ -113,9 +105,7 @@ local mappings = {
         d = {
             name = "Debug",
             i = { function ()
-                close_right_bufs()
-                close_left_bufs()
-                dapui.open()
+                sidebar.nukeAndRun(dapui.open)
             end, "Show debug view" },
             -- breakpoint
             b = { [[:DapToggleBreakpoint<CR>]], "Toggle breakpoint" },
