@@ -1,4 +1,4 @@
-local bufUtils = require('lua.jy.bufferUtils')
+local bufUtils = require('utils.bufferUtils')
 
 local termFt = 'nvimterm'
 local termTabFt = 'nvimterm_tab'

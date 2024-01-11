@@ -18,7 +18,7 @@ map("x", "<leader>p", [["_dP]])
 map({ "n", "v" }, "<leader>y", [["+y]])
 map("n", "<leader>Y", [["+Y]])
 
-map({ "n", "v" }, "<leader>d", [["_d]])
+-- map({ "n", "v" }, "<leader>d", [["_d]])
 
 map("n", "Q", "<nop>")
 -- map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")

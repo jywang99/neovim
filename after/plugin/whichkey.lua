@@ -1,4 +1,5 @@
 local status_ok, which_key = pcall(require, "which-key")
+local dap = require('dap')
 local dapui = require('dapui')
 local gitsigns = require('gitsigns')
 local comment = require('Comment.api')
@@ -173,7 +174,7 @@ local mappings = {
         -- Comments
         ['/'] = { comment.toggle.linewise.current, 'Toggle line comment' },
         -- debug
-        r = {
+        d = {
             name = "Debug",
             i = { function ()
                 close_right_bufs()
@@ -181,9 +182,12 @@ local mappings = {
                 dapui.open()
             end, "Show debug view" },
             -- breakpoint
-            p = { [[:DapToggleBreakpoint<CR>]], "Toggle breakpoint" },
+            b = { [[:DapToggleBreakpoint<CR>]], "Toggle breakpoint" },
+            c = { SetConditionalBreakpoint, "Set conditional breakpoint" },
+            L = { SetLoggingBreakpoint, "Set logging breakpoint" },
+            H = { SetHitCountBreakpoint, "Set hit count breakpoint" },
             -- debugging controls
-            c = { [[:DapLoadLaunchJson<CR>]], "Load launch json" },
+            J = { [[:DapLoadLaunchJson<CR>]], "Load launch json" },
             ["<Space>"] = { [[:DapContinue<CR>]], "Resume" },
             t = { [[:DapTerminate<CR>]], "Terminate" },
             l = { [[:DapStepInto<CR>]], "Step into" },
