@@ -1,4 +1,4 @@
-local dap = require('dap')
+local sidebar = require('util.sidebar')
 local dapui = require('dapui')
 local dap = require('dap')
 
@@ -40,7 +40,7 @@ dapui.setup({
     }, },
 })
 dap.listeners.after.event_initialized['dapui_config'] = function()
-    dapui.open()
+    sidebar.nukeAndRun(dapui.open)
 end
 dap.listeners.before.event_terminated['dapui_config'] = function()
     -- dapui.close()
@@ -50,8 +50,9 @@ dap.listeners.before.event_exited['dapui_config'] = function()
 end
 
 function SetConditionalBreakpoint()
-    local exp = vim.fn.input("Expression: ")
-    dap.set_breakpoint(exp)
+    local deleted_line = vim.fn.getline(vim.fn.line('.'))
+    vim.cmd('normal! dd')
+    dap.set_breakpoint(deleted_line)
 end
 
 function SetLoggingBreakpoint()

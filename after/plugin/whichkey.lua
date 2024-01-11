@@ -1,7 +1,7 @@
 local dapui = require('dapui')
 local gitsigns = require('gitsigns')
 local comment = require('Comment.api')
-local sidebar = require('utils.sidebarUtils')
+local sidebar = require('util.sidebar')
 
 local status_ok, which_key = pcall(require, "which-key")
 
@@ -53,8 +53,8 @@ local mappings = {
         f = {
             name = "Find",
             o = { "<Cmd>Telescope find_files<CR>", "Open file" },
-            s = { TelescopeResume, "Live grep" },
-            r = { "<Cmd>Telescope live_grep<CR>", "Live grep (reset)" },
+            r = { TelescopeResume, "Resume last search" },
+            s = { "<Cmd>Telescope live_grep<CR>", "Live grep" },
             g = { "<Cmd>Telescope git_files<CR>", "Open git file" },
         },
         -- find/replace in file

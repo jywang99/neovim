@@ -15,17 +15,5 @@ tree.setup({
     update_focused_file = {
         enable = true,
     },
-    renderer = {
-        indent_markers = {
-            enable = true,
-        },
-        icons = {
-          glyphs = {
-            folder = {
-                arrow_closed = ">",
-            },
-          },
-        },
-    },
 })
 

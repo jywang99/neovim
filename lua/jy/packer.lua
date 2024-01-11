@@ -9,6 +9,7 @@ return require('packer').startup(function(use)
 		'nvim-telescope/telescope.nvim', tag = '0.1.5',
 		requires = { 'nvim-lua/plenary.nvim' }
 	}
+    use 'nvim-telescope/telescope-dap.nvim'
     use {
         'nvim-tree/nvim-tree.lua',
         requires = {
@@ -26,7 +27,7 @@ return require('packer').startup(function(use)
     use { 'Mofiqul/vscode.nvim', as = 'vscode' }
 
     -- editing
-	use { 'nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'} }
+	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	use 'mbbill/undotree'
     use { 'simrat39/symbols-outline.nvim' }
     use {

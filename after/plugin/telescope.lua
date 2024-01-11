@@ -9,6 +9,7 @@ telescope.setup({
         }
     }
 })
+telescope.load_extension('dap')
 
 function TelescopeResume()
   if telescope_last == 0 then

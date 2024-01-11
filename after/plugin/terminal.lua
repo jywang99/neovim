@@ -1,4 +1,4 @@
-local bufUtils = require('utils.bufferUtils')
+local bufUtils = require('util.buffers')
 
 local termFt = 'nvimterm'
 local termTabFt = 'nvimterm_tab'

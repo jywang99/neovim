@@ -1,4 +1,4 @@
-local bufUtils = require('utils.bufferUtils')
+local bufUtils = require('util.buffers')
 require('gitsigns').setup()
 
 function ToggleDiffview()
