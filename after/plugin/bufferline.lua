@@ -11,7 +11,7 @@ require("bufferline").setup{
     options = {
         custom_filter = function(buf_number, buf_numbers)
             local filetp = vim.bo[buf_number].filetype
-            if isInList(filetp, {'', 'nvimterm'}) then -- stuff like terminal
+            if isInList(filetp, {'nvimterm'}) then -- stuff like terminal
                 return false
             end
             return true

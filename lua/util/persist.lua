@@ -1,4 +1,5 @@
 local BASE_DIR_NAME = '.nvim'
+local LAYOUT_FILE = 'workspace.vim'
 
 local M = {}
 
@@ -11,9 +12,22 @@ local function pathExists(path)
     return io.open(path)~=nil
 end
 
+function M.getWorkspaceFile()
+    local dataPath = M.getPersistPath()
+    if not pathExists(dataPath) then
+        return nil
+    end
+    dataPath = dataPath .. '/' .. LAYOUT_FILE
+    if not pathExists(dataPath) then
+        return nil
+    end
+    return dataPath
+end
+
 -- create .nvim directory on startup if doesn't exist
 if not pathExists(M.getPersistPath()) then
     os.execute('mkdir ' .. M.getPersistPath())
 end
 
 return M
+
