@@ -33,7 +33,6 @@ function M.getPartialFilenameBuffer(partial_path)
     local buffers = vim.api.nvim_list_bufs()
     for _, buf in ipairs(buffers) do
         local full_path = vim.fn.expand('%')
-        print(full_path)
         if full_path:find(partial_path, 1, true) then
             return buf
         end

@@ -34,7 +34,7 @@ end
 local mappings = {
     -- main menu
     ["<leader>"] = {
-        -- explorer
+        -- nvimtree
         e = {
             name = "Explorer",
             e = { function ()
@@ -130,12 +130,9 @@ local mappings = {
         -- close panes
         p = {
             name = "Close pane",
-            a = { function ()
-                close_right_bufs()
-                close_left_bufs()
-            end, "Close side panes" },
-            l = { close_left_bufs, "Close left pane" },
-            r = { close_right_bufs, "Close right pane" },
+            a = { sidebar.nukePeripherals, "Close side panes" },
+            l = { sidebar.closeLeftBufs, "Close left pane" },
+            r = { sidebar.closeRightBufs, "Close right pane" },
         }
     },
     -- buffers, some lsp

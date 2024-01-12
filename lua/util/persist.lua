@@ -24,9 +24,17 @@ function M.getWorkspaceFile()
     return dataPath
 end
 
+local function createNvimDir()
+    local path = M.getPersistPath()
+    os.execute('mkdir ' .. path)
+    local file = io.open(path .. '/.gitignore', 'w')
+    file:write(LAYOUT_FILE .. '\n', '\n')
+    file:close()
+end
+
 -- create .nvim directory on startup if doesn't exist
 if not pathExists(M.getPersistPath()) then
-    os.execute('mkdir ' .. M.getPersistPath())
+    createNvimDir()
 end
 
 return M
