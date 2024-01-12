@@ -1,6 +1,7 @@
 local sidebar = require('util.sidebar')
 local dapui = require('dapui')
 local dap = require('dap')
+local vscode = require('dap.ext.vscode')
 
 dapui.setup()
 
@@ -69,5 +70,12 @@ function SetHitCountBreakpoint()
         return
     end
     dap.set_breakpoint(nil, nil, times)
+end
+
+-- launch.json
+vscode.load_launchjs('.nvim/launch.json', {})
+function ShowDebugOptions()
+    vscode.load_launchjs('.nvim/launch.json', {})
+    vim.cmd('DapLoadLaunchJSON')
 end
 

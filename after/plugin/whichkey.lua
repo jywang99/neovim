@@ -113,7 +113,7 @@ local mappings = {
             L = { SetLoggingBreakpoint, "Set logging breakpoint" },
             H = { SetHitCountBreakpoint, "Set hit count breakpoint" },
             -- debugging controls
-            J = { [[:DapLoadLaunchJson<CR>]], "Load launch json" },
+            J = { ShowDebugOptions, "Load launch json" },
             ["<Space>"] = { [[:DapContinue<CR>]], "Resume" },
             t = { [[:DapTerminate<CR>]], "Terminate" },
             l = { [[:DapStepInto<CR>]], "Step into" },
