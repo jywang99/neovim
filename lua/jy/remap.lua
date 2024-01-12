@@ -31,9 +31,10 @@ map("n", "Q", "<nop>")
 map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- Terminal
-map("t", "<C-e>", [[<C-\><C-n><C-w>p]], { noremap = true })
 map("t", "<C-t>", [[<C-b>c]], { noremap = true })
 map("t", "<C-x>", [[<C-b>x]],{ noremap = true })
-map("t", "<C-w>", [[<C-\><C-n><C-w>]],{ noremap = true })
 map("t", "<C-b>", [[<C-b>]], { noremap = true }) -- for running nvim in tmux
+-- escape
+map("t", "<C-w>", [[<C-\><C-n><C-w>]],{ noremap = true })
+map("t", "<C-e>", [[<C-\><C-n><C-w>p]], { noremap = true })
 

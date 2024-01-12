@@ -1,6 +1,6 @@
 local M = {}
 
--- Function to check if buffer with filetype=nvimterm is open and return window number
+-- Function to check if buffer with a specific filetype is open and return window number
 function M.getFiletypeWindow(bufFileType)
     local buffers = vim.api.nvim_list_bufs()
     for _, buf in ipairs(buffers) do
@@ -66,8 +66,10 @@ function M.openBufferInSplit(buffer, splitDirection)
     if #wins == 0 then
         if splitDirection == 'v' then
             vim.cmd('vsplit')
+            vim.cmd('wincmd l')
         else
             vim.cmd('split')
+            vim.cmd('wincmd j')
         end
         -- Switch to the buffer in the newly created split
         vim.api.nvim_set_current_buf(buffer)

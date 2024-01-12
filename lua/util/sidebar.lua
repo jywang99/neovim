@@ -13,7 +13,7 @@ function M.closeRightBufs()
 end
 
 function M.closeBottomBufs()
-    TermSplitToTab()
+    TermToTab()
 end
 
 function M.nukePeripherals()

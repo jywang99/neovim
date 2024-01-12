@@ -124,8 +124,9 @@ local mappings = {
         -- terminal
         t = {
             t = { CreateAndSwitchToTerm, 'Open terminal' },
-            m = { function() CloseTerm(false) end, 'Hide terminal' },
             x = { function() CloseTerm(true) end, 'Kill terminal' },
+            s = { TermToSplit, 'Put terminal to split' },
+            b = { TermToTab, 'Put terminal to tab' },
         },
         -- close panes
         p = {
