@@ -34,7 +34,6 @@ return require('packer').startup(function(use)
         "kylechui/nvim-surround",
         tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     }
-    use 'dnlhc/glance.nvim'
     use 'numToStr/Comment.nvim'
 
     -- LSP
@@ -45,7 +44,6 @@ return require('packer').startup(function(use)
             --- Uncomment these if you want to manage LSP servers from neovim
             { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
-
             -- LSP Support
             { 'neovim/nvim-lspconfig' },
             -- Autocompletion
@@ -73,5 +71,5 @@ return require('packer').startup(function(use)
     -- Git
     use('lewis6991/gitsigns.nvim')
     use "sindrets/diffview.nvim"
-    use { 'akinsho/toggleterm.nvim' }
 end)
+

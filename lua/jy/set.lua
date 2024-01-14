@@ -35,5 +35,5 @@ vim.opt.laststatus = 3
 
 -- splits
 vim.opt.splitkeep = 'topline'
-vim.opt.equalalways = false
+vim.opt.equalalways = true
 

@@ -9,22 +9,29 @@ end
 which_key.setup({})
 
 local opts = {
-    mode = "n",     -- NORMAL mode
-    buffer = nil,   -- global mappings. specify a buffer number for buffer local mappings
+    mode = "n",
+    buffer = nil,
 }
 local mappings = {
     -- main menu
     ["<leader>"] = {
         -- window switcher
         w = { require('nvim-window').pick, 'Jump to window' },
-        -- close panes
-        p = {
-            name = "Close pane",
-            a = { sidebar.nukePeripherals, "Close side panes" },
-            l = { sidebar.closeLeftBufs, "Close left pane" },
-            r = { sidebar.closeRightBufs, "Close right pane" },
-        }
+        -- buffers
+        b = {
+            name = 'Buffers',
+            k = { [[:%bd|e#<CR>]], 'Close all other buffers' },
+        },
+    },
+    -- previously open buffers
+    ['<C-p>'] = { [[:bprev<CR>]], 'Previous buffer' },
+    ['<C-n>'] = { [[:bnext<CR>]], 'Next buffer' },
+    -- tabs
+    ['<C-t>'] = { [[:tabnew<CR>]], 'New tab' },
+    ['<C-x>'] = { [[:tabclose<CR>]], 'Close tab' },
+    -- splits
+    ['<C-w>'] = {
+        g = { [[:resize 20<CR>]], 'Goblin mode' },
     },
 }
 which_key.register(mappings, opts)
-

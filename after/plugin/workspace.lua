@@ -4,7 +4,6 @@ local sidebar = require('util.sidebar')
 local function saveSession()
     print('Saving workspace...')
     sidebar.nukePeripherals()
-    CloseTerm(true)
     vim.cmd(':mksession! ' .. persist.getPersistPath() .. '/workspace.vim')
 end
 
