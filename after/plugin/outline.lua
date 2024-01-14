@@ -41,18 +41,24 @@ local opts = {
 }
 require("symbols-outline").setup(opts)
 
+local function toggleOutline()
+    if buffers.getFiletypeBuffer('Outline') > 0 then
+        pcall(vim.cmd, 'SymbolsOutlineClose')
+        return
+    end
+    sidebar.closeRightBufs()
+    buffers.doAndSwitchBackWindow(function()
+        vim.cmd [[SymbolsOutlineOpen]]
+    end)
+end
+
 -- keybindings
 local opts = {
     mode = "n",
     prefix = '<leader>',
 }
 local mappings = {
-    o = { function ()
-        buffers.doAndSwitchBackWindow(function()
-            sidebar.closeRightBufs()
-            vim.cmd [[SymbolsOutlineOpen]]
-        end)
-    end, "Toggle SymbolsOutline" },
+    o = { toggleOutline, "Toggle SymbolsOutline" },
 }
 whichkey.register(mappings, opts)
 

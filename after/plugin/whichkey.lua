@@ -17,11 +17,6 @@ local mappings = {
     ["<leader>"] = {
         -- window switcher
         w = { require('nvim-window').pick, 'Jump to window' },
-        -- undotree
-        u = { function ()
-            sidebar.closeRightBufs()
-            vim.cmd [[UndotreeShow]]
-        end, "Toggle Undotree" },
         -- close panes
         p = {
             name = "Close pane",

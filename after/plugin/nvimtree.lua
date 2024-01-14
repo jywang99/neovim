@@ -1,6 +1,7 @@
 local tree = require("nvim-tree")
 local sidebar = require('util.sidebar')
 local whichkey = require('which-key')
+local buffers = require('util.buffers')
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -21,26 +22,28 @@ tree.setup({
     }
 })
 
-local function go_to_previous_window()
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>p", true, true, true), "n", true)
+local function toggleNvimTree()
+    if buffers.getFiletypeBuffer('NvimTree') > 0 then
+        vim.cmd [[NvimTreeClose]]
+        return
+    end
+    sidebar.closeLeftBufs()
+    buffers.doAndSwitchBackWindow(function()
+        vim.cmd [[NvimTreeFocus]]
+    end)
 end
 
 -- keybindings
 local opts = {
     mode = "n",
-    prefix = '<leader>e',
+    prefix = '<leader>',
 }
 local mappings = {
-    name = "Explorer",
-    e = { function()
-        sidebar.closeLeftBufs()
-        vim.cmd [[NvimTreeFocus]]
-        go_to_previous_window()
-    end, "Focus tree" },
-    f = { function()
+    e = { toggleNvimTree, "Toggle NvimTree" },
+    E = { function()
         sidebar.closeLeftBufs()
         vim.cmd [[NvimTreeFindFile]]
-    end, "Show file in tree" },
+    end, "go to file in NvimTree" },
 }
 whichkey.register(mappings, opts)
 
