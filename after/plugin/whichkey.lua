@@ -1,3 +1,5 @@
+local telescope = require('telescope.builtin')
+local tActions = require('telescope.actions')
 local dapui = require('dapui')
 local gitsigns = require('gitsigns')
 local comment = require('Comment.api')
@@ -52,10 +54,13 @@ local mappings = {
         -- find in workspace
         f = {
             name = "Find",
-            o = { "<Cmd>Telescope find_files<CR>", "Open file" },
-            r = { TelescopeResume, "Resume last search" },
-            s = { "<Cmd>Telescope live_grep<CR>", "Live grep" },
-            g = { "<Cmd>Telescope git_files<CR>", "Open git file" },
+            o = { telescope.find_files, "Open file" },
+            h = { telescope.oldfiles, "Recent files" },
+            s = { telescope.current_buffer_fuzzy_find, "Search in current buffer" },
+            S = { telescope.live_grep, "Live grep" },
+            r = { telescope.resume, "Resume last search" },
+            p = { telescope.pickers, "Previous search" },
+            f = { telescope.builtin, "Pick a picker" },
         },
         -- find/replace in file
         s = {
@@ -80,9 +85,9 @@ local mappings = {
             k = { gitsigns.prev_hunk, "Prev Hunk" },
             l = { gitsigns.blame_line, "Blame" },
             u = { gitsigns.undo_stage_hunk, "Undo Stage Hunk" },
-            o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
-            b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-            c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+            o = { telescope.git_status, "Open changed file" },
+            b = { telescope.git_branches, "Checkout branch" },
+            c = { telescope.git_commits, "Checkout commit" },
             d = { ToggleDiffview, "Toggle diff view", },
         },
         -- LSP
@@ -93,10 +98,10 @@ local mappings = {
             r = { vim.lsp.buf.rename, "Rename" },
             -- info
             I = { vim.lsp.buf.hover, "Info" },
-            c = { [[:Glance implementations<CR>]], "Implementations" },
-            u = { [[:Glance references<CR>]], "References" },
-            t = { [[:Glance type_definitions<CR>]], "Type definitions" },
-            i = { [[:Glance implementations<CR>]], "Implementations" },
+            d = { telescope.lsp_definitions, "Definitions" },
+            c = { telescope.lsp_implementations, "Implementations" },
+            u = { telescope.lsp_references, "References" },
+            t = { telescope.type_definitions, "Type definitions" },
             D = { vim.diagnostic.open_float, "Diagnostics" },
         },
         -- Comments

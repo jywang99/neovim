@@ -1,8 +1,11 @@
 local telescope = require('telescope')
-local builtin = require('telescope.builtin')
-local telescope_last = 0
 
 telescope.setup({
+    defaults = {
+        cache_picker = {
+            num_pickers = -1,
+        },
+    },
     pickers = {
         find_files = {
             hidden = false
@@ -10,13 +13,4 @@ telescope.setup({
     }
 })
 telescope.load_extension('dap')
-
-function TelescopeResume()
-  if telescope_last == 0 then
-    telescope_last = 1
-    builtin.live_grep()
-  else
-    builtin.resume()
-  end
-end
 

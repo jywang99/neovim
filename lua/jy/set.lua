@@ -1,6 +1,8 @@
 vim.opt.nu = true
 
 vim.opt.relativenumber = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 -- whitespace
 vim.opt.tabstop = 4
