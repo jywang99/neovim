@@ -2,28 +2,32 @@ local sidebar = require('util.sidebar')
 local dapui = require('dapui')
 local dap = require('dap')
 local vscode = require('dap.ext.vscode')
+local whichkey = require('which-key')
 
 dapui.setup()
 
-vim.fn.sign_define('DapBreakpoint', { text='🔴', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
-vim.fn.sign_define('DapBreakpointCondition', { text='🔵', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint' })
-vim.fn.sign_define('DapBreakpointRejected', { text='◯', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl= 'DapBreakpoint' })
-vim.fn.sign_define('DapLogPoint', { text='⚪️', texthl='DapLogPoint', linehl='DapLogPoint', numhl= 'DapLogPoint' })
-vim.fn.sign_define('DapStopped', { text='🟡', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
+vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl = 'DapBreakpoint', linehl = 'DapBreakpoint', numhl =
+'DapBreakpoint' })
+vim.fn.sign_define('DapBreakpointCondition',
+    { text = '🔵', texthl = 'DapBreakpoint', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
+vim.fn.sign_define('DapBreakpointRejected',
+    { text = '◯', texthl = 'DapBreakpoint', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
+vim.fn.sign_define('DapLogPoint', { text = '⚪️', texthl = 'DapLogPoint', linehl = 'DapLogPoint', numhl = 'DapLogPoint' })
+vim.fn.sign_define('DapStopped', { text = '🟡', texthl = 'DapStopped', linehl = 'DapStopped', numhl = 'DapStopped' })
 
 dapui.setup({
-    layouts = {{
-        elements = {{
+    layouts = { {
+        elements = { {
             id = "repl",
             size = 0.5
         }, {
             id = "console",
             size = 0.5
-        }},
+        } },
         position = "bottom",
         size = 10
     }, {
-        elements = {{
+        elements = { {
             id = "scopes",
             size = 0.4
         }, {
@@ -35,7 +39,7 @@ dapui.setup({
         }, {
             id = "watches",
             size = 0.2
-        }},
+        } },
         position = "left",
         size = 40
     }, },
@@ -74,8 +78,28 @@ end
 
 -- launch.json
 vscode.load_launchjs('.nvim/launch.json', {})
-function ShowDebugOptions()
-    vscode.load_launchjs('.nvim/launch.json', {})
-    vim.cmd('DapLoadLaunchJSON')
-end
+
+-- keybindings
+local opts = {
+    mode = "n",
+    prefix = '<leader>d',
+}
+local mappings = {
+    name = "Debug",
+    i = { function() sidebar.nukeAndRun(dapui.open) end, "Show debug view" },
+    -- breakpoint
+    b = { [[:DapToggleBreakpoint<CR>]], "Toggle breakpoint" },
+    c = { SetConditionalBreakpoint, "Set conditional breakpoint" },
+    L = { SetLoggingBreakpoint, "Set logging breakpoint" },
+    H = { SetHitCountBreakpoint, "Set hit count breakpoint" },
+    -- debugging controls
+    J = { DapLoadLaunchJSON, "Load launch json" },
+    ["<Space>"] = { [[:DapContinue<CR>]], "Resume" },
+    t = { [[:DapTerminate<CR>]], "Terminate" },
+    l = { [[:DapStepInto<CR>]], "Step into" },
+    h = { [[:DapStepOut<CR>]], "Step out" },
+    j = { [[:DapStepOver<CR>]], "Step over" },
+    r = { [[:DapRestartFrame<CR>]], "Restart frame" },
+}
+whichkey.register(mappings, opts)
 

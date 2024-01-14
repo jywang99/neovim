@@ -1,4 +1,6 @@
 local telescope = require('telescope')
+local builtin = require('telescope.builtin')
+local whichkey = require('which-key')
 
 telescope.setup({
     defaults = {
@@ -13,4 +15,21 @@ telescope.setup({
     }
 })
 telescope.load_extension('dap')
+
+-- keybindings
+local opts = {
+    mode = "n",
+    prefix = '<leader>f',
+}
+local mappings = {
+    name = "Telescope",
+    o = { builtin.find_files, "Open file" },
+    h = { builtin.oldfiles, "Recent files" },
+    s = { builtin.current_buffer_fuzzy_find, "Search in current buffer" },
+    S = { builtin.live_grep, "Live grep" },
+    r = { builtin.resume, "Resume last search" },
+    p = { builtin.pickers, "Previous search" },
+    f = { builtin.builtin, "Pick a picker" },
+}
+whichkey.register(mappings, opts)
 

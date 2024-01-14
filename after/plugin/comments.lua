@@ -1,3 +1,6 @@
+local api = require('Comment.api')
+local whichkey = require('which-key')
+
 require('Comment').setup({
     ---Add a space b/w comment and the line
     padding = true,
@@ -18,4 +21,23 @@ require('Comment').setup({
     ---Function to call after (un)comment
     post_hook = nil,
 })
+
+-- keybindings
+local opts = {
+    mode = "n",
+    prefix = '<leader>',
+}
+local mappings = {
+    ['/'] = { api.toggle.linewise.current, 'Toggle line comment' },
+}
+whichkey.register(mappings, opts)
+
+local v_opts = {
+    mode = "v",     -- NORMAL mode
+    prefix = '<leader>',
+}
+local v_mappings = {
+    ['/'] = { '<Plug>(comment_toggle_linewise_visual)', 'Toggle selection comment' },
+}
+whichkey.register(v_mappings, v_opts)
 

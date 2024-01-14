@@ -85,5 +85,13 @@ function M.closeBufWins(buffer)
     end
 end
 
+function M.doAndSwitchBackWindow(func)
+    local current_window = vim.fn.win_getid()
+    func()
+    vim.defer_fn(function()
+        vim.api.nvim_set_current_win(current_window)
+    end, 100)
+end
+
 return M
 

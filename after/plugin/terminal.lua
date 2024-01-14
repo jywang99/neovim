@@ -1,4 +1,5 @@
 local bufUtils = require('util.buffers')
+local whichkey = require('which-key')
 
 local termFt = 'nvimterm'
 local termTabFt = 'nvimterm_tab'
@@ -16,12 +17,12 @@ end
 
 local function createTerm()
     -- create a split for terminal buffer
-    vim.cmd('split') -- Create a horizontal split
+    vim.cmd('split')    -- Create a horizontal split
     vim.cmd('wincmd j') -- Switch to the new split
 
     -- settings for terminal buffer
     vim.cmd('resize 20') -- 20% height
-    vim.cmd('term') -- Open a terminal
+    vim.cmd('term')      -- Open a terminal
     vim.cmd('set filetype=' .. termFt)
     return vim.api.nvim_get_current_buf()
 end
@@ -81,4 +82,17 @@ function TermToSplit()
         vim.cmd('resize 20') -- 20% height
     end)
 end
+
+-- keybindings
+local opts = {
+    mode = "n",
+    prefix = '<leader>t',
+}
+local mappings = {
+    t = { CreateAndSwitchToTerm, 'Open terminal' },
+    x = { function() CloseTerm(true) end, 'Kill terminal' },
+    s = { TermToSplit, 'Put terminal to split' },
+    b = { TermToTab, 'Put terminal to tab' },
+}
+whichkey.register(mappings, opts)
 

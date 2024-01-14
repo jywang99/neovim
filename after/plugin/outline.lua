@@ -1,3 +1,7 @@
+local whichkey = require('which-key')
+local sidebar = require('util.sidebar')
+local buffers = require('util.buffers')
+
 local opts = {
     relative_width = true,
     width = 15,
@@ -36,4 +40,19 @@ local opts = {
     },
 }
 require("symbols-outline").setup(opts)
+
+-- keybindings
+local opts = {
+    mode = "n",
+    prefix = '<leader>',
+}
+local mappings = {
+    o = { function ()
+        buffers.doAndSwitchBackWindow(function()
+            sidebar.closeRightBufs()
+            vim.cmd [[SymbolsOutlineOpen]]
+        end)
+    end, "Toggle SymbolsOutline" },
+}
+whichkey.register(mappings, opts)
 
