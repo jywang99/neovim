@@ -19,6 +19,7 @@ return require('packer').startup(function(use)
     use 'nvim-tree/nvim-web-devicons'
     use 'yorickpeterse/nvim-window'
     use 'ThePrimeagen/harpoon'
+    use 'folke/zen-mode.nvim'
 
     -- UI/UX
     use 'vim-airline/vim-airline'

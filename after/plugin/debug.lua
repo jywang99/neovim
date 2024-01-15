@@ -1,5 +1,6 @@
 local dap = require('dap')
 local dapui = require('dapui')
+local bufUtils = require('util.buffers')
 local sidebar = require('util.sidebar')
 local vscode = require('dap.ext.vscode')
 local whichkey = require('which-key')
@@ -15,8 +16,8 @@ vim.fn.sign_define('DapStopped', { text = '🟡', texthl = 'DapStopped', linehl 
 dapui.setup({
     layouts = {{
         elements = {
-            { id = "repl", size = 0.5 },
-            { id = "console", size = 0.5 }
+            { id = "repl", size = 0.15 },
+            { id = "console", size = 0.85 }
         },
         position = "bottom",
         size = 10
@@ -34,10 +35,10 @@ dap.listeners.after.event_initialized['dapui_config'] = function()
     sidebar.nukeAndRun(dapui.open)
 end
 dap.listeners.before.event_terminated['dapui_config'] = function()
-    dapui.close()
+    -- dapui.close()
 end
 dap.listeners.before.event_exited['dapui_config'] = function()
-    dapui.close()
+    -- dapui.close()
 end
 
 function SetConditionalBreakpoint()
@@ -65,6 +66,14 @@ end
 -- launch.json
 vscode.load_launchjs('.nvim/launch.json', {})
 
+local function toggleDapUi()
+    if bufUtils.getFiletypeWindow('dapui_watches') > 0 then
+        dapui.close()
+        return
+    end
+    dapui.open()
+end
+
 -- keybindings
 local opts = {
     mode = "n",
@@ -72,6 +81,7 @@ local opts = {
 }
 local mappings = {
     name = "Debug",
+    i = { toggleDapUi, 'Toggle Dap UI' },
     -- breakpoint
     b = { [[:DapToggleBreakpoint<CR>]], "Toggle breakpoint" },
     c = { SetConditionalBreakpoint, "Set conditional breakpoint" },
@@ -87,3 +97,4 @@ local mappings = {
     r = { [[:DapRestartFrame<CR>]], "Restart frame" },
 }
 whichkey.register(mappings, opts)
+
