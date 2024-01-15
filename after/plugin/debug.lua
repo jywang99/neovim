@@ -90,7 +90,7 @@ local mappings = {
     -- debugging controls
     J = { [[:DapLoadLaunchJSON<CR>]], "Load launch json" },
     ["<Space>"] = { [[:DapContinue<CR>]], "Resume" },
-    t = { [[:DapTerminate<CR>]], "Terminate" },
+    s = { [[:DapTerminate<CR>]], "Terminate" },
     l = { [[:DapStepInto<CR>]], "Step into" },
     h = { [[:DapStepOut<CR>]], "Step out" },
     j = { [[:DapStepOver<CR>]], "Step over" },
