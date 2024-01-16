@@ -22,16 +22,14 @@ return require('packer').startup(function(use)
     use 'folke/zen-mode.nvim'
 
     -- UI/UX
-    use 'vim-airline/vim-airline'
+    use 'feline-nvim/feline.nvim'
     use 'folke/which-key.nvim'
     use 'lukas-reineke/indent-blankline.nvim'
-    use { 'Edeneast/nightfox.nvim', as = 'nightfox' }
-    use 'vim-airline/vim-airline-themes'
+    use { 'Mofiqul/vscode.nvim', as = 'vscode' }
 
     -- editing
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use 'mbbill/undotree'
-    use 'simrat39/symbols-outline.nvim'
     use {
         "kylechui/nvim-surround",
         tag = "*", -- Use for stability; omit to use `main` branch for the latest features

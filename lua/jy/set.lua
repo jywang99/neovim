@@ -1,5 +1,4 @@
-vim.opt.nu = true
-
+vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -28,9 +27,16 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = "80"
-
 -- splits
 vim.opt.splitkeep = 'topline'
 vim.opt.equalalways = true
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'help' },
+    desc = 'line numbers for help',
+    callback = function()
+        vim.opt.number = true
+        vim.opt.relativenumber = true
+    end,
+})
 

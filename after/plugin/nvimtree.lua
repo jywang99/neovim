@@ -17,7 +17,14 @@ tree.setup({
     },
     filters = {
         git_ignored = false
-    }
+    },
+    actions = {
+        open_file = {
+            window_picker = {
+                enable = false,
+            },
+        },
+    },
 })
 
 -- keybindings
@@ -29,4 +36,3 @@ local mappings = {
     e = { function() vim.cmd [[NvimTreeFindFile]] end, "Toggle NvimTree" },
 }
 whichkey.register(mappings, opts)
-

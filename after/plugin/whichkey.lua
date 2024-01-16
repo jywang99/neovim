@@ -10,7 +10,6 @@ which_key.setup({})
 
 local opts = {
     mode = "n",
-    buffer = nil,
 }
 local mappings = {
     -- main menu

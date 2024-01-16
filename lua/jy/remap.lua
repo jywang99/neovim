@@ -30,11 +30,23 @@ map("n", "Q", "<nop>")
 
 map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
+-- jump between windows
+map("n", "<C-j>", "<C-w>j")
+map("n", "<C-k>", "<C-w>k")
+map("n", "<C-h>", "<C-w>h")
+map("n", "<C-l>", "<C-w>l")
+
 -- Terminal
-map("t", "<C-t>", [[<C-b>c]], { noremap = true })
-map("t", "<C-x>", [[<C-b>x]],{ noremap = true })
-map("t", "<C-b>", [[<C-b>]], { noremap = true }) -- for running nvim in tmux
+local opts = { noremap = true }
+map("t", "<C-t>", [[<C-b>c]], opts)
+map("t", "<C-x>", [[<C-b>x]], opts)
+map("t", "<C-b>", [[<C-b>]], opts) -- for running nvim in tmux
 -- escape
-map("t", "<C-w>", [[<C-\><C-n><C-w>]],{ noremap = true })
-map("t", "<C-e>", [[<C-\><C-n><C-w>p]], { noremap = true })
+map("t", "<C-w>", [[<C-\><C-n><C-w>]])
+map("t", "<C-e>", [[<C-\><C-n>]], opts)
+-- window
+map("t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
+map("t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)
+map("t", "<C-h>", [[<C-\><C-n><C-w>h]], opts)
+map("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
 

@@ -1,6 +1,12 @@
-function ColorMyPencils(color)
-	color = color or "nightfox"
-	vim.cmd.colorscheme(color)
-end
+local feline = require('feline')
+vim.cmd.colorscheme("vscode")
 
-ColorMyPencils()
+feline.setup({
+    disable = {
+        filetypes = {
+            'dap'
+        },
+    },
+})
+feline.winbar.setup()
+
