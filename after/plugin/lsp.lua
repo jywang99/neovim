@@ -49,6 +49,7 @@ local mappings = {
     c = { telescope.lsp_implementations, "Implementations" },
     u = { telescope.lsp_references, "References" },
     t = { telescope.type_definitions, "Type definitions" },
+    s = { telescope.lsp_document_symbols, "Symbols in file" },
     D = { vim.diagnostic.open_float, "Diagnostics" },
 }
 whichkey.register(mappings, opts)

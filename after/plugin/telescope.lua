@@ -24,14 +24,17 @@ local opts = {
 local mappings = {
     f = {
         name = "Telescope",
+        -- current buffer
+        s = { builtin.current_buffer_fuzzy_find, "Search in current buffer" },
+        -- workspace
         o = { builtin.find_files, "Open file" },
         h = { builtin.oldfiles, "Recent files" },
-        s = { builtin.current_buffer_fuzzy_find, "Search in current buffer" },
         S = { builtin.live_grep, "Live grep" },
         r = { builtin.resume, "Resume last search" },
         p = { builtin.pickers, "Previous search" },
-        f = { builtin.builtin, "Pick a picker" },
         b = { builtin.buffers, "Find buffer" },
+        -- others
+        f = { builtin.builtin, "Pick a picker" },
     },
 }
 whichkey.register(mappings, opts)

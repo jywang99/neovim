@@ -30,9 +30,6 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
--- airline
-vim.opt.laststatus = 3
-
 -- splits
 vim.opt.splitkeep = 'topline'
 vim.opt.equalalways = true

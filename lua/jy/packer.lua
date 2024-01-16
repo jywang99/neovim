@@ -25,7 +25,8 @@ return require('packer').startup(function(use)
     use 'vim-airline/vim-airline'
     use 'folke/which-key.nvim'
     use 'lukas-reineke/indent-blankline.nvim'
-    use { 'Mofiqul/vscode.nvim', as = 'vscode' }
+    use { 'Edeneast/nightfox.nvim', as = 'nightfox' }
+    use 'vim-airline/vim-airline-themes'
 
     -- editing
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
