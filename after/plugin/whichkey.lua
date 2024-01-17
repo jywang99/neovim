@@ -8,6 +8,11 @@ end
 
 which_key.setup({})
 
+local function openInNewTab()
+    vim.cmd [[tabnew %]]
+    vim.opt.number = true
+end
+
 local opts = {
     mode = "n",
 }
@@ -21,6 +26,7 @@ local mappings = {
             name = 'Buffers',
             k = { [[:%bd|e#<CR>]], 'Close all other buffers' },
         },
+        z = { openInNewTab, 'Open current buffer in new tab' },
     },
     -- previously open buffers
     ['<C-p>'] = { [[:bprev<CR>]], 'Previous buffer' },

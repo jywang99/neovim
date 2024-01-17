@@ -3,25 +3,16 @@ local ui = require("harpoon.ui")
 local mark = require("harpoon.mark")
 local whichkey = require('which-key')
 local terminal = require("harpoon.term")
+local vimUtil = require('util.vimUtil')
 
 harpoon.setup()
 
-local function inputNumber()
-    local idx = vim.fn.input("Go to terminal index: ")
-    local numIdx = tonumber(idx)
-    if not numIdx then
-        print('Invalid argument, number expected!')
-        return
-    end
-    return numIdx
-end
-
 local function gotoTermWithPrompt()
-    terminal.gotoTerminal(inputNumber())
+    terminal.gotoTerminal(vimUtil.inputNumber("Go to terminal index: "))
 end
 
 local function gotoHarpWithPrompt()
-    ui.nav_file(inputNumber())
+    ui.nav_file(vimUtil.inputNumber("Go to harpoon buffer index: "))
 end
 
 -- keybindings

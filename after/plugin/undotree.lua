@@ -1,17 +1,7 @@
-local bufUtils = require('util.buffers')
-local sidebar = require('util.sidebar')
 local whichkey = require('which-key')
 
-vim.g.undotree_WindowLayout = 3
-
-local function toggleUndoTree()
-    if bufUtils.getFiletypeBuffer('undotree') > 0 then
-        vim.cmd [[UndotreeHide]]
-        return
-    end
-    sidebar.closeRightBufs()
-    vim.cmd [[UndotreeShow]]
-end
+vim.g.undotree_CustomUndotreeCmd = 'vertical 32 new'
+vim.g.undotree_CustomDiffpanelCmd= 'belowright 12 new'
 
 -- keybindings
 local opts = {
@@ -19,7 +9,7 @@ local opts = {
     prefix = '<leader>',
 }
 local mappings = {
-    u = { toggleUndoTree, "Toggle Undotree" },
+    u = { [[:UndotreeToggle<CR>]], "Toggle Undotree" },
 }
 whichkey.register(mappings, opts)
 

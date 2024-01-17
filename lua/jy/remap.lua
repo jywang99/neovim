@@ -35,15 +35,14 @@ map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-w>l")
+map("n", "<C-q>", [[<C-\><C-n><C-w>q]])
 
 -- Terminal
 local opts = { noremap = true }
-map("t", "<C-t>", [[<C-b>c]], opts)
-map("t", "<C-x>", [[<C-b>x]], opts)
-map("t", "<C-b>", [[<C-b>]], opts) -- for running nvim in tmux
 -- escape
 map("t", "<C-w>", [[<C-\><C-n><C-w>]])
 map("t", "<C-e>", [[<C-\><C-n>]], opts)
+map("t", "<C-q>", [[<C-\><C-n><C-w>q]], opts)
 -- window
 map("t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
 map("t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)

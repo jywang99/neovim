@@ -16,16 +16,16 @@ vim.fn.sign_define('DapStopped', { text = '🟡', texthl = 'DapStopped', linehl 
 dapui.setup({
     layouts = {{
         elements = {
-            { id = "repl", size = 0.15 },
-            { id = "console", size = 0.85 }
+            { id = "repl", size = 0.4 },
+            { id = "console", size = 0.6 }
         },
         position = "bottom",
         size = 10
     }, {
-        elements = { { id = "scopes", size = 0.4 },
-        { id = "breakpoints", size = 0.2 },
-        { id = "stacks", size = 0.2 },
-        { id = "watches", size = 0.2 }
+        elements = {
+        { id = "scopes", size = 0.4 },
+        { id = "breakpoints", size = 0.3 },
+        { id = "stacks", size = 0.3 },
     },
         position = "left",
         size = 40
@@ -67,12 +67,23 @@ end
 vscode.load_launchjs('.nvim/launch.json', {})
 
 local function toggleDapUi()
-    if bufUtils.getFiletypeWindow('dapui_watches') > 0 then
+    if bufUtils.getFiletypeWindow('dapui_console') > 0 then
         dapui.close()
         return
     end
     dapui.open()
 end
+
+-- set wrap for console so that line width adapts when enlarging it
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'dapui_console' },
+    desc = 'Line wrap for console',
+    callback = function()
+        vim.opt.linebreak = true
+        vim.opt.wrap = true
+        vim.opt.number = true
+    end,
+})
 
 -- keybindings
 local opts = {
