@@ -21,6 +21,7 @@ lsp_config.lua_ls.setup({
     }
 })
 lsp_config.pyright.setup({})
+lsp_config.csharp_ls.setup({})
 
 lsp_zero.on_attach(function(client, bufnr)
     lsp_zero.default_keymaps({ buffer = bufnr })
