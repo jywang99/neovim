@@ -18,8 +18,7 @@ local features = {
     -- change this to `true` to enable codelens
     codelens = true,
 
-    -- change this to `true` if you have `nvim-dap`,
-    -- `java-test` and `java-debug-adapter` installed
+    -- change this to `true` if you have `nvim-dap`, `java-test` and `java-debug-adapter` installed
     debugger = true,
 }
 
