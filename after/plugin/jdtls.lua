@@ -42,12 +42,12 @@ end
 
 local function promptAndRunTestClass()
     local config = promptAndPickConfig()
-    jdtls.test_class({config = config})
+    jdtls.test_class({ config = config })
 end
 
 local function promptAndRunTestMethod()
     local config = promptAndPickConfig()
-    jdtls.test_nearest_method({config = config})
+    jdtls.test_nearest_method({ config = config })
 end
 
 local function get_jdtls_paths()
@@ -162,22 +162,24 @@ local function jdtls_on_attach(client, bufnr)
     if features.codelens then
         enable_codelens(bufnr)
     end
+end
 
-    -- The following mappings are based on the suggested usage of nvim-jdtls
-    -- https://github.com/mfussenegger/nvim-jdtls#usage
-
-    --local opts = {buffer = bufnr}
-    --vim.keymap.set('n', '<A-o>', "<cmd>lua require('jdtls').organize_imports()<cr>", opts)
-    --vim.keymap.set('n', 'crv', "<cmd>lua require('jdtls').extract_variable()<cr>", opts)
-    --vim.keymap.set('x', 'crv', "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts)
-    --vim.keymap.set('n', 'crc', "<cmd>lua require('jdtls').extract_constant()<cr>", opts)
-    --vim.keymap.set('x', 'crc', "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts)
-    --vim.keymap.set('x', 'crm', "<esc><Cmd>lua require('jdtls').extract_method(true)<cr>", opts)
+local function enableKeymaps()
+    local opts = {
+        mode = "n",
+        prefix = '<leader>l',
+    }
+    local mappings = {
+        i = { jdtls.organize_imports, "Organize imports" },
+        k = { jdtls.super_implementation, "Go to super implementation" },
+        C = { jdtls.compile, "Recompile" },
+        B = { jdtls.build_projects, "Rebuild" },
+        R = { jdtls.update_project_config, "Update project config" },
+    }
+    require('which-key').register(mappings, opts)
 end
 
 local function jdtls_setup(event)
-    local jdtls = require('jdtls')
-
     local path = get_jdtls_paths()
     local data_dir = path.data_dir .. '/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 
@@ -306,6 +308,7 @@ local function jdtls_setup(event)
             bundles = path.bundles,
         },
     })
+    enableKeymaps()
 end
 
 -- run java language server when filetype is java

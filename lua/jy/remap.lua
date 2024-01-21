@@ -15,7 +15,7 @@ map("n", "N", "Nzzzv")
 map("x", "<leader>p", [["_dP]])
 
 -- next greatest remap ever : asbjornHaland
-map({ "n", "v" }, "<leader>y", [["+y]])
+-- map({ "n", "v" }, "<leader>y", [["+y]])
 map("n", "<leader>Y", [["+Y]])
 
 -- map({ "n", "v" }, "<leader>d", [["_d]])
@@ -36,6 +36,10 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-w>l")
 map("n", "<C-q>", [[<C-\><C-n><C-w>q]])
+
+-- clipboard
+map({ "n", "v" }, "<C-C>", [["+y]])
+map({ "n", "v" }, "<C-P>", [["+p]])
 
 -- Terminal
 local opts = { noremap = true }

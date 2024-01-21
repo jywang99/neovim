@@ -5,7 +5,7 @@ local whichkey = require('which-key')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = { 'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jdtls', 'pyright' },
+    ensure_installed = { 'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jdtls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls' },
     handlers = {
         lsp_zero.deefault_setup,
         jdtls = lsp_zero.noop,
@@ -20,8 +20,11 @@ lsp_config.lua_ls.setup({
         }
     }
 })
-lsp_config.pyright.setup({})
-lsp_config.csharp_ls.setup({})
+lsp_config.pyright.setup{}
+lsp_config.csharp_ls.setup{}
+lsp_config.dockerls.setup{}
+lsp_config.docker_compose_language_service.setup{}
+lsp_config.bashls.setup{}
 
 lsp_zero.on_attach(function(client, bufnr)
     lsp_zero.default_keymaps({ buffer = bufnr })
@@ -44,6 +47,7 @@ local mappings = {
     -- editing
     f = { vim.lsp.buf.format, "Format file" },
     r = { vim.lsp.buf.rename, "Rename" },
+    a = { vim.lsp.buf.code_action, "Code actions" },
     -- info
     I = { vim.lsp.buf.hover, "Info" },
     d = { telescope.lsp_definitions, "Definitions" },
@@ -52,7 +56,8 @@ local mappings = {
     t = { telescope.type_definitions, "Type definitions" },
     s = { telescope.lsp_document_symbols, "Symbols in file" },
     S = { telescope.lsp_workspace_symbols, "Symbols in file" },
-    D = { vim.diagnostic.open_float, "Diagnostics" },
+    e = { vim.diagnostic.open_float, "Inline diagnostics" },
+    E = { telescope.diagnostics, "Project diagnostics" },
 }
 whichkey.register(mappings, opts)
 

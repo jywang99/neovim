@@ -1,5 +1,3 @@
-local sidebar = require('util.sidebar')
-
 local status_ok, which_key = pcall(require, "which-key")
 
 if not status_ok then
@@ -28,9 +26,6 @@ local mappings = {
         },
         z = { openInNewTab, 'Open current buffer in new tab' },
     },
-    -- previously open buffers
-    ['<C-p>'] = { [[:bprev<CR>]], 'Previous buffer' },
-    ['<C-n>'] = { [[:bnext<CR>]], 'Next buffer' },
     -- tabs
     ['<C-t>'] = { [[:tabnew<CR>]], 'New tab' },
     ['<C-x>'] = { [[:tabclose<CR>]], 'Close tab' },
