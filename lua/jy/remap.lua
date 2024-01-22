@@ -38,8 +38,12 @@ map("n", "<C-l>", "<C-w>l")
 map("n", "<C-q>", [[<C-\><C-n><C-w>q]])
 
 -- clipboard
-map({ "n", "v" }, "<C-C>", [["+y]])
-map({ "n", "v" }, "<C-P>", [["+p]])
+map({ "n", "v" }, "<C-c>", [["+y]])
+map({ "n", "v" }, "<C-i>", [["+p]])
+
+-- tabs
+map("n", "<C-n>", "gt", { silent = true })
+map("n", "<C-p>", "gT", { silent = true })
 
 -- Terminal
 local opts = { noremap = true }

@@ -25,15 +25,18 @@ return require('packer').startup(function(use)
     use 'folke/which-key.nvim'
     use 'lukas-reineke/indent-blankline.nvim'
     use { 'Mofiqul/vscode.nvim', as = 'vscode' }
+    use { 'catppuccin/nvim', as = 'catppuccin' }
 
     -- editing
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use { 'nvim-treesitter/nvim-treesitter-context' }
     use 'mbbill/undotree'
     use {
         "kylechui/nvim-surround",
         tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     }
     use 'numToStr/Comment.nvim'
+    use 'm4xshen/autoclose.nvim'
 
     -- LSP
     use {
@@ -70,5 +73,14 @@ return require('packer').startup(function(use)
     -- Git
     use('lewis6991/gitsigns.nvim')
     use "sindrets/diffview.nvim"
+
+    -- DB
+    use {
+        'kristijanhusak/vim-dadbod-ui',
+        requires = {
+            'tpope/vim-dadbod',
+            'kristijanhusak/vim-dadbod-completion',
+        },
+    }
 end)
 

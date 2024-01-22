@@ -1,5 +1,14 @@
 local feline = require('feline')
-vim.cmd.colorscheme("vscode")
+
+require("catppuccin").setup({
+    color_overrides = {
+        mocha = {
+            base = "#191926",
+        },
+    },
+})
+
+vim.cmd.colorscheme('catppuccin')
 
 feline.setup({
     disable = {
@@ -9,4 +18,3 @@ feline.setup({
     },
 })
 feline.winbar.setup()
-
