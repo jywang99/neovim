@@ -16,7 +16,10 @@ map("x", "<leader>p", [["_dP]])
 
 -- next greatest remap ever : asbjornHaland
 -- map({ "n", "v" }, "<leader>y", [["+y]])
+-- clipboard
+map({ "n", "v" }, "<C-c>", [["+y]])
 map("n", "<leader>Y", [["+Y]])
+map("n", "<leader>P", [["+P]])
 
 -- map({ "n", "v" }, "<leader>d", [["_d]])
 
@@ -36,10 +39,6 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<C-h>", "<C-w>h")
 map("n", "<C-l>", "<C-w>l")
 map("n", "<C-q>", [[<C-\><C-n><C-w>q]])
-
--- clipboard
-map({ "n", "v" }, "<C-c>", [["+y]])
-map({ "n", "v" }, "<C-i>", [["+p]])
 
 -- tabs
 map("n", "<C-n>", "gt", { silent = true })

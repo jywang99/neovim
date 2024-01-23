@@ -24,7 +24,7 @@ require 'nvim-treesitter.configs'.setup {
 
 context.setup {
     line_numbers = true,
-    multiline_threshold = 10,
+    multiline_threshold = 5,
     trim_scope = 'outer',
     separator = '-',
     zindex = 20, -- The Z-index of the context window

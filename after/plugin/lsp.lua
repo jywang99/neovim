@@ -5,9 +5,9 @@ local whichkey = require('which-key')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = { 'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jdtls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls' },
+    ensure_installed = { 'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jdtls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls', 'jsonls' },
     handlers = {
-        lsp_zero.deefault_setup,
+        lsp_zero.default_setup,
         jdtls = lsp_zero.noop,
     }
 })
@@ -20,11 +20,18 @@ lsp_config.lua_ls.setup({
         }
     }
 })
-lsp_config.pyright.setup{}
-lsp_config.csharp_ls.setup{}
-lsp_config.dockerls.setup{}
-lsp_config.docker_compose_language_service.setup{}
-lsp_config.bashls.setup{}
+lsp_config.pyright.setup {}
+lsp_config.csharp_ls.setup {}
+lsp_config.dockerls.setup {}
+lsp_config.docker_compose_language_service.setup {}
+lsp_config.bashls.setup {}
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- require 'lspconfig'.jsonls.setup {
+--     capabilities = capabilities,
+-- }
+lsp_config.jsonls.setup{}
+lsp_config.perlpls.setup{}
 
 lsp_zero.on_attach(function(client, bufnr)
     lsp_zero.default_keymaps({ buffer = bufnr })
@@ -60,4 +67,3 @@ local mappings = {
     E = { telescope.diagnostics, "Project diagnostics" },
 }
 whichkey.register(mappings, opts)
-

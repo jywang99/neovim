@@ -1,7 +1,18 @@
 local gitsigns = require('gitsigns')
 local whichkey = require('which-key')
+local diffview = require('diffview')
 
 require('gitsigns').setup()
+
+diffview.setup({
+    view = {
+        merge_tool = {
+            -- Config for conflicted files in diff views during a merge or rebase.
+            layout = "diff3_mixed",
+            disable_diagnostics = false,
+        },
+    }
+})
 
 -- keybindings
 local opts = {
@@ -17,4 +28,3 @@ local mappings = {
     d = { [[:DiffviewOpen<CR>]], "Open diff view" },
 }
 whichkey.register(mappings, opts)
-
