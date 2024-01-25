@@ -37,6 +37,7 @@ return require('packer').startup(function(use)
     }
     use 'numToStr/Comment.nvim'
     use 'm4xshen/autoclose.nvim'
+    use 'dkarter/bullets.vim'
 
     -- LSP
     use {
@@ -54,6 +55,13 @@ return require('packer').startup(function(use)
             { 'L3MON4D3/LuaSnip' },
         }
     }
+    use {
+        "olexsmir/gopher.nvim",
+        requires = { -- dependencies
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+    }
 
     -- Debug
     use 'theHamsta/nvim-dap-virtual-text'
@@ -69,6 +77,7 @@ return require('packer').startup(function(use)
             require('dap-python').setup('~/.local/share/nvim/mason/packages/debugpy/venv/bin/python')
         end
     }
+    use 'leoluz/nvim-dap-go'
 
     -- Git
     use('lewis6991/gitsigns.nvim')
@@ -83,4 +92,3 @@ return require('packer').startup(function(use)
         },
     }
 end)
-
