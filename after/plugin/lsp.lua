@@ -31,11 +31,8 @@ lsp_config.bashls.setup {}
 --     capabilities = capabilities,
 -- }
 lsp_config.jsonls.setup{}
-<<<<<<< HEAD
-=======
 lsp_config.lemminx.setup{}
 lsp_config.gopls.setup{}
->>>>>>> a6e1b7ce712187e2e64b57bcbfecbdf5cc2566a9
 
 lsp_zero.on_attach(function(client, bufnr)
     lsp_zero.default_keymaps({ buffer = bufnr })
