@@ -5,7 +5,7 @@ local whichkey = require('which-key')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = { 'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jdtls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls', 'jsonls' },
+    ensure_installed = { 'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jdtls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls', 'jsonls', 'gopls' },
     handlers = {
         lsp_zero.default_setup,
         jdtls = lsp_zero.noop,
@@ -32,6 +32,7 @@ lsp_config.bashls.setup {}
 -- }
 lsp_config.jsonls.setup{}
 lsp_config.lemminx.setup{}
+lsp_config.gopls.setup{}
 
 lsp_zero.on_attach(function(client, bufnr)
     lsp_zero.default_keymaps({ buffer = bufnr })
