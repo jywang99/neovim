@@ -26,5 +26,6 @@ local mappings = {
     l = { gitsigns.blame_line, "Blame" },
     u = { gitsigns.undo_stage_hunk, "Undo Stage Hunk" },
     d = { [[:DiffviewOpen<CR>]], "Open diff view" },
+    h = { [[:DiffviewFileHistory<CR>]], "Open git history" },
 }
 whichkey.register(mappings, opts)

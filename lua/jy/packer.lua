@@ -91,4 +91,5 @@ return require('packer').startup(function(use)
             'kristijanhusak/vim-dadbod-completion',
         },
     }
+    use 'kristijanhusak/vim-dadbod-completion'
 end)

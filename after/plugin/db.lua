@@ -24,3 +24,23 @@ local mappings = {
 }
 whichkey.register(mappings, opts)
 
+-- DBUI settings
+vim.g.db_ui_use_nerd_fonts = 0
+
+-- auto-completion for sql
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'sql', 'mysql', 'plsql' },
+    desc = 'Auto-completion for SQL',
+    callback = function()
+        require('cmp').setup.buffer({ sources = { { name = 'vim-dadbod-completion' } } })
+    end,
+})
+-- don't fold query results
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'dbout' },
+    desc = 'No fold for query results',
+    callback = function()
+        vim.cmd [[:set nofoldenable]]
+    end,
+})
+
