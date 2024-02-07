@@ -19,6 +19,7 @@ return require('packer').startup(function(use)
     use 'nvim-tree/nvim-web-devicons'
     use 'yorickpeterse/nvim-window'
     use 'ThePrimeagen/harpoon'
+    use 'stevearc/oil.nvim'
 
     -- UI/UX
     use 'feline-nvim/feline.nvim'
@@ -92,4 +93,7 @@ return require('packer').startup(function(use)
         },
     }
     use 'kristijanhusak/vim-dadbod-completion'
+
+    -- Copilot
+    use 'github/copilot.vim'
 end)

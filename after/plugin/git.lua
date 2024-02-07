@@ -25,6 +25,7 @@ local mappings = {
     k = { gitsigns.prev_hunk, "Prev Hunk" },
     l = { gitsigns.blame_line, "Blame" },
     u = { gitsigns.undo_stage_hunk, "Undo Stage Hunk" },
+    p = { gitsigns.preview_hunk, "Preview Hunk" },
     d = { [[:DiffviewOpen<CR>]], "Open diff view" },
     h = { [[:DiffviewFileHistory<CR>]], "Open git history" },
 }

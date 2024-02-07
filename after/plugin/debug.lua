@@ -16,8 +16,8 @@ vim.fn.sign_define('DapStopped', { text = '🟡', texthl = 'DapStopped', linehl 
 dapui.setup({
     layouts = {{
         elements = {
-            { id = "repl", size = 0.1 },
-            { id = "console", size = 0.9 }
+            { id = "repl", size = 0.5 },
+            { id = "console", size = 0.5 }
         },
         position = "bottom",
         size = 10

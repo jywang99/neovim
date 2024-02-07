@@ -29,9 +29,5 @@ local mappings = {
     -- tabs
     ['<C-t>'] = { [[:tabnew<CR>]], 'New tab' },
     ['<C-x>'] = { [[:tabclose<CR>]], 'Close tab' },
-    -- splits
-    ['<C-w>'] = {
-        g = { [[:resize 20<CR>]], 'Goblin mode' },
-    },
 }
 which_key.register(mappings, opts)

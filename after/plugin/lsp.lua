@@ -32,7 +32,9 @@ lsp_config.bashls.setup {}
 -- }
 lsp_config.jsonls.setup{}
 lsp_config.lemminx.setup{}
-lsp_config.gopls.setup{}
+lsp_config.gopls.setup{
+    staticcheck = true,
+}
 
 lsp_zero.on_attach(function(client, bufnr)
     lsp_zero.default_keymaps({ buffer = bufnr })

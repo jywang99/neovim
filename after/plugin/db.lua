@@ -24,9 +24,6 @@ local mappings = {
 }
 whichkey.register(mappings, opts)
 
--- DBUI settings
-vim.g.db_ui_use_nerd_fonts = 0
-
 -- auto-completion for sql
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'sql', 'mysql', 'plsql' },

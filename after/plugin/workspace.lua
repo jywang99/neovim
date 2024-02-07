@@ -3,6 +3,13 @@ local sidebar = require('util.sidebar')
 local whichkey = require('which-key')
 
 local function saveSession()
+    -- if workspace file does not exist, confirm saving
+    if not persist.getWorkspaceFile() then
+        local confirm = vim.fn.confirm('Save workspace?', '&Yes\n&No')
+        if confirm ~= 1 then
+            return
+        end
+    end
     print('Saving workspace...')
     sidebar.nukePeripherals()
     vim.cmd(':mksession! ' .. persist.getPersistPath() .. '/workspace.vim')
