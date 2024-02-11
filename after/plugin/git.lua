@@ -27,6 +27,7 @@ local mappings = {
     u = { gitsigns.undo_stage_hunk, "Undo Stage Hunk" },
     p = { gitsigns.preview_hunk, "Preview Hunk" },
     d = { [[:DiffviewOpen<CR>]], "Open diff view" },
-    h = { [[:DiffviewFileHistory<CR>]], "Open git history" },
+    h = { [[:DiffviewFileHistory %<CR>]], "Open git history" },
+    H = { [[:DiffviewFileHistory<CR>]], "Open git history" },
 }
 whichkey.register(mappings, opts)

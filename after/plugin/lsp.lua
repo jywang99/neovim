@@ -70,3 +70,13 @@ local mappings = {
     E = { telescope.diagnostics, "Project diagnostics" },
 }
 whichkey.register(mappings, opts)
+
+local opts2 = {
+    mode = "n",
+}
+local mappings2 = {
+    name = "LSP diagnostics",
+    ["]d"] = { vim.diagnostic.goto_next, "Next diagnostic" },
+    ["[d"] = { vim.diagnostic.goto_prev, "Previous diagnostic" },
+}
+whichkey.register(mappings2, opts2)
