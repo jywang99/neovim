@@ -1,3 +1,4 @@
+local registers = require('util.registers')
 local status_ok, which_key = pcall(require, "which-key")
 
 if not status_ok then
@@ -25,7 +26,13 @@ local mappings = {
             k = { [[:%bd|e#<CR>]], 'Close all other buffers' },
         },
         z = { openInNewTab, 'Open current buffer in new tab' },
-    },
+
+        -- persistence
+        s = {
+            name = 'Persistence',
+            p = { registers.persistDefaultRegistTxt, 'Persist default register' },
+        },
+   },
     -- tabs
     ['<C-t>'] = { [[:tabnew<CR>]], 'New tab' },
     ['<C-x>'] = { [[:tabclose<CR>]], 'Close tab' },

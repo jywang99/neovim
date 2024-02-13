@@ -14,6 +14,15 @@ diffview.setup({
     }
 })
 
+local function diffFileWithRef()
+    local ref = vim.fn.input('Ref: ')
+    if ref == nil or ref == '' then
+        return
+    end
+    local cmd = 'DiffviewOpen ' .. ref .. ' -- %'
+    vim.cmd(cmd)
+end
+
 -- keybindings
 local opts = {
     mode = "n",
@@ -27,6 +36,7 @@ local mappings = {
     u = { gitsigns.undo_stage_hunk, "Undo Stage Hunk" },
     p = { gitsigns.preview_hunk, "Preview Hunk" },
     d = { [[:DiffviewOpen<CR>]], "Open diff view" },
+    D = { diffFileWithRef, "Diff file with ref" },
     h = { [[:DiffviewFileHistory %<CR>]], "Open git history" },
     H = { [[:DiffviewFileHistory<CR>]], "Open git history" },
 }
