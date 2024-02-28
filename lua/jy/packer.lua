@@ -17,9 +17,9 @@ return require('packer').startup(function(use)
         },
     }
     use 'nvim-tree/nvim-web-devicons'
-    use 'yorickpeterse/nvim-window'
     use 'ThePrimeagen/harpoon'
     use 'stevearc/oil.nvim'
+    use 'folke/trouble.nvim'
 
     -- UI/UX
     use 'feline-nvim/feline.nvim'
@@ -27,6 +27,7 @@ return require('packer').startup(function(use)
     use 'lukas-reineke/indent-blankline.nvim'
     use { 'Mofiqul/vscode.nvim', as = 'vscode' }
     use { 'catppuccin/nvim', as = 'catppuccin' }
+    use 'kshenoy/vim-signature'
 
     -- editing
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }

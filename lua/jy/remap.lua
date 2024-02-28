@@ -17,7 +17,7 @@ map("x", "<leader>p", [["_dP]])
 -- next greatest remap ever : asbjornHaland
 -- map({ "n", "v" }, "<leader>y", [["+y]])
 -- clipboard
-map({ "n", "v" }, "<C-c>", [["+y]])
+map({ "v" }, "<C-c>", [["+y]])
 map("n", "<leader>Y", [["+Y]])
 map("n", "<leader>P", [["+P]])
 

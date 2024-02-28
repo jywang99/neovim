@@ -18,8 +18,6 @@ local opts = {
 local mappings = {
     -- main menu
     ["<leader>"] = {
-        -- window switcher
-        w = { require('nvim-window').pick, 'Jump to window' },
         -- buffers
         b = {
             name = 'Buffers',

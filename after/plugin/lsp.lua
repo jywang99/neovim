@@ -2,10 +2,11 @@ local lsp_zero = require('lsp-zero')
 local lsp_config = require('lspconfig')
 local telescope = require('telescope.builtin')
 local whichkey = require('which-key')
+local trouble = require('trouble')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = { 'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jdtls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls', 'jsonls', 'gopls' },
+    ensure_installed = { 'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jdtls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls', 'jsonls', 'gopls', 'clangd' },
     handlers = {
         lsp_zero.default_setup,
         jdtls = lsp_zero.noop,
@@ -60,14 +61,14 @@ local mappings = {
     a = { vim.lsp.buf.code_action, "Code actions" },
     -- info
     I = { vim.lsp.buf.hover, "Info" },
-    d = { telescope.lsp_definitions, "Definitions" },
-    c = { telescope.lsp_implementations, "Implementations" },
-    u = { telescope.lsp_references, "References" },
-    t = { telescope.type_definitions, "Type definitions" },
+    d = { function() trouble.toggle('lsp_definitions') end, "Definitions" },
+    c = { function() trouble.toggle('lsp_implementations') end, "Implementations" },
+    u = { function() trouble.toggle('lsp_references') end, "References" },
+    t = { function() trouble.toggle('type_definitions') end, "Type definitions" },
     s = { telescope.lsp_document_symbols, "Symbols in file" },
     S = { telescope.lsp_workspace_symbols, "Symbols in file" },
     e = { vim.diagnostic.open_float, "Inline diagnostics" },
-    E = { telescope.diagnostics, "Project diagnostics" },
+    E = { function() trouble.toggle('workspace_diagnostics') end, "Project diagnostics" },
 }
 whichkey.register(mappings, opts)
 
