@@ -106,6 +106,8 @@ local mappings = {
     h = { [[:DapStepOut<CR>]], "Step out" },
     j = { [[:DapStepOver<CR>]], "Step over" },
     r = { [[:DapRestartFrame<CR>]], "Restart frame" },
+    -- dapui
+    k = { dapui.eval, "Float element" },
 }
 whichkey.register(mappings, opts)
 

@@ -7,7 +7,6 @@ local java_cmds = vim.api.nvim_create_augroup('java_cmds', { clear = true })
 local cache_vars = {}
 
 local root_files = {
-    '.git',
     'mvnw',
     'gradlew',
     'pom.xml',
