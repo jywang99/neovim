@@ -67,11 +67,11 @@ end
 vscode.load_launchjs('.nvim/launch.json', {})
 
 local function toggleDapUi()
-    if bufUtils.getFiletypeWindow('dapui_console') > 0 then
+    if bufUtils.getFiletypeWindow('dapui_scopes') > 0 then
         dapui.close()
         return
     end
-    dapui.open()
+    sidebar.nukeAndRun(dapui.open)
 end
 
 -- set wrap for console so that line width adapts when enlarging it

@@ -30,9 +30,10 @@ local mappings = {
             name = 'Persistence',
             p = { registers.persistDefaultRegistTxt, 'Persist default register' },
         },
+        n = { [[:noh<CR>]], 'Clear search highlights' },
    },
-    -- tabs
-    ['<C-t>'] = { [[:tabnew<CR>]], 'New tab' },
-    ['<C-x>'] = { [[:tabclose<CR>]], 'Close tab' },
+   -- tabs
+   ['<C-t>'] = { [[:tabnew<CR>]], 'New tab' },
+   ['<C-x>'] = { [[:tabclose<CR>]], 'Close tab' },
 }
 which_key.register(mappings, opts)

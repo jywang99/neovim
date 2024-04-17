@@ -67,7 +67,7 @@ return require('packer').startup(function(use)
 
     -- Debug
     use 'theHamsta/nvim-dap-virtual-text'
-    use { 'rcarriga/nvim-dap-ui', requires = { 'mfussenegger/nvim-dap' } }
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
     use 'mfussenegger/nvim-jdtls'
     use {
         'mfussenegger/nvim-dap-python',

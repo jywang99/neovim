@@ -3,6 +3,7 @@ local lsp_config = require('lspconfig')
 local telescope = require('telescope.builtin')
 local whichkey = require('which-key')
 local trouble = require('trouble')
+local sidebar = require('util.sidebar')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -61,10 +62,10 @@ local mappings = {
     a = { vim.lsp.buf.code_action, "Code actions" },
     -- info
     I = { vim.lsp.buf.hover, "Info" },
-    d = { function() trouble.toggle('lsp_definitions') end, "Definitions" },
-    c = { function() trouble.toggle('lsp_implementations') end, "Implementations" },
-    u = { function() trouble.toggle('lsp_references') end, "References" },
-    t = { function() trouble.toggle('type_definitions') end, "Type definitions" },
+    d = { function() sidebar.nukeAndRun(function() trouble.toggle('lsp_definitions') end) end, "Definitions" },
+    c = { function() sidebar.nukeAndRun(function() trouble.toggle('lsp_implementations') end) end, "Implementations" },
+    u = { function() sidebar.nukeAndRun(function() trouble.toggle('lsp_references') end) end, "References" },
+    t = { function() sidebar.nukeAndRun(function() trouble.toggle('type_definitions') end) end, "Type definitions" },
     s = { telescope.lsp_document_symbols, "Symbols in file" },
     S = { telescope.lsp_workspace_symbols, "Symbols in file" },
     e = { vim.diagnostic.open_float, "Inline diagnostics" },

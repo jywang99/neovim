@@ -21,6 +21,8 @@ local features = {
     debugger = true,
 }
 
+-- test config format:
+-- See help for JdtTestOpts under help tag *jdtls.dap*
 local function promptAndPickConfig()
     local jsonPath = persist.getPersistPath() .. '/' .. TEST_JSON
     if io.open(jsonPath) == nil then
@@ -34,18 +36,32 @@ local function promptAndPickConfig()
             table.insert(cfgList, idx .. '. ' .. cfg.name)
         end
         local i = vim.fn.inputlist(cfgList)
+
+        -- cancel
+        if i == 0 then
+            return nil
+        end
+
         return configs[i]
     end
+
+    -- if no config file, run without configuration
     return {}
 end
 
 local function promptAndRunTestClass()
     local config = promptAndPickConfig()
+    if config == nil then
+        return
+    end
     jdtls.test_class({ config = config })
 end
 
 local function promptAndRunTestMethod()
     local config = promptAndPickConfig()
+    if config == nil then
+        return
+    end
     jdtls.test_nearest_method({ config = config })
 end
 
