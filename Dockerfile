@@ -10,6 +10,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # apt
 RUN apt update && \ 
     apt install -y build-essential ripgrep fd-find openjdk-21-jdk unzip tmux git sudo vim wget software-properties-common
+RUN yes| unminimize
 
 ############
 ### User ###
@@ -77,6 +78,7 @@ RUN wget https://github.com/redhat-developer/vscode-xml/releases/download/0.26.1
 RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
     dpkg -i packages-microsoft-prod.deb && \
     rm -f packages-microsoft-prod.deb && \
+    apt install -y dotnet-sdk-6.0 && \
     apt install -y dotnet-sdk-8.0
 # dotnet debug
 RUN wget https://github.com/Samsung/netcoredbg/releases/download/3.0.0-1018/netcoredbg-linux-amd64.tar.gz && \
@@ -93,6 +95,39 @@ RUN wget https://go.dev/dl/go1.21.6.linux-amd64.tar.gz && \
     # Set the PATH for Go, "permission denied" error occurs without "sh -c"
     sh -c 'echo "export PATH=\$PATH:/usr/local/go/bin" >> /etc/profile'
 
+# C++
+RUN apt install -y bear
+
+##############
+### Docker ###
+##############
+
+# launch script
+RUN mkdir -p /setup/docker
+WORKDIR /setup/docker
+COPY ./ext/profile .
+RUN cat profile >> /home/dev/.profile
+
+# Add Docker's official GPG key:
+RUN apt-get update && \
+    apt-get install -y ca-certificates curl gnupg && \
+    install -m 0755 -d /etc/apt/keyrings && \
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
+    chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add the repository to Apt sources:
+RUN echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+    tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+    apt-get update
+
+# install docker
+RUN apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# set privileges
+RUN usermod -aG docker dev
+
 ##################
 ### Setup user ###
 ##################
@@ -104,6 +139,7 @@ RUN rm -fr /setup/
 RUN chown -R dev:dev /home/dev/
 USER dev
 WORKDIR /home/dev/
+RUN mkdir git
 
 ######################
 ### Non-root stuff ###
@@ -113,6 +149,6 @@ WORKDIR /home/dev/
 RUN wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
     && export NVM_DIR=~/.nvm \
     && . ~/.nvm/nvm.sh \
-    && nvm install 16.13.0 \
-    && nvm use 16.13.0
+    && nvm install 22.1.0 \
+    && nvm use 22.1.0
 

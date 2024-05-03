@@ -1,3 +1,7 @@
+## Info
+Default user: dev
+Default password: devpass
+
 ## Post installation
 Install packer dependencies
 ```bash

@@ -182,4 +182,4 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # aliases
-alias cdd='cd /mnt/c/Users/junyi/Downloads/'
+alias tmux = "tmux -u"
