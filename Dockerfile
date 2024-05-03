@@ -128,6 +128,8 @@ RUN apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugi
 # set privileges
 RUN usermod -aG docker dev
 
+RUN echo "1" | sudo update-alternatives --config iptables
+
 ##################
 ### Setup user ###
 ##################
