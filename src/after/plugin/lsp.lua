@@ -3,7 +3,6 @@ local lsp_config = require('lspconfig')
 local telescope = require('telescope.builtin')
 local whichkey = require('which-key')
 local trouble = require('trouble')
-local sidebar = require('util.sidebar')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -45,6 +44,24 @@ lsp_zero.on_attach(function(client, bufnr)
         require("jdtls.dap").setup_dap_main_class_configs()
         vim.lsp.codelens.refresh()
     end
+
+    -- keymaps when LSP is active
+    local lspOpts = {
+        mode = "n",
+        prefix = 'g'
+    }
+    local tsOpts = {
+        include_declaration = false,
+        trim_text = true,
+        fname_width = 25,
+    }
+    local lspMap = {
+        d = { function() telescope.lsp_definitions(tsOpts) end, "Definitions" },
+        c = { function() telescope.lsp_implementations(tsOpts) end, "Implementations" },
+        r = { function() telescope.lsp_references(tsOpts) end, "References" },
+        T = { function() telescope.type_definitions(tsOpts) end, "Type definitions" },
+    }
+    whichkey.register(lspMap, lspOpts)
 end)
 
 lsp_zero.setup()
@@ -62,10 +79,6 @@ local mappings = {
     a = { vim.lsp.buf.code_action, "Code actions" },
     -- info
     I = { vim.lsp.buf.hover, "Info" },
-    d = { telescope.lsp_definitions, "Definitions" },
-    c = { telescope.lsp_implementations, "Implementations" },
-    u = { telescope.lsp_references, "References" },
-    t = { telescope.type_definitions, "Type definitions" },
     s = { telescope.lsp_document_symbols, "Symbols in file" },
     S = { telescope.lsp_workspace_symbols, "Symbols in file" },
     e = { vim.diagnostic.open_float, "Inline diagnostics" },
@@ -73,12 +86,12 @@ local mappings = {
 }
 whichkey.register(mappings, opts)
 
-local opts2 = {
+local opts3 = {
     mode = "n",
 }
-local mappings2 = {
+local mappings3 = {
     name = "LSP diagnostics",
     ["]d"] = { vim.diagnostic.goto_next, "Next diagnostic" },
     ["[d"] = { vim.diagnostic.goto_prev, "Previous diagnostic" },
 }
-whichkey.register(mappings2, opts2)
+whichkey.register(mappings3, opts3)

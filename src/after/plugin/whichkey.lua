@@ -35,5 +35,7 @@ local mappings = {
    -- tabs
    ['<C-t>'] = { [[:tabnew<CR>]], 'New tab' },
    ['<C-x>'] = { [[:tabclose<CR>]], 'Close tab' },
+   -- buffers
+   ['<BS>'] = { [[<C-^>]], 'Switch to last buffer' },
 }
 which_key.register(mappings, opts)

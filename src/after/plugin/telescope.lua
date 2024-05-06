@@ -7,6 +7,8 @@ telescope.setup({
         cache_picker = {
             num_pickers = -1,
         },
+        path_display = { "truncate" },
+        dynamic_preview_title = true,
     },
     pickers = {
         find_files = {
