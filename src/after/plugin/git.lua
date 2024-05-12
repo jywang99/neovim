@@ -1,8 +1,10 @@
 local gitsigns = require('gitsigns')
 local whichkey = require('which-key')
 local diffview = require('diffview')
+local neogit = require('neogit')
 
 require('gitsigns').setup()
+neogit.setup({})
 
 diffview.setup({
     view = {
@@ -30,6 +32,7 @@ local opts = {
 }
 local mappings = {
     name = "Git",
+    g = { neogit.open, "Open Neogit" },
     l = { gitsigns.blame_line, "Blame" },
     p = { gitsigns.preview_hunk, "Preview Hunk" },
     d = { [[:DiffviewOpen<CR>]], "Open diff view" },

@@ -1,5 +1,5 @@
 ## Info
-Default user: dev
+Default user: dev \
 Default password: devpass
 
 ## Post installation
@@ -8,9 +8,13 @@ Install packer dependencies
 cd ~/.config/nvim
 nvim
 ```
-vim editor commands
+Run these vim commands
 ```vim
 :e lua/jy/packer.lua
 :so
 :PackerSync
 ```
+
+## Docker image
+[DockerHub](https://hub.docker.com/repository/docker/jyking99/neovim/)
+

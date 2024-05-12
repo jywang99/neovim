@@ -1,6 +1,5 @@
 local persist = require('util.persist')
 local sidebar = require('util.sidebar')
-local whichkey = require('which-key')
 
 local function saveSession()
     -- if workspace file does not exist, confirm saving
@@ -31,16 +30,4 @@ local function loadWorkspace()
 end
 
 loadWorkspace()
-
--- keybindings
-local opts = {
-    mode = "n",
-    prefix = '<leader>',
-}
-local mappings = {
-    name = "LSP",
-    -- editing
-    q = { '<cmd>qa<cr>', "Quit Neovim" },
-}
-whichkey.register(mappings, opts)
 
