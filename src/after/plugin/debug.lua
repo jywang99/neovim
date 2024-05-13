@@ -100,14 +100,14 @@ local mappings = {
     H = { SetHitCountBreakpoint, "Set hit count breakpoint" },
     -- debugging controls
     J = { [[:DapLoadLaunchJSON<CR>]], "Load launch json" },
-    ["<Space>"] = { [[:DapContinue<CR>]], "Resume" },
     s = { [[:DapTerminate<CR>]], "Terminate" },
-    l = { [[:DapStepInto<CR>]], "Step into" },
-    h = { [[:DapStepOut<CR>]], "Step out" },
-    j = { [[:DapStepOver<CR>]], "Step over" },
     r = { [[:DapRestartFrame<CR>]], "Restart frame" },
-    -- dapui
-    k = { dapui.eval, "Float element" },
 }
 whichkey.register(mappings, opts)
+
+vim.keymap.set("n", "<M-j>", ":DapStepOver<CR>", { desc = "Debug step over" })
+vim.keymap.set("n", "<M-l>", ":DapStepInto<CR>", { desc = "Debug step into" })
+vim.keymap.set("n", "<M-h>", ":DapStepOut<CR>", { desc = "Debug step out" })
+vim.keymap.set("n", "<M-n>", ":DapContinue<CR>", { desc = "Debug continue" })
+vim.keymap.set("n", "<M-k>", dapui.eval, { desc = "Float element" })
 
