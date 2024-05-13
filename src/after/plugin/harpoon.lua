@@ -11,29 +11,22 @@ local function gotoTermWithPrompt()
     terminal.gotoTerminal(vimUtil.inputNumber("Go to terminal index: "))
 end
 
-local function gotoHarpWithPrompt()
-    ui.nav_file(vimUtil.inputNumber("Go to harpoon buffer index: "))
-end
-
 -- keybindings
+vim.keymap.set("n", "<M-;>", ui.toggle_quick_menu, { desc = "Open harpoon menu" })
+vim.keymap.set("n", "<M-'>", mark.add_file, { desc = "Add file to harpoon" })
+vim.keymap.set("n", "<M-,>", ui.nav_prev, { desc = "Prev harp" })
+vim.keymap.set("n", "<M-.>", ui.nav_next, { desc = "Next harp" })
+vim.keymap.set("n", "<M-1>", function() ui.nav_file(1) end, { desc = "Go to harp 1" })
+vim.keymap.set("n", "<M-2>", function() ui.nav_file(2) end, { desc = "Go to harp 1" })
+vim.keymap.set("n", "<M-3>", function() ui.nav_file(3) end, { desc = "Go to harp 1" })
+vim.keymap.set("n", "<M-4>", function() ui.nav_file(4) end, { desc = "Go to harp 1" })
+vim.keymap.set("n", "<M-5>", function() ui.nav_file(5) end, { desc = "Go to harp 1" })
+
 local opts = {
     mode = "n",
     prefix = '<leader>',
 }
 local mappings = {
-    ['1'] = { function() ui.nav_file(1) end, "Go to harp 1" },
-    ['2'] = { function() ui.nav_file(2) end, "Go to harp 2" },
-    ['3'] = { function() ui.nav_file(3) end, "Go to harp 3" },
-    ['4'] = { function() ui.nav_file(4) end, "Go to harp 4" },
-    ['5'] = { function() ui.nav_file(5) end, "Go to harp 5" },
-    ['<Tab>'] = { gotoHarpWithPrompt, "Go to harp N" },
-    [';'] = { ui.toggle_quick_menu, 'Open harpoon menu' },
-    h = {
-        name = "Harpoon",
-        p = { ui.nav_prev, "Prev harp" },
-        n = { ui.nav_next, "Next harp" },
-        a = { mark.add_file, "Add file" },
-    },
     t = {
         ['1'] = { function() terminal.gotoTerminal(1) end, 'Terminal 1' },
         ['2'] = { function() terminal.gotoTerminal(2) end, 'Terminal 2' },
