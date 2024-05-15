@@ -182,4 +182,15 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # aliases
-alias tmux = "tmux -u"
+alias cdd='cd /mnt/c/Users/junyi/Downloads/' # for WSL
+alias tmux="tmux -u"
+alias pu='pushd'
+alias po='popd'
+
+alias tmux="tmux -u"
+alias pu='pushd'
+alias po='popd'
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+bind -x '"\ef": "cd && $(__fzf_cd__)"'
+

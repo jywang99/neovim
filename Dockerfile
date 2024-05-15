@@ -1,16 +1,22 @@
 FROM ubuntu:22.04
 
-####################
-### apt packages ###
-####################
+###################
+### Environment ###
+###################
 
 # Set environment variable to prevent prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
 
 # apt
 RUN apt update && \ 
-    apt install -y build-essential ripgrep fd-find openjdk-21-jdk unzip tmux git sudo vim wget software-properties-common
+    apt install -y build-essential ripgrep fd-find openjdk-21-jdk unzip tmux git sudo vim wget software-properties-common openssh-server
 RUN yes| unminimize
+
+# ssh
+COPY ./ext/sshd_config /etc/ssh/sshd_config
+
+# WSL config
+COPY ./ext/wsl.conf /etc/wsl.conf
 
 ############
 ### User ###
@@ -32,6 +38,8 @@ RUN chown dev:dev .bashrc
 # tmux
 RUN mkdir .config/tmux/
 COPY ./ext/tmux.conf .config/tmux/tmux.conf
+# fzf
+COPY ./ext/fzf /home/dev/.fzf
 
 ##############
 ### Neovim ###
@@ -153,4 +161,7 @@ RUN wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | 
     && . ~/.nvm/nvm.sh \
     && nvm install 22.1.0 \
     && nvm use 22.1.0
+
+# fzf
+RUN ~/.fzf/install --all
 
