@@ -1,2 +1,3 @@
 require("ibl").setup()
-require("autoclose").setup()
+require("nvim-surround").setup()
+

@@ -33,17 +33,6 @@ map("n", "Q", "<nop>")
 
 map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
--- jump between windows
-map("n", "<C-j>", "<C-w>j")
-map("n", "<C-k>", "<C-w>k")
-map("n", "<C-h>", "<C-w>h")
-map("n", "<C-l>", "<C-w>l")
-map("n", "<C-q>", [[<C-\><C-n><C-w>q]])
-
--- tabs
-map("n", "<C-n>", "gt", { silent = true })
-map("n", "<C-p>", "gT", { silent = true })
-
 -- Terminal
 local opts = { noremap = true }
 -- escape

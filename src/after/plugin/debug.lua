@@ -5,8 +5,6 @@ local sidebar = require('util.sidebar')
 local vscode = require('dap.ext.vscode')
 local whichkey = require('which-key')
 
-dapui.setup()
-
 vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl = 'DapBreakpoint', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
 vim.fn.sign_define('DapBreakpointCondition', { text = '🔵', texthl = 'DapBreakpoint', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
 vim.fn.sign_define('DapBreakpointRejected', { text = '◯', texthl = 'DapBreakpoint', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
@@ -23,14 +21,14 @@ dapui.setup({
         size = 10
     }, {
         elements = {
-        { id = "scopes", size = 0.4 },
-        { id = "breakpoints", size = 0.3 },
-        { id = "stacks", size = 0.3 },
-    },
+            { id = "scopes", size = 0.4 },
+            { id = "breakpoints", size = 0.3 },
+            { id = "stacks", size = 0.3 },
+        },
         position = "left",
         size = 40
-    },
-}})
+    }}
+})
 dap.listeners.after.event_initialized['dapui_config'] = function()
     sidebar.nukeAndRun(dapui.open)
 end

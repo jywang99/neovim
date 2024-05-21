@@ -38,7 +38,7 @@ return require('packer').startup(function(use)
         tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     }
     use 'numToStr/Comment.nvim'
-    use 'm4xshen/autoclose.nvim'
+    use 'cohama/lexima.vim'
     use 'dkarter/bullets.vim'
 
     -- LSP
@@ -67,7 +67,11 @@ return require('packer').startup(function(use)
 
     -- Debug
     use 'theHamsta/nvim-dap-virtual-text'
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
+    use {
+        "rcarriga/nvim-dap-ui",
+        requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
+        commit = "5934302" -- TODO remove when the PR is merged
+    }
     use 'mfussenegger/nvim-jdtls'
     use {
         'mfussenegger/nvim-dap-python',
@@ -91,9 +95,9 @@ return require('packer').startup(function(use)
             "sindrets/diffview.nvim",
             "nvim-telescope/telescope.nvim",
         },
-        config = true
+        config = true,
+        tag = "v0.0.1" -- TODO remove when upgraded to 0.10.0
     }
-
 
     -- DB
     use {

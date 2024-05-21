@@ -18,11 +18,6 @@ local opts = {
 local mappings = {
     -- main menu
     ["<leader>"] = {
-        -- buffers
-        b = {
-            name = 'Buffers',
-            k = { [[:%bd|e#<CR>]], 'Close all other buffers' },
-        },
         z = { openInNewTab, 'Open current buffer in new tab' },
 
         -- persistence
@@ -32,10 +27,5 @@ local mappings = {
         },
         n = { [[:noh<CR>]], 'Clear search highlights' },
    },
-   -- tabs
-   ['<C-t>'] = { [[:tabnew<CR>]], 'New tab' },
-   ['<C-x>'] = { [[:tabclose<CR>]], 'Close tab' },
-   -- buffers
-   ['<BS>'] = { [[<C-^>]], 'Switch to last buffer' },
 }
 which_key.register(mappings, opts)

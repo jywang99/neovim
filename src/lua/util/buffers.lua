@@ -40,51 +40,6 @@ function M.getPartialFilenameBuffer(partial_path)
     return -1
 end
 
--- switch to window if open, otherwise switch to buffer in current window
-function M.switchToWinOrBuf(buf)
-    local wins = vim.fn.getbufinfo(buf)[1].windows
-    if #wins == 0 then
-        -- focus terminal buffer
-        vim.api.nvim_set_current_buf(buf)
-    else
-        -- focus terminal split
-        vim.api.nvim_set_current_win(wins[1])
-    end
-    vim.api.nvim_feedkeys('i', 'n', true)
-end
-
--- convert a buffer to split
-function M.openBufferInSplit(buffer, splitDirection)
-    -- Check if the splitDirection is valid
-    if splitDirection ~= 'v' and splitDirection ~= 'h' then
-        print('Invalid split direction. Valid: "v" or "h".')
-        return
-    end
-
-    -- If the buffer doesn't have any window open, open a new split
-    local wins = vim.fn.getbufinfo(buffer)[1].windows
-    if #wins == 0 then
-        if splitDirection == 'v' then
-            vim.cmd('vsplit')
-            vim.cmd('wincmd l')
-        else
-            vim.cmd('split')
-            vim.cmd('wincmd j')
-        end
-        -- Switch to the buffer in the newly created split
-        vim.api.nvim_set_current_buf(buffer)
-    end
-end
-
--- close all windows for buffer
--- FORCE closes all of them
-function M.closeBufWins(buffer)
-    local wins = vim.fn.getbufinfo(buffer)[1].windows
-    for _, win in ipairs(wins) do
-        vim.api.nvim_win_close(win, true)
-    end
-end
-
 function M.doAndSwitchBackWindow(func)
     local current_window = vim.fn.win_getid()
     func()

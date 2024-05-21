@@ -71,38 +71,6 @@ require("oil").setup({
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- quickfix
-
-local prevSearch = ""
-local prevFilePtn = "**/*"
-local function promptGlobalSearch()
-    -- prompt for search string
-    local kw = vim.fn.input('Search for string (default: ' .. prevSearch .. '): ')
-    if kw == "" then
-        kw = prevSearch
-    end
-    if kw == "" then
-        print("No search string provided!")
-        return
-    end
-    prevSearch = kw
-
-    -- prompt for file pattern
-    local filePtn = vim.fn.input('File pattern (default: ' .. prevFilePtn .. '): ')
-    if filePtn == "" then
-        filePtn = prevFilePtn
-    end
-    prevFilePtn = filePtn
-
-    -- do it
-    vim.cmd("vim /" .. kw .. "/ " .. filePtn .. " | copen")
-end
-
-local function writeCmdOutputToNewBuf(cmd)
-    local command_output = vim.api.nvim_command_output(cmd)
-    vim.api.nvim_command("enew")
-    vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(command_output, '\n'))
-end
-
 local function searchModifiedBufs()
     local buffers = vim.api.nvim_list_bufs()
 
@@ -120,13 +88,32 @@ local function searchModifiedBufs()
     vim.cmd("copen")
 end
 
+-- remaps
+local map = vim.keymap.set
 
-vim.keymap.set("n", "]q", "<CMD>cnext<CR>zz", { desc = "Forward quickfix" })
-vim.keymap.set("n", "[q", "<CMD>cprev<CR>zz", { desc = "Backward quickfix" })
-vim.keymap.set("n", "<leader>sg", promptGlobalSearch, { desc = "Global search" })
-vim.keymap.set("n", "<leader>sh", function() writeCmdOutputToNewBuf("chistory") end, { desc = "Copy search history to register h" })
-vim.keymap.set("n", "<leader>co", "<CMD>copen<CR>", { desc = "Open quickfix" })
-vim.keymap.set("n", "<leader>cp", "<CMD>colder<CR>", { desc = "To older quickfix" })
-vim.keymap.set("n", "<leader>cn", "<CMD>cnewer<CR>", { desc = "To newer quickfix" })
-vim.keymap.set("n", "<leader>ce", searchModifiedBufs, { desc = "Show edited buffers" })
+-- quickfix
+map("n", "]q", "<CMD>cnext<CR>zz", { desc = "Forward quickfix" })
+map("n", "[q", "<CMD>cprev<CR>zz", { desc = "Backward quickfix" })
+map("n", "<leader>co", "<CMD>copen<CR>", { desc = "Open quickfix" })
+map("n", "<leader>cp", "<CMD>colder<CR>", { desc = "To older quickfix" })
+map("n", "<leader>cn", "<CMD>cnewer<CR>", { desc = "To newer quickfix" })
+map("n", "<leader>ce", searchModifiedBufs, { desc = "Show edited buffers" })
+
+-- tabs
+map("n", "<C-n>", "gt", { silent = true })
+map("n", "<C-p>", "gT", { silent = true })
+map("n", "<C-t>", "<CMD>tabnew<CR>", { desc = "New tab" })
+map("n", "<C-x>", "<CMD>tabclose<CR>", { desc = "Close tab" })
+
+-- windows
+map("n", "<C-j>", "<C-w>j")
+map("n", "<C-k>", "<C-w>k")
+map("n", "<C-h>", "<C-w>h")
+map("n", "<C-l>", "<C-w>l")
+map("n", "<C-q>", [[<C-\><C-n><C-w>q]])
+
+-- buffers
+map("n", "]b", "<CMD>bnext<CR>", { desc = "Next buffer" })
+map("n", "[b", "<CMD>bnext<CR>", { desc = "Prev buffer" })
+map("n", "<BS>", "<CMD>b#<CR>", { desc = "Switch to last buffer" })
 
