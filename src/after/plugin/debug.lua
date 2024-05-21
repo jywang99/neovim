@@ -109,5 +109,5 @@ vim.keymap.set("n", "<M-r>", ":DapContinue<CR>", { desc = "Debug continue" })
 vim.keymap.set("n", "<M-n>", ":DapStepOver<CR>", { desc = "Debug step over" })
 vim.keymap.set("n", "<M-i>", ":DapStepInto<CR>", { desc = "Debug step into" })
 vim.keymap.set("n", "<M-o>", ":DapStepOut<CR>", { desc = "Debug step out" })
-vim.keymap.set("n", "<M-k>", dapui.eval, { desc = "Float element" })
+vim.keymap.set("n", "<M-p>", dapui.eval, { desc = "Float element" })
 

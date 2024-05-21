@@ -1,7 +1,7 @@
 APP_NAME = jyking99/neovim
 
 local:
-	cp -r ./src/* ~/.config/nvim/
+	ln -sf ./src/ ~/.config/nvim
 
 clean:
 	rm -rf ./dist/

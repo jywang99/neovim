@@ -33,5 +33,5 @@ vim.opt.updatetime = 50
 vim.opt.splitkeep = 'topline'
 vim.opt.equalalways = true
 
-vim.o.shell = "/bin/bash"
+vim.o.shell = "/bin/zsh"
 

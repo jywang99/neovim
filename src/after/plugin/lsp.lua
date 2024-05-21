@@ -3,6 +3,7 @@ local lsp_config = require('lspconfig')
 local telescope = require('telescope.builtin')
 local whichkey = require('which-key')
 local trouble = require('trouble')
+local sidebar = require('util.sidebar')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -82,7 +83,7 @@ local mappings = {
     s = { telescope.lsp_document_symbols, "Symbols in file" },
     S = { telescope.lsp_workspace_symbols, "Symbols in file" },
     e = { vim.diagnostic.open_float, "Inline diagnostics" },
-    E = { function() trouble.toggle('workspace_diagnostics') end, "Project diagnostics" },
+    E = { function() sidebar.nukeAndRun(function() trouble.toggle('workspace_diagnostics') end) end, "Project diagnostics" },
 }
 whichkey.register(mappings, opts)
 

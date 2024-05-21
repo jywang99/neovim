@@ -4,7 +4,6 @@ local M = {}
 
 function M.closeLeftBufs()
     dapui.close()
-    vim.cmd [[NvimTreeClose]]
 end
 
 function M.closeRightBufs()
