@@ -3,11 +3,8 @@ local sidebar = require('util.sidebar')
 
 local function saveSession()
     -- if workspace file does not exist, confirm saving
-    if not persist.getWorkspaceFile() then
-        local confirm = vim.fn.confirm('Save workspace?', '&Yes\n&No')
-        if confirm ~= 1 then
-            return
-        end
+    if not persist.persistPathExists() then
+        return
     end
     print('Saving workspace...')
     sidebar.nukePeripherals()
@@ -18,6 +15,12 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
     desc = 'Save workspace',
     callback = saveSession,
 })
+
+-- create .nvim directory
+vim.api.nvim_create_user_command('W',function()
+    persist.createNvimDir()
+    print('Workspace directory created')
+end,{})
 
 local function loadWorkspace()
     -- print('Loading workspace...')
