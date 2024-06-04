@@ -36,12 +36,10 @@ require("gopher").setup {
     },
 }
 
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'go' },
-    desc = 'Keybindings for Go',
-    callback = function()
-        -- setKeymaps()
-    end,
+-- .tsx, .ts, .js, and .jsx files
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+    pattern = { "*.tsx", "*.ts", "*.js", "*.jsx" },
+    command = "setlocal ts=2 sts=2 sw=2 expandtab",
 })
 
 -- csharp
