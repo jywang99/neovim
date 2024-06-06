@@ -9,7 +9,6 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim', tag = '0.1.5',
         requires = { 'nvim-lua/plenary.nvim' }
     }
-    use 'nvim-telescope/telescope-dap.nvim'
     use {
         'nvim-tree/nvim-tree.lua',
         requires = {
@@ -24,19 +23,17 @@ return require('packer').startup(function(use)
     -- UI/UX
     use 'feline-nvim/feline.nvim'
     use 'folke/which-key.nvim'
-    use 'lukas-reineke/indent-blankline.nvim'
-    use { 'Mofiqul/vscode.nvim', as = 'vscode' }
     use { 'catppuccin/nvim', as = 'catppuccin' }
-    use 'kshenoy/vim-signature'
 
     -- editing
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'nvim-treesitter/nvim-treesitter-context' }
     use 'mbbill/undotree'
     use {
-        "kylechui/nvim-surround",
-        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+        'kylechui/nvim-surround',
+        tag = '*', -- Use for stability; omit to use `main` branch for the latest features
     }
+    use 'lukas-reineke/indent-blankline.nvim'
     use 'numToStr/Comment.nvim'
     use 'cohama/lexima.vim'
     use 'dkarter/bullets.vim'
@@ -57,21 +54,17 @@ return require('packer').startup(function(use)
             { 'L3MON4D3/LuaSnip' },
         }
     }
-    use {
-        "olexsmir/gopher.nvim",
-        requires = { -- dependencies
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-        },
-    }
 
     -- Debug
+    -- UI
     use 'theHamsta/nvim-dap-virtual-text'
     use {
-        "rcarriga/nvim-dap-ui",
-        requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
-        commit = "5934302" -- TODO remove when the PR is merged
+        'rcarriga/nvim-dap-ui',
+        requires = {'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio'},
+        commit = '5934302' -- TODO remove when the PR is merged
     }
+    use 'nvim-telescope/telescope-dap.nvim'
+    -- languages
     use 'mfussenegger/nvim-jdtls'
     use {
         'mfussenegger/nvim-dap-python',
@@ -86,28 +79,18 @@ return require('packer').startup(function(use)
     use 'leoluz/nvim-dap-go'
 
     -- Git
-    use('lewis6991/gitsigns.nvim')
-    use "sindrets/diffview.nvim"
+    use 'lewis6991/gitsigns.nvim'
+    use 'sindrets/diffview.nvim'
     use {
-        "NeogitOrg/neogit",
+        'NeogitOrg/neogit',
         requires = {
-            "nvim-lua/plenary.nvim",
-            "sindrets/diffview.nvim",
-            "nvim-telescope/telescope.nvim",
+            'nvim-lua/plenary.nvim',
+            'sindrets/diffview.nvim',
+            'nvim-telescope/telescope.nvim',
         },
         config = true,
-        tag = "v0.0.1" -- TODO remove when upgraded to 0.10.0
+        tag = 'v0.0.1' -- TODO remove when nvim upgraded to 0.10.0
     }
-
-    -- DB
-    use {
-        'kristijanhusak/vim-dadbod-ui',
-        requires = {
-            'tpope/vim-dadbod',
-            'kristijanhusak/vim-dadbod-completion',
-        },
-    }
-    use 'kristijanhusak/vim-dadbod-completion'
 
     -- Copilot
     use 'github/copilot.vim'

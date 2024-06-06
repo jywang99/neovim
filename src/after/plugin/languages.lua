@@ -26,16 +26,6 @@ require('dap-go').setup {
     },
 }
 
-require("gopher").setup {
-    commands = {
-        go = "go",
-        gomodifytags = "gomodifytags",
-        gotests = "~/go/bin/gotests", -- also you can set custom command path
-        impl = "impl",
-        iferr = "iferr",
-    },
-}
-
 -- .tsx, .ts, .js, and .jsx files
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     pattern = { "*.tsx", "*.ts", "*.js", "*.jsx" },

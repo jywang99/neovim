@@ -1,9 +1,10 @@
 local dap = require('dap')
 local dapui = require('dapui')
-local bufUtils = require('util.buffers')
 local sidebar = require('util.sidebar')
 local vscode = require('dap.ext.vscode')
 local whichkey = require('which-key')
+
+require("nvim-dap-virtual-text").setup()
 
 vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl = 'DapBreakpoint', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
 vim.fn.sign_define('DapBreakpointCondition', { text = '🔵', texthl = 'DapBreakpoint', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
@@ -46,8 +47,7 @@ function SetConditionalBreakpoint()
 end
 
 function SetLoggingBreakpoint()
-    print('Variable interpolation with {foo} is supported')
-    local exp = vim.fn.input("Log message: ")
+    local exp = vim.fn.input("Log message (interpolation with {foo}): ")
     dap.set_breakpoint(nil, nil, exp)
 end
 
@@ -63,14 +63,6 @@ end
 
 -- launch.json
 vscode.load_launchjs('.nvim/launch.json', {})
-
-local function toggleDapUi()
-    if bufUtils.getFiletypeWindow('dapui_scopes') > 0 then
-        dapui.close()
-        return
-    end
-    sidebar.nukeAndRun(dapui.open)
-end
 
 -- set wrap for console so that line width adapts when enlarging it
 vim.api.nvim_create_autocmd('FileType', {
@@ -90,7 +82,7 @@ local opts = {
 }
 local mappings = {
     name = "Debug",
-    i = { toggleDapUi, 'Toggle Dap UI' },
+    i = { dapui.toggle, 'Toggle Dap UI' },
     -- breakpoint
     b = { [[:DapToggleBreakpoint<CR>]], "Toggle breakpoint" },
     c = { SetConditionalBreakpoint, "Set conditional breakpoint" },

@@ -13,7 +13,6 @@ end
 
 function M.closeBottomBufs()
     dapui.close()
-    vim.cmd [[TroubleClose]]
 end
 
 function M.nukePeripherals()
