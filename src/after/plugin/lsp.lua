@@ -56,9 +56,9 @@ lsp_zero.on_attach(function(client, bufnr)
     }
     local lspMap = {
         d = { function() telescope.lsp_definitions(tsOpts) end, "Definitions" },
-        c = { function() telescope.lsp_implementations(tsOpts) end, "Implementations" },
+        i = { function() telescope.lsp_implementations(tsOpts) end, "Implementations" },
         r = { function() telescope.lsp_references(tsOpts) end, "References" },
-        T = { function() telescope.type_definitions(tsOpts) end, "Type definitions" },
+        T = { function() telescope.lsp_type_definitions(tsOpts) end, "Type definitions" },
     }
     whichkey.register(lspMap, lspOpts)
 end)
@@ -81,7 +81,7 @@ local mappings = {
     s = { telescope.lsp_document_symbols, "Symbols in file" },
     S = { telescope.lsp_workspace_symbols, "Symbols in file" },
     e = { vim.diagnostic.open_float, "Inline diagnostics" },
-    E = { telescope.lsp_workspace_diagnostics, "Workspace diagnostics" },
+    E = { telescope.diagnostics, "Workspace diagnostics" },
 }
 whichkey.register(mappings, opts)
 

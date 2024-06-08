@@ -3,6 +3,7 @@ local dapui = require('dapui')
 local sidebar = require('util.sidebar')
 local vscode = require('dap.ext.vscode')
 local whichkey = require('which-key')
+local persist = require('util.persist')
 
 require("nvim-dap-virtual-text").setup()
 
@@ -62,7 +63,15 @@ function SetHitCountBreakpoint()
 end
 
 -- launch.json
-vscode.load_launchjs('.nvim/launch.json', {})
+local LAUNCH_JSON = persist.getPersistPath() .. '/launch.json'
+local function readConfigAndDebug()
+    if vim.fn.filereadable(LAUNCH_JSON) == 0 then
+        print('No launch.json found')
+        return
+    end
+    vscode.load_launchjs(LAUNCH_JSON, {})
+    dap.continue()
+end
 
 -- set wrap for console so that line width adapts when enlarging it
 vim.api.nvim_create_autocmd('FileType', {
@@ -95,6 +104,7 @@ local mappings = {
 }
 whichkey.register(mappings, opts)
 
+vim.keymap.set("n", "<M-d>", readConfigAndDebug, { desc = "Read launch.json and debug" })
 vim.keymap.set("n", "<M-r>", ":DapContinue<CR>", { desc = "Debug continue" })
 vim.keymap.set("n", "<M-n>", ":DapStepOver<CR>", { desc = "Debug step over" })
 vim.keymap.set("n", "<M-i>", ":DapStepInto<CR>", { desc = "Debug step into" })
