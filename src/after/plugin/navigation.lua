@@ -102,7 +102,6 @@ map("n", "<leader>ce", searchModifiedBufs, { desc = "Show edited buffers" })
 -- tabs
 map("n", "<C-n>", "gt", { silent = true })
 map("n", "<C-p>", "gT", { silent = true })
-map("n", "<C-t>", "<CMD>tabnew<CR>", { desc = "New tab" })
 map("n", "<C-x>", "<CMD>tabclose<CR>", { desc = "Close tab" })
 
 -- windows
@@ -113,7 +112,5 @@ map("n", "<C-l>", "<C-w>l")
 map("n", "<C-q>", [[<C-\><C-n><C-w>q]])
 
 -- buffers
-map("n", "]b", "<CMD>bnext<CR>", { desc = "Next buffer" })
-map("n", "[b", "<CMD>bnext<CR>", { desc = "Prev buffer" })
 map("n", "<BS>", "<CMD>b#<CR>", { desc = "Switch to last buffer" })
 
