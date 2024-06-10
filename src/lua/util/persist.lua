@@ -30,13 +30,13 @@ end
 
 function M.createNvimDir()
     if M.persistPathExists() then
-        return
+        return false
     end
     local path = M.getPersistPath()
     os.execute('mkdir ' .. path)
     local file = io.open(path .. '/.gitignore', 'w')
     if file == nil then
-        return
+        return true
     end
     file:write(LAYOUT_FILE .. '\n', '\n')
     file:close()

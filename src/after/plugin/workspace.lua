@@ -18,9 +18,13 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
 
 -- create .nvim directory
 vim.api.nvim_create_user_command('W',function()
-    persist.createNvimDir()
+    local new = persist.createNvimDir()
+    if not new then
+        print('Workspace directory already exists')
+        return
+    end
     print('Workspace directory created')
-end,{})
+end, {})
 
 local function loadWorkspace()
     -- print('Loading workspace...')
