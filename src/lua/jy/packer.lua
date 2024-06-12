@@ -36,6 +36,7 @@ return require('packer').startup(function(use)
     use 'lukas-reineke/indent-blankline.nvim'
     use 'numToStr/Comment.nvim'
     use 'cohama/lexima.vim'
+    use 'windwp/nvim-ts-autotag'
     use 'dkarter/bullets.vim'
 
     -- LSP
