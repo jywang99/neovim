@@ -102,7 +102,7 @@ map("n", "<leader>ce", searchModifiedBufs, { desc = "Show edited buffers" })
 -- tabs
 map("n", "<C-n>", "gt", { silent = true })
 map("n", "<C-p>", "gT", { silent = true })
-map("n", "<C-x>", "<CMD>tabclose<CR>", { desc = "Close tab" })
+map("n", "<C-c>", "<CMD>tabclose<CR>", { desc = "Close tab" })
 
 -- windows
 map("n", "<C-j>", "<C-w>j")
