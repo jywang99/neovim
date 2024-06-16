@@ -14,22 +14,15 @@ map("n", "N", "Nzzzv")
 -- greatest remap ever
 map("x", "<leader>p", [["_dP]])
 
--- next greatest remap ever : asbjornHaland
--- map({ "n", "v" }, "<leader>y", [["+y]])
 -- clipboard
 map({ "v" }, "<C-c>", [["+y]])
 map("n", "<leader>Y", [["+Y]])
 map("n", "<leader>P", [["+P]])
 
--- map({ "n", "v" }, "<leader>d", [["_d]])
+map({ "n", "v" }, "<leader>d", [["_d]])
 
 map("n", "Q", "<nop>")
 -- map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-
--- map("n", "<C-k>", "<cmd>cnext<CR>zz")
--- map("n", "<C-j>", "<cmd>cprev<CR>zz")
--- map("n", "<leader>k", "<cmd>lnext<CR>zz")
--- map("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 

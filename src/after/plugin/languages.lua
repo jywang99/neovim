@@ -26,9 +26,9 @@ require('dap-go').setup {
     },
 }
 
--- .tsx, .ts, .js, and .jsx files
+-- these languages tend to be deeply nested
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-    pattern = { "*.tsx", "*.ts", "*.js", "*.jsx" },
+    pattern = { "*.tsx", "*.ts", "*.js", "*.jsx", "*.html" },
     command = "setlocal ts=2 sts=2 sw=2 expandtab",
 })
 
