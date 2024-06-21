@@ -28,7 +28,7 @@ require('dap-go').setup {
 
 -- these languages tend to be deeply nested
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-    pattern = { "*.tsx", "*.ts", "*.js", "*.jsx", "*.html" },
+    pattern = { "*.tsx", "*.ts", "*.js", "*.jsx", "*.html", "*.svelte" },
     command = "setlocal ts=2 sts=2 sw=2 expandtab",
 })
 

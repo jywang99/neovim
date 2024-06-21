@@ -9,16 +9,9 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim', tag = '0.1.5',
         requires = { 'nvim-lua/plenary.nvim' }
     }
-    use {
-        'nvim-tree/nvim-tree.lua',
-        requires = {
-            'nvim-tree/nvim-web-devicons',
-        },
-    }
     use 'nvim-tree/nvim-web-devicons'
     use 'ThePrimeagen/harpoon'
     use 'stevearc/oil.nvim'
-    use 'folke/trouble.nvim'
 
     -- UI/UX
     use 'feline-nvim/feline.nvim'
@@ -57,7 +50,6 @@ return require('packer').startup(function(use)
     }
 
     -- Debug
-    -- UI
     use 'theHamsta/nvim-dap-virtual-text'
     use {
         'rcarriga/nvim-dap-ui',
