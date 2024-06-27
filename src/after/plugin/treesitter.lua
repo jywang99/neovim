@@ -31,7 +31,7 @@ context.setup {
     zindex = 20, -- The Z-index of the context window
 }
 
-vim.keymap.set("n", "gk", function()
+vim.keymap.set("n", "[c", function()
     context.go_to_context(vim.v.count1)
 end, { silent = true })
 
