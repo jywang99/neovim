@@ -2,29 +2,29 @@ local map = vim.keymap.set
 
 vim.g.mapleader = " "
 
+-- text manipulation
 map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
 
+-- navigation
 map("n", "J", "mzJ`z")
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
--- greatest remap ever
-map("x", "<leader>p", [["_dP]])
-
 -- clipboard
 map({ "v" }, "<C-c>", [["+y]])
 map("n", "<leader>Y", [["+Y]])
 map("n", "<leader>P", [["+P]])
-
 map({ "n", "v" }, "<leader>d", [["_d]])
+-- greatest remap ever
+map("x", "<leader>p", [["_dP]])
 
 map("n", "Q", "<nop>")
--- map("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
-map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+-- insert mode
+map('i', '<C-c>', '<Esc>O', { noremap = true, silent = true })
 
 -- Terminal
 local opts = { noremap = true }

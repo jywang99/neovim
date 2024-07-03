@@ -6,5 +6,5 @@ end
 
 -- remaps
 local map = vim.keymap.set
-map('i', '<C-w>', acceptWord, {expr = true, remap = false})
+map('i', '<C-f>', acceptWord, {expr = true, remap = false})
 

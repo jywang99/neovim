@@ -18,7 +18,7 @@ require("oil").setup({
         ["gx"] = "actions.open_external",
         ["g."] = "actions.toggle_hidden",
         -- ["g\\"] = "actions.toggle_trash",
-        ['yp'] = {
+        ['<leader>yp'] = {
             desc = 'Copy filepath to system clipboard',
             callback = function ()
                 require('oil.actions').copy_entry_path.callback()
