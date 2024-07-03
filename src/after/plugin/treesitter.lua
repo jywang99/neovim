@@ -20,6 +20,15 @@ require 'nvim-treesitter.configs'.setup {
         -- Instead of true it can also be a list of languages
         additional_vim_regex_highlighting = false,
     },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "gn", -- Start selection
+            node_incremental = "gn", -- Increment to the upper named parent
+            scope_incremental = "gc", -- Increment to the upper scope (as defined in locals.scm)
+            node_decremental = "gm", -- Decrement to the previous node
+        },
+    },
 }
 
 context.setup {
@@ -30,8 +39,4 @@ context.setup {
     separator = '-',
     zindex = 20, -- The Z-index of the context window
 }
-
-vim.keymap.set("n", "[c", function()
-    context.go_to_context(vim.v.count1)
-end, { silent = true })
 

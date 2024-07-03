@@ -10,8 +10,8 @@ map("v", "K", ":m '<-2<CR>gv=gv")
 map("n", "J", "mzJ`z")
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
-map("n", "n", "nzzzv")
-map("n", "N", "Nzzzv")
+map("n", "n", "nzv")
+map("n", "N", "Nzv")
 
 -- clipboard
 map({ "v" }, "<C-c>", [["+y]])
