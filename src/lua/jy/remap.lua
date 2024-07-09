@@ -13,28 +13,24 @@ map("n", "<C-u>", "<C-u>zz")
 map("n", "n", "nzv")
 map("n", "N", "Nzv")
 
+-- tabs
+map("n", "<leader>z", ":tabnew %<CR>")
+map("n", "<leader>Z", "<C-w>T")
+
 -- clipboard
-map({ "v" }, "<C-c>", [["+y]])
+map("v", "<C-c>", [["+y]])
 map("n", "<leader>Y", [["+Y]])
 map("n", "<leader>P", [["+P]])
 map({ "n", "v" }, "<leader>d", [["_d]])
--- greatest remap ever
-map("x", "<leader>p", [["_dP]])
+map("x", "<leader>p", [["_dP]]) -- greatest remap ever
 
-map("n", "Q", "<nop>")
+-- options
+map("n", "<leader>n", ":noh<CR>", { desc = "Clear highlights" })
+map("n", "<leader>oh", ":set invhlsearch<CR>", { desc = "Toggle search highlights" })
+map("n", "<leader>op", ":set invpaste<CR>", { desc = "Toggle paste mode" })
+map("n", "<leader>on", ":set invnumber<CR>", { desc = "Toggle line number" })
+map("n", "<leader>or", ":set invrelativenumber<CR>", { desc = "Toggle relative number" })
 
 -- insert mode
 map('i', '<C-c>', '<Esc>O', { noremap = true, silent = true })
-
--- Terminal
-local opts = { noremap = true }
--- escape
-map("t", "<C-w>", [[<C-\><C-n><C-w>]])
-map("t", "<C-e>", [[<C-\><C-n>]], opts)
-map("t", "<C-q>", [[<C-\><C-n><C-w>q]], opts)
--- window
-map("t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
-map("t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)
-map("t", "<C-h>", [[<C-\><C-n><C-w>h]], opts)
-map("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
 
