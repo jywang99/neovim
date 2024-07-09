@@ -2,7 +2,6 @@ local dap = require('dap')
 local dapui = require('dapui')
 local sidebar = require('util.sidebar')
 local vscode = require('dap.ext.vscode')
-local whichkey = require('which-key')
 local persist = require('util.persist')
 
 require("nvim-dap-virtual-text").setup()
@@ -85,29 +84,21 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- keybindings
-local opts = {
-    mode = "n",
-    prefix = '<leader>d',
-}
-local mappings = {
-    name = "Debug",
-    i = { dapui.toggle, 'Toggle Dap UI' },
-    -- breakpoint
-    b = { [[:DapToggleBreakpoint<CR>]], "Toggle breakpoint" },
-    c = { SetConditionalBreakpoint, "Set conditional breakpoint" },
-    L = { SetLoggingBreakpoint, "Set logging breakpoint" },
-    H = { SetHitCountBreakpoint, "Set hit count breakpoint" },
-    -- debugging controls
-    J = { [[:DapLoadLaunchJSON<CR>]], "Load launch json" },
-    s = { [[:DapTerminate<CR>]], "Terminate" },
-    r = { [[:DapRestartFrame<CR>]], "Restart frame" },
-}
-whichkey.register(mappings, opts)
+local map = vim.keymap.set
+map("n", "<leader>di", dapui.toggle, { desc = "Toggle Dap UI" })
+map("n", "<leader>db", ":DapToggleBreakpoint<CR>", { desc = "Toggle breakpoint" })
+map("n", "<leader>dc", SetConditionalBreakpoint, { desc = "Set conditional breakpoint" })
+map("n", "<leader>dL", SetLoggingBreakpoint, { desc = "Set logging breakpoint" })
+map("n", "<leader>dH", SetHitCountBreakpoint, { desc = "Set hit count breakpoint" })
+map("n", "<leader>dj", ":DapLoadLaunchJSON<CR>", { desc = "Load launch json" })
+map("n", "<leader>ds", ":DapTerminate<CR>", { desc = "Terminate" })
+map("n", "<leader>dr", ":DapRestartFrame<CR>", { desc = "Restart frame" })
 
-vim.keymap.set("n", "<M-d>", readConfigAndDebug, { desc = "Read launch.json and debug" })
-vim.keymap.set("n", "<M-r>", ":DapContinue<CR>", { desc = "Debug continue" })
-vim.keymap.set("n", "<M-n>", ":DapStepOver<CR>", { desc = "Debug step over" })
-vim.keymap.set("n", "<M-i>", ":DapStepInto<CR>", { desc = "Debug step into" })
-vim.keymap.set("n", "<M-o>", ":DapStepOut<CR>", { desc = "Debug step out" })
-vim.keymap.set("n", "<M-p>", dapui.eval, { desc = "Float element" })
+-- debugging
+map("n", "<M-d>", readConfigAndDebug, { desc = "Read launch.json and debug" })
+map("n", "<M-r>", ":DapContinue<CR>", { desc = "Debug continue" })
+map("n", "<M-n>", ":DapStepOver<CR>", { desc = "Debug step over" })
+map("n", "<M-i>", ":DapStepInto<CR>", { desc = "Debug step into" })
+map("n", "<M-o>", ":DapStepOut<CR>", { desc = "Debug step out" })
+map("n", "<M-p>", dapui.eval, { desc = "Float element" })
 

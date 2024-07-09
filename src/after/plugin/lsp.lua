@@ -1,7 +1,6 @@
 local lsp_zero = require('lsp-zero')
 local lsp_config = require('lspconfig')
 local telescope = require('telescope.builtin')
-local whichkey = require('which-key')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -30,9 +29,9 @@ lsp_config.bashls.setup {}
 -- require 'lspconfig'.jsonls.setup {
 --     capabilities = capabilities,
 -- }
-lsp_config.jsonls.setup{}
-lsp_config.lemminx.setup{}
-lsp_config.gopls.setup{
+lsp_config.jsonls.setup {}
+lsp_config.lemminx.setup {}
+lsp_config.gopls.setup {
     staticcheck = true,
 }
 
@@ -43,54 +42,30 @@ lsp_zero.on_attach(function(client, bufnr)
         require("jdtls.dap").setup_dap_main_class_configs()
         vim.lsp.codelens.refresh()
     end
-
-    -- keymaps when LSP is active
-    local lspOpts = {
-        mode = "n",
-        prefix = 'g'
-    }
-    local tsOpts = {
-        include_declaration = false,
-        trim_text = true,
-        fname_width = 25,
-    }
-    local lspMap = {
-        d = { function() telescope.lsp_definitions(tsOpts) end, "Definitions" },
-        i = { function() telescope.lsp_implementations(tsOpts) end, "Implementations" },
-        r = { function() telescope.lsp_references(tsOpts) end, "References" },
-        T = { function() telescope.lsp_type_definitions(tsOpts) end, "Type definitions" },
-    }
-    whichkey.register(lspMap, lspOpts)
 end)
 
 lsp_zero.setup()
 
--- keybindings
-local opts = {
-    mode = "n",
-    prefix = '<leader>l',
+local tsOpts = {
+    include_declaration = false,
+    trim_text = true,
+    fname_width = 25,
 }
-local mappings = {
-    name = "LSP",
-    -- editing
-    f = { vim.lsp.buf.format, "Format file" },
-    r = { vim.lsp.buf.rename, "Rename" },
-    a = { vim.lsp.buf.code_action, "Code actions" },
-    -- info
-    I = { vim.lsp.buf.hover, "Info" },
-    s = { telescope.lsp_document_symbols, "Symbols in file" },
-    S = { telescope.lsp_workspace_symbols, "Symbols in file" },
-    e = { vim.diagnostic.open_float, "Inline diagnostics" },
-    E = { telescope.diagnostics, "Workspace diagnostics" },
-}
-whichkey.register(mappings, opts)
 
-local opts3 = {
-    mode = "n",
-}
-local mappings3 = {
-    name = "LSP diagnostics",
-    ["]d"] = { vim.diagnostic.goto_next, "Next diagnostic" },
-    ["[d"] = { vim.diagnostic.goto_prev, "Previous diagnostic" },
-}
-whichkey.register(mappings3, opts3)
+-- keybindings
+local map = vim.keymap.set
+map("n", "<leader>lf", function() vim.lsp.buf.formatting() end, { desc = "Format file" })
+map("n", "<leader>lr", function() vim.lsp.buf.rename() end, { desc = "Rename" })
+map("n", "<leader>la", function() vim.lsp.buf.code_action() end, { desc = "Code actions" })
+map("n", "<leader>ls", function() telescope.lsp_document_symbols(tsOpts) end, { desc = "Symbols in file" })
+map("n", "<leader>lS", function() telescope.lsp_workspace_symbols(tsOpts) end, { desc = "Symbols in workspace" })
+map("n", "<leader>le", function() vim.diagnostic.open_float() end, { desc = "Inline diagnostics" })
+map("n", "<leader>lE", function() telescope.diagnostics() end, { desc = "Workspace diagnostics" })
+
+map("n", "gr", function() telescope.lsp_references(tsOpts) end, { desc = "References" })
+map("n", "gT", function() telescope.lsp_type_definitions(tsOpts) end, { desc = "Type definitions" })
+map("n", "gi", function() telescope.lsp_implementations(tsOpts) end, { desc = "Implementations" })
+
+map("n", "[d", function() vim.diagnostic.goto_prev() end, { desc = "Previous diagnostic" })
+map("n", "]d", function() vim.diagnostic.goto_next() end, { desc = "Next diagnostic" })
+
