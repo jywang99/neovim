@@ -29,6 +29,43 @@ require 'nvim-treesitter.configs'.setup {
             node_decremental = "gm", -- Decrement to the previous node
         },
     },
+    textobjects = {
+        move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+                ["]f"] = "@function.outer",
+                ["]c"] = "@class.outer",
+            },
+            goto_next_end = {
+                ["]F"] = "@function.outer",
+                ["]c"] = "@class.outer",
+            },
+            goto_previous_start = {
+                ["[f"] = "@function.outer",
+                ["[c"] = "@class.outer",
+            },
+            goto_previous_end = {
+                ["[F"] = "@function.outer",
+                ["[C"] = "@class.outer",
+            },
+        },
+        select = {
+            enable = true,
+            -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,
+            keymaps = {
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
+            },
+            selection_modes = {
+                ['@function.inner'] = 'V',
+                ['@function.outer'] = 'V',
+                ['@class.outer'] = 'V',
+            },
+        },
+    },
 }
 
 context.setup {
@@ -39,4 +76,17 @@ context.setup {
     separator = '-',
     zindex = 20, -- The Z-index of the context window
 }
+
+-- repeat movements
+local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
+local map = vim.keymap.set
+-- Repeat movement with ; and ,
+-- ensure ; goes forward and , goes backward regardless of the last direction
+map({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
+map({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
+-- make builtin f, F, t, T also repeatable with ; and ,
+map({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+map({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+map({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+map({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
 

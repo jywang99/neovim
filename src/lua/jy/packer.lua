@@ -17,10 +17,15 @@ return require('packer').startup(function(use)
     use 'feline-nvim/feline.nvim'
     use 'folke/which-key.nvim'
     use { 'catppuccin/nvim', as = 'catppuccin' }
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
 
     -- editing
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use { 'nvim-treesitter/nvim-treesitter-context' }
+    use { 'nvim-treesitter/nvim-treesitter-textobjects' }
     use 'mbbill/undotree'
     use {
         'kylechui/nvim-surround',

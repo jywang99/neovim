@@ -6,6 +6,7 @@ local:
 clean:
 	rm -rf ./dist/
 
+# For copying local configs to another machine
 local-dist:
 	mkdir -p ./dist/tmp/
 	cp -r ~/.config/nvim/ ./dist/tmp/nvimConfig/
