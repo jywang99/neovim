@@ -36,18 +36,22 @@ require 'nvim-treesitter.configs'.setup {
             goto_next_start = {
                 ["]f"] = "@function.outer",
                 ["]c"] = "@class.outer",
+                ["]b"] = "@block.outer",
             },
             goto_next_end = {
                 ["]F"] = "@function.outer",
-                ["]c"] = "@class.outer",
+                ["]C"] = "@class.outer",
+                ["]B"] = "@block.outer",
             },
             goto_previous_start = {
                 ["[f"] = "@function.outer",
                 ["[c"] = "@class.outer",
+                ["[b"] = "@block.outer",
             },
             goto_previous_end = {
                 ["[F"] = "@function.outer",
                 ["[C"] = "@class.outer",
+                ["[B"] = "@block.outer",
             },
         },
         select = {
@@ -58,11 +62,13 @@ require 'nvim-treesitter.configs'.setup {
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
                 ["ac"] = "@class.outer",
+                ["ab"] = "@block.outer",
             },
             selection_modes = {
                 ['@function.inner'] = 'V',
                 ['@function.outer'] = 'V',
                 ['@class.outer'] = 'V',
+                ["@block.outer"] = 'V',
             },
         },
     },

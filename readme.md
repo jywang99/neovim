@@ -5,12 +5,15 @@
 ```bash
 make local
 ```
-4. Open [packer.lua](src/lua/jy/packer.lua), and enter the following editor commands
+4. Open [packer.lua](src/lua/jy/packer.lua) with `nvim`, and enter the following editor commands
+```bash
+nvim src/lua/jy/packer.lua
+```
 ```vim
 :so
 :PackerInstall
 ```
-This will install all plugins used in the configuration
+This will install all plugins specified in the configuration
 
 ## Docker image
 1. Pull docker image from here: https://hub.docker.com/repository/docker/jyking99/neovim/
