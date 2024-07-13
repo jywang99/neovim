@@ -1,3 +1,5 @@
+local map = vim.keymap.set
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -33,7 +35,7 @@ require("oil").setup({
     },
 })
 
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- quickfix
 local function searchModifiedBufs()
@@ -54,7 +56,6 @@ local function searchModifiedBufs()
 end
 
 -- remaps
-local map = vim.keymap.set
 
 -- quickfix
 map("n", "]q", "<CMD>cnext<CR>zz", { desc = "Forward quickfix" })

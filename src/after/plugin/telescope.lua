@@ -1,6 +1,6 @@
 local telescope = require('telescope')
 local builtin = require('telescope.builtin')
-local whichkey = require('which-key')
+local map = vim.keymap.set
 
 telescope.setup({
     defaults = {
@@ -18,26 +18,12 @@ telescope.setup({
 })
 telescope.load_extension('dap')
 
--- keybindings
-local opts = {
-    mode = "n",
-    prefix = '<leader>',
-}
-local mappings = {
-    f = {
-        name = "Telescope",
-        -- current buffer
-        s = { builtin.current_buffer_fuzzy_find, "Search in current buffer" },
-        -- workspace
-        o = { builtin.find_files, "Open file" },
-        h = { builtin.oldfiles, "Recent files" },
-        S = { builtin.live_grep, "Live grep" },
-        r = { builtin.resume, "Resume last search" },
-        p = { builtin.pickers, "Previous search" },
-        b = { builtin.buffers, "Find buffer" },
-        -- others
-        f = { builtin.builtin, "Pick a picker" },
-    },
-}
-whichkey.register(mappings, opts)
+map("n", "<leader>fs", builtin.current_buffer_fuzzy_find, { desc = "Search in current buffer" })
+map("n", "<leader>fo", builtin.find_files, { desc = "Open file" })
+map("n", "<leader>fh", builtin.oldfiles, { desc = "Recent files" })
+map("n", "<leader>fS", builtin.live_grep, { desc = "Live grep" })
+map("n", "<leader>fr", builtin.resume, { desc = "Resume last search" })
+map("n", "<leader>fp", builtin.pickers, { desc = "Previous search" })
+map("n", "<leader>fb", builtin.buffers, { desc = "Find buffer" })
+map("n", "<leader>ff", builtin.builtin, { desc = "Pick a picker" })
 

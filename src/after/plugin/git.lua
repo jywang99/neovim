@@ -1,7 +1,7 @@
 local gitsigns = require('gitsigns')
-local whichkey = require('which-key')
 local diffview = require('diffview')
 local neogit = require('neogit')
+local map = vim.keymap.set
 
 require('gitsigns').setup()
 neogit.setup({})
@@ -25,28 +25,14 @@ local function diffFileWithRef()
     vim.cmd(cmd)
 end
 
--- keybindings
-local opts = {
-    mode = "n",
-    prefix = '<leader>g',
-}
-local mappings = {
-    name = "Git",
-    g = { neogit.open, "Open Neogit" },
-    l = { gitsigns.blame_line, "Blame" },
-    p = { gitsigns.preview_hunk, "Preview Hunk" },
-    d = { [[:DiffviewOpen<CR>]], "Open diff view" },
-    D = { diffFileWithRef, "Diff file with ref" },
-    h = { [[:DiffviewFileHistory %<CR>]], "Open git history" },
-    H = { [[:DiffviewFileHistory<CR>]], "Open git history" },
-}
-whichkey.register(mappings, opts)
+-- set whichkey title for <leader>g
+map("n", "<leader>gg", neogit.open, { desc = "Open Neogit" })
+map("n", "<leader>gl", gitsigns.blame_line, { desc = "Blame" })
+map("n", "<leader>gp", gitsigns.preview_hunk, { desc = "Preview Hunk" })
+map("n", "<leader>gd", [[:DiffviewOpen<CR>]], { desc = "Open diff view" })
+map("n", "<leader>gD", diffFileWithRef, { desc = "Diff file with ref" })
+map("n", "<leader>gh", [[:DiffviewFileHistory %<CR>]], { desc = "Open git history" })
 
-opts = {
-    mode = "n",
-}
-mappings = {
-    [']g'] = { gitsigns.next_hunk, "Next Hunk" },
-    ['[g'] = { gitsigns.prev_hunk, "Prev Hunk" },
-}
-whichkey.register(mappings, opts)
+map("n", "]g", gitsigns.next_hunk, { desc = "Next Git Hunk" })
+map("n", "[g", gitsigns.prev_hunk, { desc = "Previous Git Hunk" })
+

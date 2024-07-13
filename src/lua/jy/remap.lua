@@ -19,9 +19,6 @@ map("n", "<leader>Z", "<C-w>T")
 
 -- clipboard
 map("v", "<C-c>", [["+y]])
-map("n", "<leader>Y", [["+Y]])
-map("n", "<leader>P", [["+P]])
-map({ "n", "v" }, "<leader>d", [["_d]])
 map("x", "<leader>p", [["_dP]]) -- greatest remap ever
 
 -- options
