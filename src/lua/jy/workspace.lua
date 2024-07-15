@@ -26,7 +26,9 @@ vim.api.nvim_create_user_command('W',function()
     print('Workspace directory created')
 end, {})
 
-local function loadWorkspace()
+local M = {}
+
+function M.loadWorkspace()
     -- print('Loading workspace...')
     local path = persist.getWorkspaceFile()
     if path == nil then
@@ -36,5 +38,5 @@ local function loadWorkspace()
     vim.cmd(':source ' .. path)
 end
 
-loadWorkspace()
+return M
 

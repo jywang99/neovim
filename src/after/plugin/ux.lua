@@ -1,3 +1,5 @@
+-- whichkey
+
 local status_ok, whichkey = pcall(require, "which-key")
 
 if not status_ok then
@@ -12,4 +14,29 @@ whichkey.add({ '<leader>c', group = 'Quickfix' })
 whichkey.add({ '<leader>d', group = 'Debug' })
 whichkey.add({ '<leader>l', group = 'LSP', icon = '🧠' })
 whichkey.add({ '<leader>o', group = 'Options', icon = '⚙️' })
+
+-- theme
+
+require("catppuccin").setup({
+    color_overrides = {
+        mocha = {
+            base = "#191926",
+        },
+    },
+})
+
+vim.cmd.colorscheme('catppuccin')
+
+-- status line
+
+local feline = require('feline')
+
+feline.setup({
+    disable = {
+        filetypes = {
+            'dap'
+        },
+    },
+})
+feline.winbar.setup()
 

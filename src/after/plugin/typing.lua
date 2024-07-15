@@ -34,3 +34,13 @@ require('Comment').setup({
 map("n", "<leader>/", api.toggle.linewise.current, { desc = "Toggle line comment" })
 map("v", "<leader>/", "<Plug>(comment_toggle_linewise_visual)", { desc = "Toggle selection comment" })
 
+-- copilot
+local function acceptWord()
+    vim.fn['copilot#Accept']("")
+    local bar = vim.fn['copilot#TextQueuedForInsertion']()
+    return vim.fn.split(bar,  [[[ *.]\zs]])[1]
+end
+
+-- remaps
+map('i', '<C-f>', acceptWord, {expr = true, remap = false})
+
