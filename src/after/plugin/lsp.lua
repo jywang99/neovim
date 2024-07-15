@@ -66,6 +66,3 @@ map("n", "gr", function() telescope.lsp_references(tsOpts) end, { desc = "Refere
 map("n", "gT", function() telescope.lsp_type_definitions(tsOpts) end, { desc = "Type definitions" })
 map("n", "gi", function() telescope.lsp_implementations(tsOpts) end, { desc = "Implementations" })
 
-map("n", "[d", function() vim.diagnostic.goto_prev() end, { desc = "Previous diagnostic" })
-map("n", "]d", function() vim.diagnostic.goto_next() end, { desc = "Next diagnostic" })
-

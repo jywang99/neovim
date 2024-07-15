@@ -35,22 +35,22 @@ require 'nvim-treesitter.configs'.setup {
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
                 ["]f"] = "@function.outer",
-                ["]c"] = "@class.outer",
+                ["]k"] = "@class.outer",
                 ["]b"] = "@block.outer",
             },
             goto_next_end = {
                 ["]F"] = "@function.outer",
-                ["]C"] = "@class.outer",
+                ["]K"] = "@class.outer",
                 ["]B"] = "@block.outer",
             },
             goto_previous_start = {
                 ["[f"] = "@function.outer",
-                ["[c"] = "@class.outer",
+                ["[k"] = "@class.outer",
                 ["[b"] = "@block.outer",
             },
             goto_previous_end = {
                 ["[F"] = "@function.outer",
-                ["[C"] = "@class.outer",
+                ["[K"] = "@class.outer",
                 ["[B"] = "@block.outer",
             },
         },
@@ -61,13 +61,15 @@ require 'nvim-treesitter.configs'.setup {
             keymaps = {
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
-                ["ac"] = "@class.outer",
+                ["ak"] = "@class.outer",
+                ["ib"] = "@block.inner",
                 ["ab"] = "@block.outer",
             },
             selection_modes = {
                 ['@function.inner'] = 'V',
                 ['@function.outer'] = 'V',
                 ['@class.outer'] = 'V',
+                ["@block.inner"] = 'v',
                 ["@block.outer"] = 'V',
             },
         },

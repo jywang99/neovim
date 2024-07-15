@@ -88,7 +88,6 @@ return require('packer').startup(function(use)
             'nvim-telescope/telescope.nvim',
         },
         config = true,
-        tag = 'v0.0.1' -- TODO remove when nvim upgraded to 0.10.0
     }
 
     -- Copilot

@@ -4,7 +4,12 @@ local neogit = require('neogit')
 local map = vim.keymap.set
 
 require('gitsigns').setup()
-neogit.setup({})
+
+neogit.setup({
+    commit_editor = {
+        staged_diff_split_kind = "vsplit_left",
+    },
+})
 
 diffview.setup({
     view = {
