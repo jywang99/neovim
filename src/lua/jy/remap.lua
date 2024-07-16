@@ -40,7 +40,6 @@ end
 map("n", "<leader>rs", promptAndSwap, { desc = "Swap registers" })
 
 -- text manipulation
-map("v", "$", "g_") -- to end of line
 map("v", "J", ":m '>+1<CR>gv=gv") -- move line
 map("v", "K", ":m '<-2<CR>gv=gv")
 map('i', '<C-c>', '<Esc>O') -- newline above
