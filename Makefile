@@ -6,12 +6,10 @@ local:
 clean:
 	rm -rf ./dist/
 
-# For copying local configs to another machine
-local-dist:
-	mkdir -p ./dist/tmp/
-	cp -r ~/.config/nvim/ ./dist/tmp/nvimConfig/
-	cp -r ~/.local/share/nvim/ ./dist/tmp/nvimData/
-	tar -czf ./dist/neovim.tar.gz ./dist/tmp/
+# For copying local nvim data to another machine
+tarball:
+	mkdir -p ./dist/
+	tar -czf ./dist/nvim.tar.gz -C ~/.local/share/ nvim
 
 dist:
 	docker build -t $(APP_NAME):latest .

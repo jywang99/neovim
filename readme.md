@@ -5,31 +5,39 @@
 ```bash
 make local
 ```
-4. Open [packer.lua](src/lua/jy/packer.lua) with `nvim`, and enter the following editor commands
+4. Open [packer.lua](src/lua/jy/packer.lua) with `nvim`
 ```bash
 nvim src/lua/jy/packer.lua
 ```
+And then enter the following editor commands
 ```vim
 :so
 :PackerInstall
 ```
-This will install all plugins specified in the configuration
-
-## Docker image
-1. Pull docker image from here: https://hub.docker.com/repository/docker/jyking99/neovim/
-2. Run the docker image and login with the following credentials:\
-Default user: `dev` \
-Default password: `devpass`
-3. In the running docker container, run step 4 of [local setup](#setup)
+This will install all plugins needed for this configuration.
 
 ## Offline installation
-Prerequisite: you have a working neovim installation that you want to copy to another machine
+**Prerequisite**: you have a working neovim installation that you want to copy to another machine
+
+Step 1. Transfer `~/.local/share/nvim`
 1. Generate a tarball containing all Neovim config files and dependencies
 ```bash
-make local-dist
+make tarball
 ```
-2. Copy the tarball to the target machine
-3. Extract the tarball to the target machine
+2. Copy the tarball to the target machine, and apply configs
+On source machine:
+```bash
+scp ./dist/nvim.tar.gz user@target-machine:/path/to/destination
+```
+3. On target machine:
+```bash
+tar -xzf /path/to/destination/nvim.tar.gz -C ~/.config
+```
 
-**TODO** Re-organize tarball content, add instructions for target machine
+Step 2. Transfer `~/.config/nvim`
+1. Copy this repository to the target machine
+```bash
+scp -r . user@target-machine:/path/to/destination
+```
+2. Follow steps 3 and 4 of [Setup locally](#setup-locally)
 
