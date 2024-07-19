@@ -27,16 +27,8 @@ require("catppuccin").setup({
 
 vim.cmd.colorscheme('catppuccin')
 
--- status line
+-- lualine
 
-local feline = require('feline')
-
-feline.setup({
-    disable = {
-        filetypes = {
-            'dap'
-        },
-    },
-})
-feline.winbar.setup()
+local line = require('lualine')
+line.setup {}
 

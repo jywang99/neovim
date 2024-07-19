@@ -4,7 +4,7 @@ local telescope = require('telescope.builtin')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-    ensure_installed = { 'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jdtls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls', 'jsonls', 'gopls', 'clangd', 'svelte' },
+    ensure_installed = { 'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jdtls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls', 'jsonls', 'gopls', 'clangd', 'svelte', 'omnisharp' },
     handlers = {
         lsp_zero.default_setup,
         jdtls = lsp_zero.noop,
@@ -20,19 +20,24 @@ lsp_config.lua_ls.setup({
     }
 })
 lsp_config.pyright.setup {}
-lsp_config.csharp_ls.setup {}
 lsp_config.dockerls.setup {}
 lsp_config.docker_compose_language_service.setup {}
 lsp_config.bashls.setup {}
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
--- require 'lspconfig'.jsonls.setup {
---     capabilities = capabilities,
--- }
 lsp_config.jsonls.setup {}
 lsp_config.lemminx.setup {}
+
 lsp_config.gopls.setup {
     staticcheck = true,
+}
+
+local omni_ext = require('omnisharp_extended')
+lsp_config.omnisharp.setup {
+    handlers = {
+        ["textDocument/definition"] = omni_ext.definition_handler,
+        ["textDocument/typeDefinition"] = omni_ext.type_definition_handler,
+        ["textDocument/references"] = omni_ext.references_handler,
+        ["textDocument/implementation"] = omni_ext.implementation_handler,
+    },
 }
 
 lsp_zero.on_attach(function(client, bufnr)
@@ -62,6 +67,7 @@ map("n", "<leader>lS", function() telescope.lsp_workspace_symbols(tsOpts) end, {
 map("n", "<leader>le", function() vim.diagnostic.open_float() end, { desc = "Inline diagnostics" })
 map("n", "<leader>lE", function() telescope.diagnostics() end, { desc = "Workspace diagnostics" })
 
+map("n", "<C-]>", function() vim.lsp.buf.definition(tsOpts) end, { desc = "Go to definition" })
 map("n", "gr", function() telescope.lsp_references(tsOpts) end, { desc = "References" })
 map("n", "gT", function() telescope.lsp_type_definitions(tsOpts) end, { desc = "Type definitions" })
 map("n", "gi", function() telescope.lsp_implementations(tsOpts) end, { desc = "Implementations" })

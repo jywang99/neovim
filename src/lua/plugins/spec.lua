@@ -10,7 +10,6 @@ return {
     'stevearc/oil.nvim',
 
     -- UI/UX
-    'feline-nvim/feline.nvim',
     'folke/which-key.nvim',
     { 'catppuccin/nvim', name = 'catppuccin' },
     {
@@ -18,6 +17,11 @@ return {
         build = function() vim.fn["mkdp#util#install"]() end,
     },
     { 'echasnovski/mini.icons', lazy = true },
+    'nvim-telescope/telescope-dap.nvim',
+    {
+	    'nvim-lualine/lualine.nvim',
+	    dependencies = { 'nvim-tree/nvim-web-devicons' }
+    },
 
     -- editing
     {
@@ -61,7 +65,7 @@ return {
         dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
         lazy = true,
     },
-    'nvim-telescope/telescope-dap.nvim',
+
     -- languages
     { 'mfussenegger/nvim-jdtls', lazy = true },
     {
@@ -76,6 +80,7 @@ return {
         end
     },
     { 'leoluz/nvim-dap-go', lazy = true },
+    { 'Hoffs/omnisharp-extended-lsp.nvim', lazy = true },
 
     -- Git
     'lewis6991/gitsigns.nvim',
