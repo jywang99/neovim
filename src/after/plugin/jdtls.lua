@@ -2,6 +2,7 @@ local TEST_JSON = 'jdtls_tests.json'
 
 local persist = require('util.persist')
 local jdtls = require('jdtls')
+local map = vim.keymap.set
 
 local java_cmds = vim.api.nvim_create_augroup('java_cmds', { clear = true })
 local cache_vars = {}
@@ -180,18 +181,11 @@ local function jdtls_on_attach(client, bufnr)
 end
 
 local function enableKeymaps()
-    local opts = {
-        mode = "n",
-        prefix = '<leader>l',
-    }
-    local mappings = {
-        i = { jdtls.organize_imports, "Organize imports" },
-        k = { jdtls.super_implementation, "Go to super implementation" },
-        C = { jdtls.compile, "Recompile" },
-        B = { jdtls.build_projects, "Rebuild" },
-        R = { jdtls.update_project_config, "Update project config" },
-    }
-    require('which-key').register(mappings, opts)
+    map("n", "<leader>li", jdtls.organize_imports, { desc = "Organize imports" })
+    map("n", "gk", jdtls.super_implementation, { desc = "Go to super implementation" })
+    map("n", "<leader>lC", jdtls.compile, { desc = "Recompile" })
+    map("n", "<leader>lB", jdtls.build_projects, { desc = "Rebuild" })
+    map("n", "<leader>lR", jdtls.update_project_config, { desc = "Update project config" })
 end
 
 local function jdtls_setup(event)

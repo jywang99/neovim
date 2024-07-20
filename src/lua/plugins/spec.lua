@@ -67,7 +67,7 @@ return {
     },
 
     -- languages
-    { 'mfussenegger/nvim-jdtls', lazy = true },
+    'mfussenegger/nvim-jdtls',
     {
         'mfussenegger/nvim-dap-python',
         lazy = true,
