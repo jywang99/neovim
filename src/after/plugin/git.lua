@@ -30,7 +30,7 @@ map("n", "<leader>gl", gitsigns.blame_line, { desc = "Blame" })
 map("n", "<leader>gp", gitsigns.preview_hunk, { desc = "Preview Hunk" })
 map("n", "<leader>gd", [[:DiffviewOpen<CR>]], { desc = "Open diff view" })
 map("n", "<leader>gD", diffFileWithRef, { desc = "Diff file with ref" })
-map("n", "<leader>gh", [[:DiffviewFileHistory %<CR>]], { desc = "Open git history" })
+map("n", "<leader>gh", [[:DiffviewFileHistory %<CR>]], { desc = "View file history" })
 
 map("n", "]g", gitsigns.next_hunk, { desc = "Next Git Hunk" })
 map("n", "[g", gitsigns.prev_hunk, { desc = "Previous Git Hunk" })

@@ -18,6 +18,7 @@ vim.opt.wrap = true
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
+vim.opt.laststatus = 3
 
 -- backups
 vim.opt.swapfile = false
@@ -33,5 +34,6 @@ vim.opt.updatetime = 50
 vim.opt.splitkeep = 'topline'
 vim.opt.equalalways = true
 
+-- terminal
 vim.o.shell = "/bin/bash"
 
