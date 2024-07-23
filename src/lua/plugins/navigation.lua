@@ -10,7 +10,6 @@ local function setup_lsp_keymaps()
     }
 
     -- keybindings
-    local map = vim.keymap.set
     map("n", "<leader>lf", function() vim.lsp.buf.formatting() end, { desc = "Format file" })
     map("n", "<leader>lr", function() vim.lsp.buf.rename() end, { desc = "Rename" })
     map("n", "<leader>la", function() vim.lsp.buf.code_action() end, { desc = "Code actions" })
@@ -49,7 +48,6 @@ return {
                     }
                 }
             })
-            telescope.load_extension('dap')
 
             map("n", "<leader>fs", builtin.current_buffer_fuzzy_find, { desc = "Search in current buffer" })
             map("n", "<leader>fo", builtin.find_files, { desc = "Open file" })

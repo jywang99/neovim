@@ -1,6 +1,8 @@
 local persist = require('util.persist')
 local sidebar = require('util.sidebar')
 
+local debuggables = { 'java', 'py', 'go', }
+
 -- launch.json
 local LAUNCH_JSON = persist.getPersistPath() .. '/launch.json'
 local function readConfigAndDebug()
@@ -69,6 +71,7 @@ end
 return {
     {
         'mfussenegger/nvim-dap',
+        lazy = true,
         config = function()
             local dap = require('dap')
             dap.adapters.coreclr = {
@@ -105,6 +108,8 @@ return {
     { 'theHamsta/nvim-dap-virtual-text', lazy = true },
     {
         'nvim-telescope/telescope-dap.nvim',
+        lazy = true,
+        ft = debuggables,
         dependencies = { 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap' },
         config = function()
             require('telescope').load_extension('dap')
@@ -113,40 +118,42 @@ return {
     {
         'rcarriga/nvim-dap-ui',
         dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio', 'theHamsta/nvim-dap-virtual-text' },
-	config = function()
-	    local dapui = require('dapui')
-	    local dap = require('dap')
-	    require("nvim-dap-virtual-text").setup()
+        lazy = true,
+        ft = debuggables,
+        config = function()
+            local dapui = require('dapui')
+            local dap = require('dap')
+            require("nvim-dap-virtual-text").setup()
 
-	    dapui.setup({
-		layouts = {{
-		    elements = {
-			{ id = "repl", size = 0.5 },
-			{ id = "console", size = 0.5 }
-		    },
-		    position = "bottom",
-		    size = 10
-		}, {
-		    elements = {
-			{ id = "scopes", size = 0.4 },
-			{ id = "breakpoints", size = 0.3 },
-			{ id = "stacks", size = 0.3 },
-		    },
-		    position = "left",
-		    size = 40
-		}}
-	    })
-	    dap.listeners.after.event_initialized['dapui_config'] = function()
-		sidebar.nukeAndRun(dapui.open)
-	    end
-	    dap.listeners.before.event_terminated['dapui_config'] = function()
-		-- dapui.close()
-	    end
-	    dap.listeners.before.event_exited['dapui_config'] = function()
-		-- dapui.close()
-	    end
-	    setKeymaps()
-	end,
+            dapui.setup({
+                layouts = {{
+                    elements = {
+                        { id = "repl", size = 0.5 },
+                        { id = "console", size = 0.5 }
+                    },
+                    position = "bottom",
+                    size = 10
+                }, {
+                    elements = {
+                        { id = "scopes", size = 0.4 },
+                        { id = "breakpoints", size = 0.3 },
+                        { id = "stacks", size = 0.3 },
+                    },
+                    position = "left",
+                    size = 40
+                }}
+            })
+            dap.listeners.after.event_initialized['dapui_config'] = function()
+                sidebar.nukeAndRun(dapui.open)
+            end
+            dap.listeners.before.event_terminated['dapui_config'] = function()
+                -- dapui.close()
+            end
+            dap.listeners.before.event_exited['dapui_config'] = function()
+                -- dapui.close()
+            end
+            setKeymaps()
+        end,
     },
     {
         'mfussenegger/nvim-dap-python',

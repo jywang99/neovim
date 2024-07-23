@@ -3,16 +3,13 @@ return {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
         dependencies = {
-            -- Uncomment these if you want to manage LSP servers from neovim
-            { 'williamboman/mason.nvim' },
-            { 'williamboman/mason-lspconfig.nvim' },
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' },
-            -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'L3MON4D3/LuaSnip' },
-            { 'nvim-telescope/telescope.nvim' },
+            'williamboman/mason.nvim',
+            'williamboman/mason-lspconfig.nvim',
+            'neovim/nvim-lspconfig',
+            'hrsh7th/nvim-cmp',
+            'hrsh7th/cmp-nvim-lsp',
+            'L3MON4D3/LuaSnip',
+            'nvim-telescope/telescope.nvim',
         },
         config = function()
             local lsp_zero = require('lsp-zero')
@@ -42,6 +39,7 @@ return {
             lsp_config.bashls.setup {}
             lsp_config.jsonls.setup {}
             lsp_config.lemminx.setup {}
+            lsp_config.clangd.setup {}
 
             lsp_config.gopls.setup {
                 staticcheck = true,
@@ -65,7 +63,7 @@ return {
         'Hoffs/omnisharp-extended-lsp.nvim',
         lazy = true,
         ft = { 'cs' },
-        dependencies = { 'neovim/nvim-lspconfig' },
+        dependencies = { 'VonHeikemen/lsp-zero.nvim' },
         config = function()
             local omni_ext = require('omnisharp_extended')
             require('lspconfig').omnisharp.setup {
