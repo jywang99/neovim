@@ -4,10 +4,10 @@ vim.opt.smartcase = true
 vim.cmd("autocmd BufEnter * set formatoptions-=cro")
 
 -- whitespace
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+    pattern = { "*" },
+    command = "setlocal ts=4 sts=4 sw=4 expandtab",
+})
 
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     pattern = { "*.tsx", "*.ts", "*.js", "*.jsx", "*.html", "*.svelte" },
