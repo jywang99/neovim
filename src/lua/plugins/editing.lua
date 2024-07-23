@@ -166,7 +166,11 @@ return {
             require('nvim-ts-autotag').setup()
         end
     },
-    'dkarter/bullets.vim',
+    {
+	'dkarter/bullets.vim',
+	lazy = true,
+	ft = { 'md' },
+    },
     {
         'github/copilot.vim',
         config = function()
