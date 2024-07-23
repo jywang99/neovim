@@ -1,2 +1,0 @@
-require("jy.workspace").loadWorkspace()
-

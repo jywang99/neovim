@@ -1,9 +1,7 @@
-local dapui = require('dapui')
-
 local M = {}
 
 function M.closeLeftBufs()
-    dapui.close()
+    require('dapui').close()
 end
 
 function M.closeRightBufs()
@@ -12,7 +10,7 @@ function M.closeRightBufs()
 end
 
 function M.closeBottomBufs()
-    dapui.close()
+    require('dapui').close()
 end
 
 function M.nukePeripherals()

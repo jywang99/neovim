@@ -1,5 +1,4 @@
 return {
-    -- LSP
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
@@ -13,10 +12,10 @@ return {
             { 'hrsh7th/nvim-cmp' },
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'L3MON4D3/LuaSnip' },
+            { 'nvim-telescope/telescope.nvim' },
         },
         config = function()
             local lsp_zero = require('lsp-zero')
-            local lsp_config = require('lspconfig')
             require('mason').setup({})
             require('mason-lspconfig').setup({
                 ensure_installed = { 'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jdtls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls', 'jsonls', 'gopls', 'clangd', 'svelte', 'omnisharp' },
@@ -25,6 +24,9 @@ return {
                     jdtls = lsp_zero.noop,
                 }
             })
+
+            local lsp_config = require('lspconfig')
+
             lsp_config.lua_ls.setup({
                 settings = {
                     Lua = {
@@ -45,16 +47,6 @@ return {
                 staticcheck = true,
             }
 
-            local omni_ext = require('omnisharp_extended')
-            lsp_config.omnisharp.setup {
-                handlers = {
-                    ["textDocument/definition"] = omni_ext.definition_handler,
-                    ["textDocument/typeDefinition"] = omni_ext.type_definition_handler,
-                    ["textDocument/references"] = omni_ext.references_handler,
-                    ["textDocument/implementation"] = omni_ext.implementation_handler,
-                },
-            }
-
             lsp_zero.on_attach(function(client, bufnr)
                 lsp_zero.default_keymaps({ buffer = bufnr })
                 if client.name == "jdt.ls" then
@@ -65,6 +57,30 @@ return {
             end)
 
             lsp_zero.setup()
+        end
+    },
+
+    -- languages
+    {
+        'mfussenegger/nvim-jdtls',
+        lazy = true,
+        ft = { 'java' },
+    },
+    {
+        'Hoffs/omnisharp-extended-lsp.nvim',
+        lazy = true,
+        ft = { 'cs' },
+        dependencies = { 'neovim/nvim-lspconfig' },
+        config = function()
+            local omni_ext = require('omnisharp_extended')
+            require('lspconfig').omnisharp.setup {
+                handlers = {
+                    ["textDocument/definition"] = omni_ext.definition_handler,
+                    ["textDocument/typeDefinition"] = omni_ext.type_definition_handler,
+                    ["textDocument/references"] = omni_ext.references_handler,
+                    ["textDocument/implementation"] = omni_ext.implementation_handler,
+                },
+            }
         end
     },
 }

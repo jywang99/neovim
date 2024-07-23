@@ -9,6 +9,11 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+    pattern = { "*.tsx", "*.ts", "*.js", "*.jsx", "*.html", "*.svelte" },
+    command = "setlocal ts=2 sts=2 sw=2 expandtab",
+})
+
 -- appearance
 vim.opt.number = true
 vim.opt.relativenumber = true
