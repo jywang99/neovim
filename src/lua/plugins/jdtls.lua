@@ -1,7 +1,6 @@
 local TEST_JSON = 'jdtls_tests.json'
 
 local persist = require('util.persist')
-local jdtls = require('jdtls')
 local map = vim.keymap.set
 
 local java_cmds = vim.api.nvim_create_augroup('java_cmds', { clear = true })
@@ -16,7 +15,7 @@ local root_files = {
 
 local features = {
     -- change this to `true` to enable codelens
-    codelens = false,
+    codelens = true,
 
     -- change this to `true` if you have `nvim-dap`, `java-test` and `java-debug-adapter` installed
     debugger = true,
@@ -55,7 +54,7 @@ local function promptAndRunTestClass()
     if config == nil then
         return
     end
-    jdtls.test_class({ config = config })
+    require('jdtls').test_class({ config = config })
 end
 
 local function promptAndRunTestMethod()
@@ -63,7 +62,7 @@ local function promptAndRunTestMethod()
     if config == nil then
         return
     end
-    jdtls.test_nearest_method({ config = config })
+    require('jdtls').test_nearest_method({ config = config })
 end
 
 local function get_jdtls_paths()
@@ -170,7 +169,7 @@ local function enable_debugger(bufnr)
     vim.keymap.set('n', '<leader>dm', promptAndRunTestMethod, opts)
 end
 
-local function jdtls_on_attach(client, bufnr)
+local function jdtls_on_attach(_, bufnr)
     if features.debugger then
         enable_debugger(bufnr)
     end
@@ -181,6 +180,8 @@ local function jdtls_on_attach(client, bufnr)
 end
 
 local function enableKeymaps()
+    local jdtls = require('jdtls')
+
     map("n", "<leader>li", jdtls.organize_imports, { desc = "Organize imports" })
     map("n", "gk", jdtls.super_implementation, { desc = "Go to super implementation" })
     map("n", "<leader>lC", jdtls.compile, { desc = "Recompile" })
@@ -188,7 +189,8 @@ local function enableKeymaps()
     map("n", "<leader>lR", jdtls.update_project_config, { desc = "Update project config" })
 end
 
-local function jdtls_setup(event)
+local function jdtls_setup()
+    local jdtls = require('jdtls')
     local path = get_jdtls_paths()
     local data_dir = path.data_dir .. '/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 
@@ -320,10 +322,16 @@ local function jdtls_setup(event)
     enableKeymaps()
 end
 
--- run java language server when filetype is java
-vim.api.nvim_create_autocmd('FileType', {
-    group = java_cmds,
-    pattern = { 'java' },
-    desc = 'Setup jdtls',
-    callback = jdtls_setup,
-})
+return {
+    {
+        'mfussenegger/nvim-jdtls',
+        dependencies = {
+            'VonHeikemen/lsp-zero.nvim',
+            'williamboman/mason.nvim',
+            'neovim/nvim-lspconfig',
+            'williamboman/mason-lspconfig.nvim'
+        },
+        config = jdtls_setup,
+    },
+}
+

@@ -62,11 +62,6 @@ return {
 
     -- languages
     {
-        'mfussenegger/nvim-jdtls',
-        lazy = true,
-        ft = { 'java' },
-    },
-    {
         'Hoffs/omnisharp-extended-lsp.nvim',
         lazy = true,
         ft = { 'cs' },
