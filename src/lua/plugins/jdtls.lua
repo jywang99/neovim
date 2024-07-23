@@ -325,13 +325,20 @@ end
 return {
     {
         'mfussenegger/nvim-jdtls',
+        lazy = true,
+        ft = { 'java' },
         dependencies = {
             'VonHeikemen/lsp-zero.nvim',
             'williamboman/mason.nvim',
             'neovim/nvim-lspconfig',
             'williamboman/mason-lspconfig.nvim'
         },
-        config = jdtls_setup,
+        config = function()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "java",
+                callback = jdtls_setup,
+            })
+        end
     },
 }
 
