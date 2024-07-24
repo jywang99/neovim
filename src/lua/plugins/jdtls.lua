@@ -331,7 +331,8 @@ return {
             'VonHeikemen/lsp-zero.nvim',
             'williamboman/mason.nvim',
             'neovim/nvim-lspconfig',
-            'williamboman/mason-lspconfig.nvim'
+            'williamboman/mason-lspconfig.nvim',
+            'mfussenegger/nvim-dap',
         },
         config = function()
             vim.api.nvim_create_autocmd("FileType", {

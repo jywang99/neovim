@@ -1,7 +1,9 @@
 local persist = require('util.persist')
 local sidebar = require('util.sidebar')
+local buffers = require('util.buffers')
 
 local debuggables = { 'java', 'py', 'go', }
+local replers = { 'py', 'go', }
 
 -- launch.json
 local LAUNCH_JSON = persist.getPersistPath() .. '/launch.json'
@@ -144,13 +146,33 @@ return {
                 }}
             })
             dap.listeners.after.event_initialized['dapui_config'] = function()
-                sidebar.nukeAndRun(dapui.open)
+                print('Debug session started')
+
+                -- find log buffer
+                local filetype = vim.bo.filetype
+                local target = 'dapui_console'
+                if vim.tbl_contains(replers, filetype) then
+                    target = 'dap-repl'
+                else
+
+                end
+                local buf = buffers.getFiletypeBuffer(target)
+                if not buf then
+                    print('Dap console buffer not found')
+                    return
+                end
+
+                -- open it in new tab
+                buffers.openBufInNewTab(buf)
             end
             dap.listeners.before.event_terminated['dapui_config'] = function()
-                -- dapui.close()
+                print('Debug session terminated')
             end
             dap.listeners.before.event_exited['dapui_config'] = function()
-                -- dapui.close()
+                print('Debug session exited')
+            end
+            dap.listeners.before.event_stopped['dapui_config'] = function()
+                sidebar.nukeAndRun(dapui.open)
             end
             setKeymaps()
         end,
@@ -158,7 +180,7 @@ return {
     {
         'mfussenegger/nvim-dap-python',
         lazy = true,
-	ft = { 'py' },
+        ft = { 'py' },
         dependencies = { 'mfussenegger/nvim-dap', 'rcarriga/nvim-dap-ui' },
         config = function()
             require('dap-python').setup('~/.local/share/nvim/mason/packages/debugpy/venv/bin/python')
@@ -167,7 +189,7 @@ return {
     {
         'leoluz/nvim-dap-go',
         lazy = true,
-	ft = { 'go' },
+        ft = { 'go' },
         dependencies = { 'mfussenegger/nvim-dap', 'rcarriga/nvim-dap-ui' },
         config = function()
             -- go

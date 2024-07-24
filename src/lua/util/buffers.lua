@@ -48,5 +48,29 @@ function M.doAndSwitchBackWindow(func)
     end, 100)
 end
 
+function M.isBufferInAnyTab(buffer)
+    local tabpages = vim.api.nvim_list_tabpages()
+    for _, tabpage in ipairs(tabpages) do
+        local windows = vim.api.nvim_tabpage_list_wins(tabpage)
+        for _, win in ipairs(windows) do
+            if vim.api.nvim_win_get_buf(win) == buffer then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+function M.openBufInNewTab(buf)
+    if M.isBufferInAnyTab(buf) then
+        return
+    end
+
+    local current_tab = vim.api.nvim_get_current_tabpage()
+    vim.cmd('tabnew')
+    vim.api.nvim_set_current_buf(buf)
+    vim.api.nvim_set_current_tabpage(current_tab)
+end
+
 return M
 
