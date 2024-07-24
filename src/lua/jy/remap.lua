@@ -48,8 +48,8 @@ map("n", "[d", function() vim.diagnostic.goto_prev() end, { desc = "Previous dia
 map("n", "]d", function() vim.diagnostic.goto_next() end, { desc = "Next diagnostic" })
 
 -- quickfix
-map("n", "<Tab>", "<CMD>cnext<CR>zz", { desc = "Forward quickfix" })
-map("n", "<S-Tab>", "<CMD>cprev<CR>zz", { desc = "Backward quickfix" })
+map("n", "<M-c>", "<CMD>cnext<CR>zz", { desc = "Forward quickfix" })
+map("n", "<M-q>", "<CMD>cprev<CR>zz", { desc = "Backward quickfix" })
 map("n", "<leader>co", "<CMD>copen<CR>", { desc = "Open quickfix" })
 map("n", "<leader>cp", "<CMD>colder<CR>", { desc = "To older quickfix" })
 map("n", "<leader>cn", "<CMD>cnewer<CR>", { desc = "To newer quickfix" })
