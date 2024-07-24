@@ -1,5 +1,10 @@
 local map = vim.keymap.set
 
+local ts_ignore = {
+    "node_modules/",
+    ".git/",
+}
+
 local function setup_lsp_keymaps()
     local telescope = require('telescope.builtin')
 
@@ -28,7 +33,6 @@ return {
     -- navigation
     {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.5',
         dependencies = { 'nvim-lua/plenary.nvim' },
         config = function()
             local telescope = require('telescope')
@@ -44,7 +48,12 @@ return {
                 },
                 pickers = {
                     find_files = {
-                        hidden = false
+                        hidden = true,
+                        file_ignore_patterns = ts_ignore,
+                    },
+                    live_grep = {
+                        hidden = true,
+                        file_ignore_patterns = ts_ignore,
                     }
                 }
             })
@@ -58,7 +67,7 @@ return {
             map("n", "<leader>fb", builtin.buffers, { desc = "Find buffer" })
             map("n", "<leader>ff", builtin.builtin, { desc = "Pick a picker" })
 
-           setup_lsp_keymaps()
+            setup_lsp_keymaps()
         end
     },
     {

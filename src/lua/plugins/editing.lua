@@ -14,6 +14,20 @@ return {
         config = function()
             local context = require('treesitter-context')
 
+            context.setup {
+                line_numbers = true,
+                max_lines = 5,
+                multiline_threshold = 1,
+                trim_scope = 'outer',
+                separator = '-',
+                zindex = 20, -- The Z-index of the context window
+            }
+        end
+    },
+    {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
+        config = function()
             require 'nvim-treesitter.configs'.setup {
                 -- A list of parser names, or "all" (the five listed parsers should always be installed)
                 ensure_installed = { "javascript", "typescript", "c", "lua", "python", "c_sharp", "java", "go" },
@@ -90,15 +104,6 @@ return {
                 },
             }
 
-            context.setup {
-                line_numbers = true,
-                max_lines = 5,
-                multiline_threshold = 1,
-                trim_scope = 'outer',
-                separator = '-',
-                zindex = 20, -- The Z-index of the context window
-            }
-
             -- repeat movements
             local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
             -- make builtin f, F, t, T also repeatable with ; and ,
@@ -108,7 +113,6 @@ return {
             map({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
         end
     },
-    'nvim-treesitter/nvim-treesitter-textobjects',
     {
         'mbbill/undotree',
         config = function()

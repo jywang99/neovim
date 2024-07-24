@@ -44,37 +44,20 @@ map("v", "J", ":m '>+1<CR>gv=gv") -- move line
 map("v", "K", ":m '<-2<CR>gv=gv")
 map('i', '<C-c>', '<Esc>O') -- newline above
 
--- quickfix
-local function searchModifiedBufs()
-    local buffers = vim.api.nvim_list_bufs()
-
-    local quickfix_list = {}
-    for _, bufnr in ipairs(buffers) do
-        local bufname = vim.api.nvim_buf_get_name(bufnr)
-        local is_modified = vim.api.nvim_buf_get_option(bufnr, 'modified')
-
-        if is_modified then
-            table.insert(quickfix_list, {filename = bufname, bufnr = bufnr})
-        end
-    end
-
-    vim.fn.setqflist(quickfix_list)
-    vim.cmd("copen")
-end
-
 map("n", "[d", function() vim.diagnostic.goto_prev() end, { desc = "Previous diagnostic" })
 map("n", "]d", function() vim.diagnostic.goto_next() end, { desc = "Next diagnostic" })
 
-map("n", "]q", "<CMD>cnext<CR>zz", { desc = "Forward quickfix" })
-map("n", "[q", "<CMD>cprev<CR>zz", { desc = "Backward quickfix" })
+-- quickfix
+map("n", "<Tab>", "<CMD>cnext<CR>zz", { desc = "Forward quickfix" })
+map("n", "<S-Tab>", "<CMD>cprev<CR>zz", { desc = "Backward quickfix" })
 map("n", "<leader>co", "<CMD>copen<CR>", { desc = "Open quickfix" })
 map("n", "<leader>cp", "<CMD>colder<CR>", { desc = "To older quickfix" })
 map("n", "<leader>cn", "<CMD>cnewer<CR>", { desc = "To newer quickfix" })
-map("n", "<leader>ce", searchModifiedBufs, { desc = "Show edited buffers" })
 
 -- tabs
 map("n", "<C-n>", "gt")
 map("n", "<C-p>", "gT")
+map("n", "<leader>tn", "<CMD>tabnew<CR>", { desc = "New tab" })
 map("n", "<C-c>", "<CMD>tabclose<CR>", { desc = "Close tab" })
 
 -- windows
