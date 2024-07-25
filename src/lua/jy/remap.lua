@@ -1,4 +1,6 @@
+local r = require('util.registers')
 local map = vim.keymap.set
+local bmap = vim.api.nvim_buf_set_keymap
 
 vim.g.mapleader = " "
 
@@ -53,6 +55,17 @@ map("n", "<M-q>", "<CMD>cprev<CR>zz", { desc = "Backward quickfix" })
 map("n", "<leader>co", "<CMD>copen<CR>", { desc = "Open quickfix" })
 map("n", "<leader>cp", "<CMD>colder<CR>", { desc = "To older quickfix" })
 map("n", "<leader>cn", "<CMD>cnewer<CR>", { desc = "To newer quickfix" })
+-- remaps in quickfix window
+vim.api.nvim_create_augroup('QuickFixGroup', {})
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'QuickFixGroup',
+  pattern = 'qf',
+  callback = function()
+    bmap(0, 'n', 'o', '<CR><C-w>w', {})
+    bmap(0, 'n', '<Tab>', 'jo', {})
+    bmap(0, 'n', '<S-Tab>', 'ko', {})
+  end
+})
 
 -- tabs
 map("n", "<C-n>", "gt")
@@ -69,4 +82,17 @@ map("n", "<C-q>", [[<C-\><C-n><C-w>q]])
 
 -- buffers
 map("n", "<BS>", "<CMD>b#<CR>", { desc = "Switch to last buffer" })
+
+-- LSP
+map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
+map("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code actions" })
+
+map("n", "<C-]>", function() r.markAndDo('s', vim.lsp.buf.definition) end, { desc = "Definition" })
+map("n", "gr", function() r.markAndDo('s', vim.lsp.buf.references) end, { desc = "References" })
+map("n", "gi", function() r.markAndDo('s', vim.lsp.buf.implementation) end, { desc = "Implementations" })
+map("n", "gT", function() r.markAndDo('s', vim.lsp.buf.type_definition) end, { desc = "Type definitions" })
+map("n", "gs", function() r.markAndDo('s', vim.lsp.buf.typehierarchy) end, { desc = "Type hierarchy" })
+
+map("n", "<leader>le", vim.diagnostic.open_float, { desc = "Inline diagnostics" })
+map("n", "<leader>lE", vim.diagnostic.setqflist, { desc = "Workspace diagnostics" })
 

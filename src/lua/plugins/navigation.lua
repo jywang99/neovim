@@ -1,42 +1,20 @@
 local map = vim.keymap.set
 
-local ts_ignore = {
-    "node_modules/",
-    ".git/",
-}
-
-local function setup_lsp_keymaps()
-    local telescope = require('telescope.builtin')
-
-    local tsOpts = {
-        include_declaration = false,
-        trim_text = true,
-        fname_width = 25,
-    }
-
-    -- keybindings
-    map("n", "<leader>lf", function() vim.lsp.buf.formatting() end, { desc = "Format file" })
-    map("n", "<leader>lr", function() vim.lsp.buf.rename() end, { desc = "Rename" })
-    map("n", "<leader>la", function() vim.lsp.buf.code_action() end, { desc = "Code actions" })
-    map("n", "<leader>ls", function() telescope.lsp_document_symbols(tsOpts) end, { desc = "Symbols in file" })
-    map("n", "<leader>lS", function() telescope.lsp_workspace_symbols(tsOpts) end, { desc = "Symbols in workspace" })
-    map("n", "<leader>le", function() vim.diagnostic.open_float() end, { desc = "Inline diagnostics" })
-    map("n", "<leader>lE", function() telescope.diagnostics() end, { desc = "Workspace diagnostics" })
-
-    map("n", "<C-]>", function() vim.lsp.buf.definition(tsOpts) end, { desc = "Go to definition" })
-    map("n", "gr", function() telescope.lsp_references(tsOpts) end, { desc = "References" })
-    map("n", "gT", function() telescope.lsp_type_definitions(tsOpts) end, { desc = "Type definitions" })
-    map("n", "gi", function() telescope.lsp_implementations(tsOpts) end, { desc = "Implementations" })
-end
-
 return {
-    -- navigation
     {
         'nvim-telescope/telescope.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' },
         config = function()
             local telescope = require('telescope')
             local builtin = require('telescope.builtin')
+
+            local pickerCfg = {
+                hidden = true,
+                file_ignore_patterns = {
+                    "node_modules/",
+                    ".git/",
+                },
+            }
 
             telescope.setup({
                 defaults = {
@@ -47,27 +25,36 @@ return {
                     dynamic_preview_title = true,
                 },
                 pickers = {
-                    find_files = {
-                        hidden = true,
-                        file_ignore_patterns = ts_ignore,
-                    },
-                    live_grep = {
-                        hidden = true,
-                        file_ignore_patterns = ts_ignore,
-                    }
+                    find_files = pickerCfg,
+                    live_grep = pickerCfg,
+                    grep_string = pickerCfg,
                 }
             })
 
+            -- string search
             map("n", "<leader>fs", builtin.current_buffer_fuzzy_find, { desc = "Search in current buffer" })
+            map("n", "<leader>fS", builtin.live_grep, { desc = "Live grep" })
+            map({"n", "v"}, "<leader>fc", builtin.grep_string, { desc = "Search word/selection under cursor" })
+
+            -- files
             map("n", "<leader>fo", builtin.find_files, { desc = "Open file" })
             map("n", "<leader>fh", builtin.oldfiles, { desc = "Recent files" })
-            map("n", "<leader>fS", builtin.live_grep, { desc = "Live grep" })
-            map("n", "<leader>fr", builtin.resume, { desc = "Resume last search" })
-            map("n", "<leader>fp", builtin.pickers, { desc = "Previous search" })
             map("n", "<leader>fb", builtin.buffers, { desc = "Find buffer" })
-            map("n", "<leader>ff", builtin.builtin, { desc = "Pick a picker" })
 
-            setup_lsp_keymaps()
+            -- meta
+            map("n", "<leader>ff", builtin.builtin, { desc = "Pick a picker" })
+            map("n", "<leader>fr", builtin.resume, { desc = "Resume last search" })
+            map("n", "<leader>fp", builtin.pickers, { desc = "Previous searches" })
+
+            local tsOpts = {
+                include_declaration = false,
+                trim_text = true,
+                fname_width = 25,
+            }
+
+            map("n", "<leader>ls", function() builtin.lsp_document_symbols(tsOpts) end, { desc = "Symbols in file" })
+            map("n", "<leader>lS", function() builtin.lsp_workspace_symbols(tsOpts) end, { desc = "Symbols in workspace" })
+
         end
     },
     {

@@ -1,7 +1,6 @@
 local map = vim.keymap.set
 
 return {
-    -- editing
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',

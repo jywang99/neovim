@@ -28,5 +28,11 @@ function M.persistDefaultRegistTxt()
     M.persistRegistTxt('"')
 end
 
+function M.markAndDo(letter, action)
+    local mark = vim.fn.getpos(".")
+    vim.fn.setpos("'" .. letter, mark)
+    action()
+end
+
 return M
 
