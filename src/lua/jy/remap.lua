@@ -87,11 +87,12 @@ map("n", "<BS>", "<CMD>b#<CR>", { desc = "Switch to last buffer" })
 map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
 map("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code actions" })
 
-map("n", "<C-]>", function() r.markAndDo('s', vim.lsp.buf.definition) end, { desc = "Definition" })
-map("n", "gr", function() r.markAndDo('s', vim.lsp.buf.references) end, { desc = "References" })
-map("n", "gi", function() r.markAndDo('s', vim.lsp.buf.implementation) end, { desc = "Implementations" })
-map("n", "gT", function() r.markAndDo('s', vim.lsp.buf.type_definition) end, { desc = "Type definitions" })
-map("n", "gs", function() r.markAndDo('s', vim.lsp.buf.typehierarchy) end, { desc = "Type hierarchy" })
+local mark = 'S'
+map("n", "<C-]>", function() r.markAndDo(mark, vim.lsp.buf.definition) end, { desc = "Definition" })
+map("n", "gr", function() r.markAndDo(mark, vim.lsp.buf.references) end, { desc = "References" })
+map("n", "gi", function() r.markAndDo(mark, vim.lsp.buf.implementation) end, { desc = "Implementations" })
+map("n", "gT", function() r.markAndDo(mark, vim.lsp.buf.type_definition) end, { desc = "Type definitions" })
+map("n", "gs", function() r.markAndDo(mark, vim.lsp.buf.typehierarchy) end, { desc = "Type hierarchy" })
 
 map("n", "<leader>le", vim.diagnostic.open_float, { desc = "Inline diagnostics" })
 map("n", "<leader>lE", vim.diagnostic.setqflist, { desc = "Workspace diagnostics" })
