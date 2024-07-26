@@ -8,10 +8,6 @@ vim.g.mapleader = " "
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 
--- tabs
-map("n", "<leader>z", ":tabnew %<CR>")
-map("n", "<leader>Z", "<C-w>T")
-
 -- clipboard
 map("v", "<C-c>", [["+y]])
 map("x", "<leader>p", [["_dP]]) -- greatest remap ever
@@ -69,9 +65,10 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- tabs
+map("n", "<leader>z", ":tabnew %<CR>")
+map("n", "<leader>Z", "<C-w>T")
 map("n", "<C-n>", "gt")
 map("n", "<C-p>", "gT")
-map("n", "<leader>tn", "<CMD>tabnew<CR>", { desc = "New tab" })
 map("n", "<C-c>", "<CMD>tabclose<CR>", { desc = "Close tab" })
 
 -- windows

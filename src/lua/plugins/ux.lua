@@ -4,20 +4,20 @@ return {
     {
         'folke/which-key.nvim',
         config = function()
-            local status_ok, whichkey = pcall(require, "which-key")
+            local status_ok, wk = pcall(require, "which-key")
 
             if not status_ok then
                 return
             end
 
-            whichkey.setup({})
+            wk.setup({})
 
-            whichkey.add({ '<leader>g', group = 'Git' })
-            whichkey.add({ '<leader>f', group = 'Telescope' })
-            whichkey.add({ '<leader>c', group = 'Quickfix' })
-            whichkey.add({ '<leader>d', group = 'Debug' })
-            whichkey.add({ '<leader>l', group = 'LSP', icon = '🧠' })
-            whichkey.add({ '<leader>o', group = 'Options', icon = '⚙️' })
+            wk.add({ '<leader>g', group = 'Git' })
+            wk.add({ '<leader>f', group = 'Telescope' })
+            wk.add({ '<leader>c', group = 'Quickfix' })
+            wk.add({ '<leader>d', group = 'Debug' })
+            wk.add({ '<leader>l', group = 'LSP', icon = '🧠' })
+            wk.add({ '<leader>o', group = 'Options', icon = '⚙️' })
         end
     },
     {
@@ -45,8 +45,16 @@ return {
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
             local line = require('lualine')
-            line.setup {}
-
+            line.setup {
+                sections = {
+                    lualine_a = {'mode'},
+                    lualine_b = {'branch', 'diff', 'diagnostics'},
+                    lualine_c = {'filename'},
+                    lualine_x = {'encoding', 'fileformat', 'filetype'},
+                    lualine_y = {'progress', 'location'},
+                    lualine_z = {'tabs'},
+                },
+            }
         end
     },
 }
