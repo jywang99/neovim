@@ -8,14 +8,20 @@ return {
             local telescope = require('telescope')
             local builtin = require('telescope.builtin')
 
-            local pickerCfg = {
-                hidden = true,
-                file_ignore_patterns = {
+            -- ignore list, ignored in addition to .gitignore
+            local ignoreFile = require('util.persist').getPersistPath() .. '/.tsignore'
+            local ignoreList, _ = require('util.files').readAllLines(ignoreFile, true)
+            if not ignoreList then
+                ignoreList = {
                     "node_modules/",
                     ".git/",
-                },
-            }
+                }
+            end
 
+            local pickerCfg = {
+                hidden = true,
+                file_ignore_patterns = ignoreList,
+            }
             telescope.setup({
                 defaults = {
                     cache_picker = {

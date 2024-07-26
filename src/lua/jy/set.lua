@@ -37,7 +37,6 @@ vim.opt.updatetime = 50
 
 -- splits
 vim.opt.splitkeep = 'topline'
-vim.opt.equalalways = true
 
 -- terminal
 vim.o.shell = "/bin/bash"

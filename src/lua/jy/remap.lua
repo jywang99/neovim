@@ -61,9 +61,10 @@ vim.api.nvim_create_autocmd('FileType', {
   group = 'QuickFixGroup',
   pattern = 'qf',
   callback = function()
-    bmap(0, 'n', 'o', '<CR><C-w>w', {})
+    bmap(0, 'n', 'o', '<CR><C-w>w', { noremap = true })
     bmap(0, 'n', '<Tab>', 'jo', {})
     bmap(0, 'n', '<S-Tab>', 'ko', {})
+    bmap(0, 'n', '<CR>', '<CR>:cclose<CR>', {})
   end
 })
 
