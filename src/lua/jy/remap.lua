@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd('FileType', {
   group = 'QuickFixGroup',
   pattern = 'qf',
   callback = function()
-    bmap(0, 'n', 'o', '<CR><C-w>w', { noremap = true })
+    bmap(0, 'n', 'o', '<CR><C-w>p', { noremap = true })
     bmap(0, 'n', '<Tab>', 'jo', {})
     bmap(0, 'n', '<S-Tab>', 'ko', {})
     bmap(0, 'n', '<CR>', '<CR>:cclose<CR>', {})
@@ -85,13 +85,13 @@ map("n", "<BS>", "<CMD>b#<CR>", { desc = "Switch to last buffer" })
 map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
 map("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code actions" })
 
-local mark = 'S'
-map("n", "<C-]>", function() r.markAndDo(mark, vim.lsp.buf.definition) end, { desc = "Definition" })
-map("n", "gr", function() r.markAndDo(mark, vim.lsp.buf.references) end, { desc = "References" })
-map("n", "gi", function() r.markAndDo(mark, vim.lsp.buf.implementation) end, { desc = "Implementations" })
-map("n", "gT", function() r.markAndDo(mark, vim.lsp.buf.type_definition) end, { desc = "Type definitions" })
-map("n", "gs", function() r.markAndDo(mark, vim.lsp.buf.typehierarchy) end, { desc = "Type hierarchy" })
+local startMark = 'S'
+map("n", "<C-]>", function() r.markAndDo(startMark, vim.lsp.buf.definition) end, { desc = "Definition" })
+map("n", "gr", function() r.markAndDo(startMark, function() vim.lsp.buf.references({ includeDeclaration = false }) end) end, { desc = "References" })
+map("n", "gi", function() r.markAndDo(startMark, vim.lsp.buf.implementation) end, { desc = "Implementations" })
+map("n", "gT", function() r.markAndDo(startMark, vim.lsp.buf.type_definition) end, { desc = "Type definitions" })
+map("n", "gh", function() r.markAndDo(startMark, vim.lsp.buf.typehierarchy) end, { desc = "Type hierarchy" })
 
-map("n", "<leader>le", vim.diagnostic.open_float, { desc = "Inline diagnostics" })
-map("n", "<leader>lE", vim.diagnostic.setqflist, { desc = "Workspace diagnostics" })
+map("n", "<leader>le", function() r.markAndDo(startMark, vim.diagnostic.open_float) end, { desc = "Inline diagnostics" })
+map("n", "<leader>lE", function() r.markAndDo(startMark, vim.diagnostic.setqflist) end, { desc = "Workspace diagnostics" })
 

@@ -2,7 +2,7 @@ local persist = require('util.persist')
 local sidebar = require('util.sidebar')
 
 local function saveSession()
-    -- if workspace file does not exist, confirm saving
+    -- if .nvim directory does not exist, do nothing
     if not persist.persistPathExists() then
         return
     end
@@ -29,10 +29,8 @@ end, {})
 local M = {}
 
 function M.loadWorkspace()
-    -- print('Loading workspace...')
     local path = persist.getWorkspaceFile()
     if path == nil then
-        -- print('Workspace file not found')
         return
     end
     vim.cmd(':source ' .. path)

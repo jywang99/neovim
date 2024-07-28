@@ -1,3 +1,5 @@
+local files = require('util.files')
+
 local BASE_DIR_NAME = '.nvim'
 local LAYOUT_FILE = 'workspace.vim'
 
@@ -8,38 +10,28 @@ function M.getPersistPath()
     return persistPath
 end
 
-function M.pathExists(path)
-    return io.open(path)~=nil
-end
-
 function M.getWorkspaceFile()
     local dataPath = M.getPersistPath()
-    if not M.pathExists(dataPath) then
+    if not files.pathExists(dataPath) then
         return nil
     end
-    dataPath = dataPath .. '/' .. LAYOUT_FILE
-    if not M.pathExists(dataPath) then
+    local layoutPath = dataPath .. '/' .. LAYOUT_FILE
+    if not files.pathExists(layoutPath) then
         return nil
     end
-    return dataPath
+    return layoutPath
 end
 
 function M.persistPathExists()
-    return M.pathExists(M.getPersistPath())
+    return files.pathExists(M.getPersistPath())
 end
 
 function M.createNvimDir()
     if M.persistPathExists() then
         return false
     end
-    local path = M.getPersistPath()
-    os.execute('mkdir ' .. path)
-    local file = io.open(path .. '/.gitignore', 'w')
-    if file == nil then
-        return true
-    end
-    file:write(LAYOUT_FILE .. '\n', '\n')
-    file:close()
+    os.execute('mkdir ' .. M.getPersistPath())
+    return true
 end
 
 return M

@@ -1,5 +1,9 @@
 local M = {}
 
+function M.pathExists(path)
+    return io.open(path)~=nil
+end
+
 local function isWhitespaceOnly(s)
     return s:match("^%s*$") ~= nil
 end

@@ -46,6 +46,10 @@ end
 local BP_FILE = persist.getPersistPath() .. '/breakpoints.json'
 
 local function saveBreakpoints()
+    if not persist.persistPathExists() then
+        return
+    end
+
     local breakpoints_by_buf = require("dap.breakpoints").get()
     local any = false
     for _, buf_bps in pairs(breakpoints_by_buf) do
@@ -67,7 +71,7 @@ local function saveBreakpoints()
         breakpoints_by_file[vim.api.nvim_buf_get_name(buf)] = buf_bps
     end
 
-    -- if doesn't exist create it:
+    -- if doesn't exist create json file
     if vim.fn.filereadable(BP_FILE) == 0 then
         os.execute("touch " .. BP_FILE)
     end
@@ -236,6 +240,9 @@ return {
                 -- open it in new tab
                 buffers.openBufInNewTab(buf)
             end
+            dap.listeners.before.event_stopped['dapui_config'] = function()
+                sidebar.nukeAndRun(dapui.open)
+            end
             dap.listeners.before.event_terminated['dapui_config'] = function()
                 dapui.close()
                 print('Debug session terminated')
@@ -244,16 +251,13 @@ return {
                 dapui.close()
                 print('Debug session exited')
             end
-            dap.listeners.before.event_stopped['dapui_config'] = function()
-                sidebar.nukeAndRun(dapui.open)
-            end
 
             -- breakpoints
-            vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl = 'DapBreakpoint', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
-            vim.fn.sign_define('DapBreakpointCondition', { text = '🔵', texthl = 'DapBreakpoint', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
-            vim.fn.sign_define('DapBreakpointRejected', { text = '◯', texthl = 'DapBreakpoint', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
-            vim.fn.sign_define('DapLogPoint', { text = '⚪️', texthl = 'DapLogPoint', linehl = 'DapLogPoint', numhl = 'DapLogPoint' })
-            vim.fn.sign_define('DapStopped', { text = '🟡', texthl = 'DapStopped', linehl = 'DapStopped', numhl = 'DapStopped' })
+            vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl = '', linehl = '', numhl = 'DapBreakpoint' })
+            vim.fn.sign_define('DapBreakpointCondition', { text = '🔵', texthl = '', linehl = '', numhl = 'DapBreakpoint' })
+            vim.fn.sign_define('DapBreakpointRejected', { text = '◯', texthl = '', linehl = '', numhl = 'DapBreakpoint' })
+            vim.fn.sign_define('DapLogPoint', { text = '⚪️', texthl = '', linehl = '', numhl = 'DapLogPoint' })
+            vim.fn.sign_define('DapStopped', { text = '🟡', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
 
             -- keymaps
             map({"n", "v"}, "<M-p>", dapui.eval, { desc = "Evaluate expression" })

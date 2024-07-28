@@ -3,7 +3,6 @@ local TEST_JSON = 'jdtls_tests.json'
 local persist = require('util.persist')
 local map = vim.keymap.set
 
-local java_cmds = vim.api.nvim_create_augroup('java_cmds', { clear = true })
 local cache_vars = {}
 
 local root_files = {
@@ -11,14 +10,6 @@ local root_files = {
     'gradlew',
     'pom.xml',
     'build.gradle',
-}
-
-local features = {
-    -- change this to `true` to enable codelens
-    codelens = true,
-
-    -- change this to `true` if you have `nvim-dap`, `java-test` and `java-debug-adapter` installed
-    debugger = true,
 }
 
 -- test config format:
@@ -148,35 +139,12 @@ local function get_jdtls_paths()
     return path
 end
 
-local function enable_codelens(bufnr)
-    pcall(vim.lsp.codelens.refresh)
-
-    vim.api.nvim_create_autocmd('BufWritePost', {
-        buffer = bufnr,
-        group = java_cmds,
-        desc = 'refresh codelens',
-        callback = function()
-            pcall(vim.lsp.codelens.refresh)
-        end,
-    })
-end
-
-local function enable_debugger(bufnr)
+local function jdtls_on_attach(_, bufnr)
+    -- enable debugger
     require('jdtls').setup_dap({ hotcodereplace = 'auto' })
     require('jdtls.dap').setup_dap_main_class_configs()
-    local opts = { buffer = bufnr }
-    vim.keymap.set('n', '<leader>dt', promptAndRunTestClass, opts)
-    vim.keymap.set('n', '<leader>dm', promptAndRunTestMethod, opts)
-end
-
-local function jdtls_on_attach(_, bufnr)
-    if features.debugger then
-        enable_debugger(bufnr)
-    end
-
-    if features.codelens then
-        enable_codelens(bufnr)
-    end
+    vim.keymap.set('n', '<leader>dt', promptAndRunTestClass, { buffer = bufnr, desc = "Run test class" })
+    vim.keymap.set('n', '<leader>dm', promptAndRunTestMethod, { buffer = bufnr, desc = "Run test method" })
 end
 
 local function enableKeymaps()
@@ -253,12 +221,6 @@ local function jdtls_setup()
             },
             maven = {
                 downloadSources = true,
-            },
-            implementationsCodeLens = {
-                enabled = true,
-            },
-            referencesCodeLens = {
-                enabled = true,
             },
             -- inlayHints = {
             --   parameterNames = {
