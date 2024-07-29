@@ -69,7 +69,12 @@ return {
         dependencies = { 'nvim-lua/plenary.nvim' },
         config = function()
             local harpoon = require("harpoon")
-            harpoon.setup()
+            harpoon.setup({
+                settings = {
+                    save_on_toggle = true,
+                    sync_on_ui_close = true,
+                },
+            })
 
             vim.keymap.set("n", "<M-'>", function() harpoon:list():add() end, { desc = "Add harp" })
             vim.keymap.set("n", "<M-;>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Toggle harpoon menu" })

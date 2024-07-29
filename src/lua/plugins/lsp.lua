@@ -54,7 +54,7 @@ return {
         'Hoffs/omnisharp-extended-lsp.nvim',
         lazy = true,
         ft = { 'cs' },
-        dependencies = { 'VonHeikemen/lsp-zero.nvim' },
+        dependencies = { 'VonHeikemen/lsp-zero.nvim', 'neovim/nvim-lspconfig' },
         config = function()
             local omni_ext = require('omnisharp_extended')
             require('lspconfig').omnisharp.setup {
