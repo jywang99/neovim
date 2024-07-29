@@ -42,16 +42,32 @@ return {
     },
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        dependencies = { 'nvim-tree/nvim-web-devicons', 'ThePrimeagen/harpoon' },
         config = function()
             local line = require('lualine')
+            local harpoon = require("harpoon")
+
+            local function getHarps()
+                local harps = harpoon:list().items
+                local harpNames = {}
+                local currentFile = vim.fn.expand("%")
+                for i, harp in ipairs(harps) do
+                    local char = "" .. i
+                    if harp.value == currentFile then
+                        char = "✦"
+                    end
+                    table.insert(harpNames, char .. " " .. harp.value:match("[^\\/]+$"))
+                end
+                return table.concat(harpNames, "  ")
+            end
+
             line.setup {
                 sections = {
                     lualine_a = {'mode'},
                     lualine_b = {'branch', 'diff', 'diagnostics'},
                     lualine_c = {'filename'},
-                    lualine_x = {{ 'encoding', show_bomb = true }, 'fileformat'},
-                    lualine_y = {'filetype'},
+                    lualine_x = {getHarps},
+                    lualine_y = {{ 'encoding', show_bomb = true, }, 'fileformat', 'filetype'},
                     lualine_z = {'progress', 'location'},
                 },
             }
