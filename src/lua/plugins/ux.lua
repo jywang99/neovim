@@ -48,12 +48,10 @@ return {
             local harpoon = require("harpoon")
 
             local function getHarps()
-                local harps = harpoon:list().items
                 local harpNames = {}
-                local currentFile = vim.fn.expand("%")
-                for i, harp in ipairs(harps) do
+                for i, harp in ipairs(harpoon:list().items) do
                     local char = "" .. i
-                    if harp.value == currentFile then
+                    if harp.value == vim.fn.expand("%") then
                         char = "✦"
                     end
                     table.insert(harpNames, char .. " " .. harp.value:match("[^\\/]+$"))
