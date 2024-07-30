@@ -65,8 +65,8 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- tabs
-map("n", "<leader>z", ":tabnew %<CR>")
-map("n", "<leader>Z", "<C-w>T")
+map("n", "<leader>t", ":tabnew %<CR>")
+map("n", "<leader>z", "<C-w>T")
 map("n", "<C-n>", "gt")
 map("n", "<C-p>", "gT")
 map("n", "<C-c>", "<CMD>tabclose<CR>", { desc = "Close tab" })
