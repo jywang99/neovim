@@ -36,3 +36,12 @@ scp -r . user@target-machine:/path/to/destination
 ```
 2. Follow steps 3 and 4 of [Setup locally](#setup-locally)
 
+## Troubleshooting
+### jdtls
+Sometimes after `git pull` or `git submodule update` in a java project and launching `nvim`, `jdtls` spams screen with errors. If you know the project doesn't have any errors, this is likely due to cache. \
+Cache can be found here:
+```
+~/.cache/nvim/nvim-jdtls/
+```
+Try finding and deleting the cache directory for your project in there, or delete the entire directory.
+
