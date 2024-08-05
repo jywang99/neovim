@@ -54,12 +54,22 @@ return {
                     if harp.value == vim.fn.expand("%") then
                         char = "✦"
                     end
-                    table.insert(harpNames, char .. " " .. harp.value:match("[^\\/]+$"))
+
+                    -- truncate to 10 characters
+                    local fname = harp.value:match("[^\\/]+$")
+                    if #fname > 10 then
+                        fname = fname:sub(1, 10) .. "…"
+                    end
+
+                    table.insert(harpNames, char .. " " .. fname)
                 end
                 return table.concat(harpNames, "  ")
             end
 
             line.setup {
+                options = {
+                    globalstatus = true,
+                },
                 sections = {
                     lualine_a = {'mode'},
                     lualine_b = {'branch', 'diff', 'diagnostics'},

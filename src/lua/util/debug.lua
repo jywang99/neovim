@@ -6,10 +6,6 @@ M.view = nil
 
 local BP_FILE = persist.getPersistPath() .. '/breakpoints.json'
 
-function M.openRepl()
-    require('dap').repl.open({ height = 10 })
-end
-
 function M.saveBreakpoints()
     vim.notify('Saving breakpoints', 'info', { title = 'DAP' })
     if not persist.persistPathExists() then

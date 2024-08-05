@@ -5,16 +5,11 @@
 ```bash
 make local
 ```
-4. Open [packer.lua](src/lua/jy/packer.lua) with `nvim`
+4. Launch `nvim`
 ```bash
-nvim src/lua/jy/packer.lua
+nvim
 ```
-And then enter the following editor commands
-```vim
-:so
-:PackerInstall
-```
-This will install all plugins needed for this configuration.
+Dependencies will be automatically installed by Lazy.nvim
 
 ## Offline installation
 **Prerequisite**: you have a working neovim installation that you want to copy to another machine
