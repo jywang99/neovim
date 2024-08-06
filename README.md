@@ -1,3 +1,15 @@
+# Neovim configuration
+This is my personal Neovim configuration that I use for personal and professional projects.\
+I mainly use this to develop in
+- Go
+- Java
+- C#
+- C++
+- Python
+- Svelte
+- React
+- Bash scripts
+
 ## Setup locally
 1. Download and install [Neovim](https://github.com/neovim/neovim/blob/master/INSTALL.md)
 2. Clone this repository
@@ -10,6 +22,10 @@ make local
 nvim
 ```
 Dependencies will be automatically installed by Lazy.nvim
+
+### Nerdfont support
+Make sure to install a [Nerdfont](https://www.nerdfonts.com/) for icons to display correctly.\
+The terminal emulator of your choice must be set up to use the font.
 
 ## Offline installation
 **Prerequisite**: you have a working neovim installation that you want to copy to another machine
