@@ -34,5 +34,20 @@ function M.markAndDo(letter, action)
     action()
 end
 
+function M.promptAndSwap()
+    -- prompt for registers
+    vim.cmd('echo "Swap register: "')
+    local a = vim.fn.nr2char(vim.fn.getchar())
+    vim.cmd('echo "with register: "')
+    local b = vim.fn.nr2char(vim.fn.getchar())
+
+    -- swap
+    local temp = vim.fn.getreg(a)
+    vim.fn.setreg(a, vim.fn.getreg(b))
+    vim.fn.setreg(b, temp)
+
+    vim.cmd('echo "Swapped."')
+end
+
 return M
 

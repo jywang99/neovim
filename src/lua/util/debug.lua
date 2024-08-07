@@ -1,5 +1,4 @@
 local persist = require('util.persist')
-local files = require('util.files')
 
 local M = {}
 M.view = nil
@@ -12,25 +11,24 @@ function M.saveBreakpoints()
         return
     end
 
+    -- get breakpoints table
     local breakpoints_by_buf = require("dap.breakpoints").get()
+    local breakpoints_by_file = {}
     local any = false
-    for _, buf_bps in pairs(breakpoints_by_buf) do
+    for buf, buf_bps in pairs(breakpoints_by_buf) do
         if #buf_bps > 0 then
             any = true
-            break
         end
-    end
-
-    -- if no breakpoints and file exists, truncate it
-    if not any and vim.fn.filereadable(BP_FILE) == 1 then
-        files.truncateFile(BP_FILE)
-        return
-    end
-
-    -- file path -> breakpoints
-    local breakpoints_by_file = {}
-    for buf, buf_bps in pairs(breakpoints_by_buf) do
         breakpoints_by_file[vim.api.nvim_buf_get_name(buf)] = buf_bps
+    end
+
+    -- if no breakpoints
+    if not any then
+        -- if file exists delete it
+        if vim.fn.filereadable(BP_FILE) == 1 then
+            os.remove(BP_FILE)
+        end
+        return
     end
 
     -- if doesn't exist create json file

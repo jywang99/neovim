@@ -19,23 +19,7 @@ map("n", "<leader>op", ":set invpaste<CR>", { desc = "Toggle paste mode" })
 map("n", "<leader>on", ":set invnumber<CR>", { desc = "Toggle line number" })
 map("n", "<leader>or", ":set invrelativenumber<CR>", { desc = "Toggle relative number" })
 
--- registers
-local function promptAndSwap()
-    -- prompt for registers
-    vim.cmd('echo "Swap register: "')
-    local a = vim.fn.nr2char(vim.fn.getchar())
-    vim.cmd('echo "with register: "')
-    local b = vim.fn.nr2char(vim.fn.getchar())
-
-    -- swap
-    local temp = vim.fn.getreg(a)
-    vim.fn.setreg(a, vim.fn.getreg(b))
-    vim.fn.setreg(b, temp)
-
-    vim.cmd('echo "Swapped."')
-end
-
-map("n", "<leader>rs", promptAndSwap, { desc = "Swap registers" })
+map("n", "<leader>rs", r.promptAndSwap, { desc = "Swap registers" })
 
 -- text manipulation
 map("v", "J", ":m '>+1<CR>gv=gv") -- move line
@@ -54,14 +38,14 @@ map("n", "<leader>cn", "<CMD>cnewer<CR>", { desc = "To newer quickfix" })
 -- remaps in quickfix window
 vim.api.nvim_create_augroup('QuickFixGroup', {})
 vim.api.nvim_create_autocmd('FileType', {
-  group = 'QuickFixGroup',
-  pattern = 'qf',
-  callback = function()
-    bmap(0, 'n', 'o', '<CR><C-w>p', { noremap = true })
-    bmap(0, 'n', '<Tab>', 'jo', {})
-    bmap(0, 'n', '<S-Tab>', 'ko', {})
-    bmap(0, 'n', '<CR>', '<CR>:cclose<CR>', {})
-  end
+    group = 'QuickFixGroup',
+    pattern = 'qf',
+    callback = function()
+        bmap(0, 'n', 'o', '<CR><C-w>p', { noremap = true })
+        bmap(0, 'n', '<Tab>', 'jo', {})
+        bmap(0, 'n', '<S-Tab>', 'ko', {})
+        bmap(0, 'n', '<CR>', '<CR>:cclose<CR>', {})
+    end
 })
 
 -- tabs

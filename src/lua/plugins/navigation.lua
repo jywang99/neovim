@@ -76,6 +76,25 @@ return {
                 },
             })
 
+            -- focus current file in harpoon ui
+            local function focus_current()
+                local target_string = vim.fn.getreg('#')
+                local found = vim.fn.search('\\V' .. vim.fn.escape(target_string, '\\'), 'w')
+                vim.notify("Searching for: '" .. target_string .. "' found at: " .. found)
+
+                if found ~= 0 then
+                    vim.api.nvim_win_set_cursor(0, { found, 0 })
+                end
+            end
+            vim.api.nvim_create_augroup('HarpoonGroup', {})
+            vim.api.nvim_create_autocmd('FileType', {
+                group = 'HarpoonGroup',
+                pattern = 'harpoon',
+                callback = function()
+                    vim.schedule(focus_current)
+                end
+            })
+
             vim.keymap.set("n", "<M-'>", function() harpoon:list():add() end, { desc = "Add harp" })
             vim.keymap.set("n", "<M-;>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Toggle harpoon menu" })
 
