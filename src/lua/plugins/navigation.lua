@@ -80,8 +80,6 @@ return {
             local function focus_current()
                 local target_string = vim.fn.getreg('#')
                 local found = vim.fn.search('\\V' .. vim.fn.escape(target_string, '\\'), 'w')
-                vim.notify("Searching for: '" .. target_string .. "' found at: " .. found)
-
                 if found ~= 0 then
                     vim.api.nvim_win_set_cursor(0, { found, 0 })
                 end

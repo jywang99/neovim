@@ -45,7 +45,6 @@ return {
             local replers = { 'python', 'go' }
 
             -- https://microsoft.github.io/debug-adapter-protocol/specification#Events
-            local sidebar = nil
             dap.listeners.after.event_initialized['dapui_config'] = function(session)
                 print('Debug session started')
                 if vim.tbl_contains(replers, session.filetype) then
@@ -54,24 +53,12 @@ return {
             end
             dap.listeners.before.event_stopped['dapui_config'] = function()
                 print('Debug session stopped')
-                if not sidebar then
-                    sidebar = widgets.sidebar(widgets.scopes)
-                    sidebar.open()
-                end
             end
             dap.listeners.before.event_terminated['dapui_config'] = function()
                 print('Debug session terminated')
-                if sidebar then
-                    sidebar.close()
-                end
-                sidebar = nil
             end
             dap.listeners.before.event_exited['dapui_config'] = function()
                 print('Debug session exited')
-                if sidebar then
-                    sidebar.close()
-                end
-                sidebar = nil
             end
 
             -- breakpoints
@@ -99,8 +86,8 @@ return {
 
             -- view
             map({"n", "v"}, "<M-p>", dbg.floatExpr, { desc = "Evaluate expression" })
-            map("n", "<leader>dv", function() widgets.centered_float(widgets.scopes) end, { desc = "Scope variables" })
-            map("n", "<leader>df", function() widgets.centered_float(widgets.frames) end, { desc = "Frames" })
+            map("n", "<leader>dv", function() widgets.cursor_float(widgets.scopes) end, { desc = "Scope variables" }) -- TODO preferably preview
+            map("n", "<leader>df", function() widgets.cursor_float(widgets.frames) end, { desc = "Frames" })
             map("n", "<leader>dR", dap.repl.open, { desc = "Open repl" })
             map("n", "<leader>dq", dbg.closeView, { desc = "Close opened view" })
 
