@@ -29,6 +29,10 @@ return {
                 },
             }
 
+            local function float_scopes()
+                widgets.cursor_float(widgets.scopes) -- TODO preferably preview
+            end
+
             -- https://microsoft.github.io/debug-adapter-protocol/specification#Events
             dap.listeners.after.event_initialized['dapui_config'] = function()
                 print('Debug session started')
@@ -67,11 +71,10 @@ return {
             map("n", "<leader>dC", dap.clear_breakpoints, { desc = "Clear all breakpoints" })
 
             -- view
-            map({"n", "v"}, "<M-p>", dbg.floatExpr, { desc = "Evaluate expression" })
-            map("n", "<leader>dv", function() widgets.cursor_float(widgets.scopes) end, { desc = "Scope variables" }) -- TODO preferably preview
+            map({"n", "v"}, "<M-p>", widgets.hover, { desc = "Evaluate expression" })
+            map("n", "<M-s>", float_scopes, { desc = "Scope variables" })
             map("n", "<leader>df", function() widgets.cursor_float(widgets.frames) end, { desc = "Frames" })
             map("n", "<leader>dR", dap.repl.open, { desc = "Open repl" })
-            map("n", "<leader>dq", dbg.closeView, { desc = "Close opened view" })
 
             -- debugging controls
             map("n", "<M-d>", dbg.readConfigAndDebug, { desc = "Load launch.json and debug" })
@@ -88,10 +91,7 @@ return {
         'jay-babu/mason-nvim-dap.nvim',
         lazy = true,
         ft = debugees,
-        dependencies = {
-            'williamboman/mason.nvim',
-            'mfussenegger/nvim-dap',
-        },
+        dependencies = { 'williamboman/mason.nvim', 'mfussenegger/nvim-dap' },
         config = function()
             require('mason-nvim-dap').setup({
                 ensure_installed = { 'python', 'javadbg', 'javatest', 'delve' },

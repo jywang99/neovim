@@ -72,5 +72,36 @@ function M.openBufInNewTab(buf)
     vim.api.nvim_set_current_tabpage(current_tab)
 end
 
+local function find_terminal_buffers()
+  local terminal_buffers = {}
+
+  for _, buf in ipairs(vim.fn.getbufinfo()) do
+    if vim.api.nvim_buf_get_option(buf.bufnr, "buftype") == "terminal" then
+      table.insert(terminal_buffers, {
+        bufnr = buf.bufnr,
+        name = vim.fn.bufname(buf.bufnr),
+      })
+    end
+  end
+
+  return terminal_buffers
+end
+
+function M.list_terminals_in_quickfix()
+  local terminal_buffers = find_terminal_buffers()
+
+  local qf_list = {}
+  for _, buf in ipairs(terminal_buffers) do
+    table.insert(qf_list, {
+      bufnr = buf.bufnr,
+      text = buf.name ~= '' and buf.name or '[No Name]',
+    })
+  end
+
+  -- Set the quickfix list and open it
+  vim.fn.setqflist(qf_list, 'r')
+  vim.cmd('copen')
+end
+
 return M
 

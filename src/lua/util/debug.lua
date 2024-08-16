@@ -1,7 +1,6 @@
 local persist = require('util.persist')
 
 local M = {}
-M.view = nil
 
 local BP_FILE = persist.getPersistPath() .. '/breakpoints.json'
 
@@ -124,24 +123,6 @@ end
 function M.listBreakpoints()
     require('dap').list_breakpoints()
     vim.cmd('copen')
-end
-
-function M.closeView()
-    if M.view then
-        M.view.close()
-        M.view = nil
-    end
-end
-
-function M.toggleView()
-    if M.view then
-        M.view.toggle()
-        M.view = nil
-    end
-end
-
-function M.floatExpr()
-    M.view = require('dap.ui.widgets').hover()
 end
 
 return M

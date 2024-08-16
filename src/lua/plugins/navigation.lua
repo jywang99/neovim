@@ -42,7 +42,7 @@ return {
             map("n", "<leader>fS", builtin.live_grep, { desc = "Live grep" })
             map({"n", "v"}, "<leader>fc", builtin.grep_string, { desc = "Search word/selection under cursor" })
 
-            -- files
+            -- files/buffers
             map("n", "<leader>fo", builtin.find_files, { desc = "Open file" })
             map("n", "<leader>fh", builtin.oldfiles, { desc = "Recent files" })
             map("n", "<leader>fb", builtin.buffers, { desc = "Find buffer" })

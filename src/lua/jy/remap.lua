@@ -1,4 +1,5 @@
 local r = require('util.registers')
+local b = require('util.buffers')
 local map = vim.keymap.set
 local bmap = vim.api.nvim_buf_set_keymap
 
@@ -7,6 +8,7 @@ vim.g.mapleader = " "
 -- navigation
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
+map("n", "<leader>ft", b.list_terminals_in_quickfix, { desc = "List terminals" })
 
 -- clipboard
 map("v", "<C-c>", [["+y]])
