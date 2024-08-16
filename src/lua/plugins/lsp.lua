@@ -1,5 +1,11 @@
 return {
     {
+        'williamboman/mason.nvim',
+        config = function()
+            require('mason').setup()
+        end
+    },
+    {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
         dependencies = {
@@ -13,9 +19,8 @@ return {
         },
         config = function()
             local lsp_zero = require('lsp-zero')
-            require('mason').setup({})
             require('mason-lspconfig').setup({
-                ensure_installed = { 'tsserver', 'rust_analyzer', 'eslint', 'lua_ls', 'jdtls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls', 'jsonls', 'gopls', 'clangd', 'svelte', 'omnisharp' },
+                ensure_installed = { 'tsserver', 'eslint', 'lua_ls', 'jdtls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls', 'jsonls', 'gopls', 'clangd', 'svelte', 'omnisharp' },
                 handlers = {
                     lsp_zero.default_setup,
                     jdtls = lsp_zero.noop,
@@ -23,7 +28,6 @@ return {
             })
 
             local lsp_config = require('lspconfig')
-
             lsp_config.lua_ls.setup({
                 settings = {
                     Lua = {
@@ -48,8 +52,6 @@ return {
             lsp_zero.setup()
         end
     },
-
-    -- languages
     {
         'Hoffs/omnisharp-extended-lsp.nvim',
         lazy = true,

@@ -1,10 +1,11 @@
 local map = vim.keymap.set
+local debugees =  { 'java', 'python', 'go', }
 
 return {
     {
         'mfussenegger/nvim-dap',
         lazy = true,
-        ft = { 'java', 'python', 'go', },
+        ft = debugees,
         config = function()
             local dap = require('dap')
             local widgets = require('dap.ui.widgets')
@@ -27,29 +28,10 @@ return {
                     end,
                 },
             }
-            dap.adapters.python = {
-                type = 'executable',
-                command = 'python3',
-                args = {'-m', 'debugpy.adapter'}
-            }
-            dap.configurations.python = {
-                {
-                    type = 'python',
-                    request = 'launch',
-                    name = "Launch file",
-                    program = "${file}",
-                    pythonPath = function() return '/usr/bin/python3' end,
-                },
-            }
-
-            local replers = { 'python', 'go' }
 
             -- https://microsoft.github.io/debug-adapter-protocol/specification#Events
-            dap.listeners.after.event_initialized['dapui_config'] = function(session)
+            dap.listeners.after.event_initialized['dapui_config'] = function()
                 print('Debug session started')
-                if vim.tbl_contains(replers, session.filetype) then
-                    dap.repl.open()
-                end
             end
             dap.listeners.before.event_stopped['dapui_config'] = function()
                 print('Debug session stopped')
@@ -102,14 +84,30 @@ return {
             map("n", "<leader>dr", dap.restart_frame, { desc = "Restart frame" })
         end
     },
+    {
+        'jay-babu/mason-nvim-dap.nvim',
+        lazy = true,
+        ft = debugees,
+        dependencies = {
+            'williamboman/mason.nvim',
+            'mfussenegger/nvim-dap',
+        },
+        config = function()
+            require('mason-nvim-dap').setup({
+                ensure_installed = { 'python', 'javadbg', 'javatest', 'delve' },
+            })
+        end
+    },
     { 'theHamsta/nvim-dap-virtual-text', lazy = true },
+
+    -- languages
     {
         'mfussenegger/nvim-dap-python',
         lazy = true,
-        ft = { 'py' },
+        ft = { 'python' },
         dependencies = { 'mfussenegger/nvim-dap' },
         config = function()
-            require('dap-python').setup('~/.local/share/nvim/mason/packages/debugpy/venv/bin/python')
+            require('dap-python').setup('python')
         end
     },
     {
@@ -118,29 +116,7 @@ return {
         ft = { 'go' },
         dependencies = { 'mfussenegger/nvim-dap' },
         config = function()
-            -- go
-            require('dap-go').setup {
-                dap_configurations = {
-                    {
-                        -- Must be "go" or it will be ignored by the plugin
-                        type = "go",
-                        name = "Attach remote",
-                        mode = "remote",
-                        request = "attach",
-                    },
-                },
-                -- delve configurations
-                delve = {
-                    args = {},
-                    -- the build flags that are passed to delve.
-                    -- defaults to empty string, but can be used to provide flags
-                    -- such as "-tags=unit" to make sure the test suite is
-                    -- compiled during debugging, for example.
-                    -- passing build flags using args is ineffective, as those are
-                    -- ignored by delve in dap mode.
-                    build_flags = "",
-                },
-            }
+            require('dap-go').setup()
         end
     },
 }
