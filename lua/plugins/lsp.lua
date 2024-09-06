@@ -20,7 +20,7 @@ return {
         config = function()
             local lsp_zero = require('lsp-zero')
             require('mason-lspconfig').setup({
-                ensure_installed = { 'tsserver', 'eslint', 'lua_ls', 'jdtls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls', 'jsonls', 'gopls', 'clangd', 'svelte', 'omnisharp' },
+                ensure_installed = { 'eslint', 'lua_ls', 'jdtls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls', 'jsonls', 'gopls', 'clangd', 'svelte', 'omnisharp' },
                 handlers = {
                     lsp_zero.default_setup,
                     jdtls = lsp_zero.noop,
