@@ -19,6 +19,13 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     command = "setlocal ft=man relativenumber number",
 })
 
+vim.filetype.add({
+    pattern = {
+        [".*/hypr/.*%.conf"] = "hyprlang",
+        [".*.rasi"] = "rasi",
+    },
+})
+
 -- appearance
 vim.opt.number = true
 vim.opt.relativenumber = true

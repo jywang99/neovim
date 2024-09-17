@@ -21,6 +21,9 @@ return {
             local pickerCfg = {
                 hidden = true,
                 file_ignore_patterns = ignoreList,
+                additional_args = function(opts)
+                    return {"--hidden"}
+                end,
             }
             telescope.setup({
                 defaults = {
