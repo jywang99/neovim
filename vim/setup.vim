@@ -67,9 +67,6 @@ set undofile
 set isfname+=@-@
 set updatetime=50
 
-" splits
-set splitkeep=topline
-
 " terminal
 set shell=/bin/bash
 
@@ -147,4 +144,24 @@ endif
 if filereadable('/etc/wsl.conf')
     vmap <C-c> :w<Home>silent <End> !clip.exe<CR>
 endif
+
+
+""" quickfix
+
+nmap <M-c> <CMD>cnext<CR>zz
+nmap <M-q> <CMD>cprev<CR>zz
+nmap <leader>co <cmd>copen<cr>
+nmap <leader>cp <cmd>colder<cr>
+nmap <leader>cn <cmd>cnewer<cr>
+
+augroup QuickFixGroup
+  autocmd!
+  autocmd FileType qf call SetupQuickFixMappings()
+augroup END
+
+function! SetupQuickFixMappings()
+  nmap <buffer> o <CR><C-w>p
+  nmap <buffer> <Tab> jo
+  nmap <buffer> <S-Tab> ko
+endfunction
 

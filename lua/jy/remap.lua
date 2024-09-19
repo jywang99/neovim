@@ -1,37 +1,14 @@
 local r = require('util.registers')
 local b = require('util.buffers')
 local map = vim.keymap.set
-local bmap = vim.api.nvim_buf_set_keymap
 
 map("n", "<leader>ft", b.list_terminals_in_quickfix, { desc = "List terminals" })
 map("n", "<leader>rs", r.promptAndSwap, { desc = "Swap registers" })
 
--- quickfix
-
 map("n", "[d", function() vim.diagnostic.goto_prev() end, { desc = "Previous diagnostic" })
 map("n", "]d", function() vim.diagnostic.goto_next() end, { desc = "Next diagnostic" })
 
-map("n", "<M-c>", "<CMD>cnext<CR>zz", { desc = "Forward quickfix" })
-map("n", "<M-q>", "<CMD>cprev<CR>zz", { desc = "Backward quickfix" })
-map("n", "<leader>co", "<CMD>copen<CR>", { desc = "Open quickfix" })
-map("n", "<leader>cp", "<CMD>colder<CR>", { desc = "To older quickfix" })
-map("n", "<leader>cn", "<CMD>cnewer<CR>", { desc = "To newer quickfix" })
-
--- remaps in quickfix window
-vim.api.nvim_create_augroup('QuickFixGroup', {})
-vim.api.nvim_create_autocmd('FileType', {
-    group = 'QuickFixGroup',
-    pattern = 'qf',
-    callback = function()
-        bmap(0, 'n', 'o', '<CR><C-w>p', { noremap = true })
-        bmap(0, 'n', '<Tab>', 'jo', {})
-        bmap(0, 'n', '<S-Tab>', 'ko', {})
-        bmap(0, 'n', '<CR>', '<CR>:cclose<CR>', {})
-    end
-})
-
 -- LSP
-
 map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
 map("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code actions" })
 
