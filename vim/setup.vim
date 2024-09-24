@@ -141,9 +141,9 @@ endif
 
 
 """ WSL clipboard
-if filereadable('/etc/wsl.conf')
-    vmap <C-c> :w<Home>silent <End> !clip.exe<CR>
-endif
+" if filereadable('/etc/wsl.conf')
+"     vmap <C-c> :w<Home>silent <End> !clip.exe<CR>
+" endif
 
 
 """ quickfix
@@ -151,6 +151,7 @@ endif
 nmap <M-c> <CMD>cnext<CR>zz
 nmap <M-q> <CMD>cprev<CR>zz
 nmap <leader>co <cmd>copen<cr>
+nmap <leader>cc <cmd>cclose<cr>
 nmap <leader>cp <cmd>colder<cr>
 nmap <leader>cn <cmd>cnewer<cr>
 
