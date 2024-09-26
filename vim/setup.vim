@@ -161,8 +161,9 @@ augroup QuickFixGroup
 augroup END
 
 function! SetupQuickFixMappings()
-  nmap <buffer> o <CR><C-w>p
+  nnoremap <buffer> o <CR><C-w>p
   nmap <buffer> <Tab> jo
   nmap <buffer> <S-Tab> ko
+  nmap <buffer> <CR> <CR>:cclose<CR>
 endfunction
 
