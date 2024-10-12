@@ -81,7 +81,7 @@ vmap <C-c> "+y
 vmap <leader>p "_dP
 
 " toggle options
-nmap <leader>n :noh<CR>
+nmap <M-u> :noh<CR>
 nmap <leader>oh :set invhlsearch<CR>
 nmap <leader>op :set invpaste<CR>
 nmap <leader>on :set invnumber<CR>
