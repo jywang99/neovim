@@ -73,3 +73,27 @@ stack traceback:
 ```
 This sometimes resolves by itself after dismissing the error message, but if it doesn't, try restarting Neovim.
 
+## launch.json
+`launch.json` is supported for debugging using `nvim-dap` (see [dap documentation](https://github.com/mfussenegger/nvim-dap/blob/master/doc/dap.txt) for more info).
+
+### Example for pytest
+```
+{
+    "name": "Pytest integration",
+    "type": "python",
+    "request": "launch",
+    "module": "pytest"
+}
+```
+
+### Example for Java
+```
+{
+    "name": "Launch",
+    "type": "java",
+    "request": "launch",
+    "mainClass": "com.example.demo.DemoApplication",
+    "args": "--spring.profiles.active=dev"
+}
+```
+
