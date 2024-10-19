@@ -4,7 +4,7 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
 })
 
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-    pattern = { "*.tsx", "*.ts", "*.js", "*.jsx", "*.html", "*.svelte" },
+    pattern = { "*.tsx", "*.ts", "*.js", "*.jsx", "*.html", "*.svelte", "*.yml", "*.yaml" },
     command = "setlocal ts=2 sts=2 sw=2",
 })
 
