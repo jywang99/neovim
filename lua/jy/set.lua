@@ -13,6 +13,11 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     command = "setlocal ft=man relativenumber number",
 })
 
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+    pattern = { "Makefile" },
+    command = "setlocal noexpandtab",
+})
+
 vim.filetype.add({
     pattern = {
         [".*/hypr/.*%.conf"] = "hyprlang",
