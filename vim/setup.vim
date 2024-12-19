@@ -110,6 +110,10 @@ nmap <C-q> <C-\><C-n><C-w>q
 " buffers
 nmap <BS> <CMD>b#<CR>
 
+" diff
+nmap ]c ]czz
+nmap [c [czz
+
 
 """ Autocmds
 
