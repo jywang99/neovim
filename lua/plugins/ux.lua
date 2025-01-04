@@ -35,10 +35,9 @@ return {
         end
     },
     {
-        "iamcco/markdown-preview.nvim",
-        build = function() vim.fn["mkdp#util#install"]() end,
-        lazy = true,
-        ft = { 'markdown' },
+        'MeanderingProgrammer/render-markdown.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        opts = {},
     },
     {
         'nvim-lualine/lualine.nvim',

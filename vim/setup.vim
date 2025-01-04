@@ -10,6 +10,10 @@ set wrap
 set autoindent          " auto indenting
 filetype indent on      " activates indenting for files
 
+" movement
+nnoremap <silent> k :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
+nnoremap <silent> j :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'j'<CR>
+
 " UI
 set cursorline
 if !has('nvim')
