@@ -1,21 +1,6 @@
 local persist = require('util.persist')
 local sidebar = require('util.sidebar')
 
-local function saveSession()
-    -- if .nvim directory does not exist, do nothing
-    if not persist.persistPathExists() then
-        return
-    end
-    print('Saving workspace...')
-    sidebar.nukePeripherals()
-    vim.cmd(':mksession! ' .. persist.getPersistPath() .. '/workspace.vim')
-end
-
-vim.api.nvim_create_autocmd('VimLeavePre', {
-    desc = 'Save workspace',
-    callback = saveSession,
-})
-
 -- create .nvim directory
 vim.api.nvim_create_user_command('W',function()
     local new = persist.createNvimDir()
@@ -27,6 +12,16 @@ vim.api.nvim_create_user_command('W',function()
 end, {})
 
 local M = {}
+
+function M.saveWorkspace()
+    -- if .nvim directory does not exist, do nothing
+    if not persist.persistPathExists() then
+        return
+    end
+    print('Saving workspace...')
+    sidebar.nukePeripherals()
+    vim.cmd(':mksession! ' .. persist.getPersistPath() .. '/workspace.vim')
+end
 
 function M.loadWorkspace()
     local path = persist.getWorkspaceFile()

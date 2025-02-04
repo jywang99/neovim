@@ -4,9 +4,6 @@ return {
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
-        config = function()
-            require("jy.workspace").loadWorkspace()
-        end,
     },
     {
         'nvim-treesitter/nvim-treesitter-context',
@@ -180,6 +177,10 @@ return {
     },
     {
         'github/copilot.vim',
+
+        vim.keymap.set("n", "<leader>ai", ":Copilot enable<CR>", { desc = "Enable Copilot" });
+        vim.keymap.set("n", "<leader>an", ":Copilot disable<CR>", { desc = "Disable Copilot" });
+
         config = function()
             local function acceptWord()
                 vim.fn['copilot#Accept']("")
