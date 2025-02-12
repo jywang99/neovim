@@ -1,7 +1,6 @@
 local files = require('util.files')
 
 local BASE_DIR_NAME = '.nvim'
-local LAYOUT_FILE = 'workspace.vim'
 
 local M = {}
 
@@ -10,12 +9,12 @@ function M.getPersistPath()
     return persistPath
 end
 
-function M.getWorkspaceFile()
+function M.getPersistedFile(file)
     local dataPath = M.getPersistPath()
     if not files.pathExists(dataPath) then
         return nil
     end
-    local layoutPath = dataPath .. '/' .. LAYOUT_FILE
+    local layoutPath = dataPath .. '/' .. file
     if not files.pathExists(layoutPath) then
         return nil
     end

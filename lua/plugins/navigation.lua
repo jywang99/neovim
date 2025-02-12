@@ -67,6 +67,21 @@ return {
         end
     },
     {
+        "princejoogie/dir-telescope.nvim",
+        config = function()
+            require("dir-telescope").setup({
+                -- these are the default options set
+                hidden = true,
+                no_ignore = false,
+                show_preview = true,
+                follow_symlinks = false,
+            })
+
+            vim.keymap.set("n", "<leader>fd", "<cmd>Telescope dir find_files<CR>", { desc = "Run test class" })
+            vim.keymap.set("n", "<leader>fg", "<cmd>Telescope dir live_grep<CR>", { desc = "Run test class" })
+        end,
+    },
+    {
         'stevearc/oil.nvim',
         config = function ()
             vim.g.loaded_netrw = 1
