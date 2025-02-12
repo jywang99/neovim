@@ -67,48 +67,6 @@ return {
         end
     },
     {
-        'ThePrimeagen/harpoon',
-        branch = "harpoon2",
-        dependencies = { 'nvim-lua/plenary.nvim' },
-        config = function()
-            local harpoon = require("harpoon")
-            harpoon.setup({
-                settings = {
-                    save_on_toggle = true,
-                    sync_on_ui_close = true,
-                },
-            })
-
-            -- focus current file in harpoon ui
-            local function focus_current()
-                local target_string = vim.fn.getreg('#')
-                local found = vim.fn.search('\\V' .. vim.fn.escape(target_string, '\\'), 'w')
-                if found ~= 0 then
-                    vim.api.nvim_win_set_cursor(0, { found, 0 })
-                end
-            end
-            vim.api.nvim_create_augroup('HarpoonGroup', {})
-            vim.api.nvim_create_autocmd('FileType', {
-                group = 'HarpoonGroup',
-                pattern = 'harpoon',
-                callback = function()
-                    vim.schedule(focus_current)
-                end
-            })
-
-            vim.keymap.set("n", "<M-'>", function() harpoon:list():add() end, { desc = "Add harp" })
-            vim.keymap.set("n", "<M-;>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Toggle harpoon menu" })
-
-            vim.keymap.set("n", "<M-,>", function() harpoon:list():prev() end, { desc = "Previous harp" })
-            vim.keymap.set("n", "<M-.>", function() harpoon:list():next() end, { desc = "Next harp" })
-            vim.keymap.set("n", "<M-1>", function() harpoon:list():select(1) end, { desc = "Go to harp 1" })
-            vim.keymap.set("n", "<M-2>", function() harpoon:list():select(2) end, { desc = "Go to harp 2" })
-            vim.keymap.set("n", "<M-3>", function() harpoon:list():select(3) end, { desc = "Go to harp 3" })
-            vim.keymap.set("n", "<M-4>", function() harpoon:list():select(4) end, { desc = "Go to harp 4" })
-            vim.keymap.set("n", "<M-5>", function() harpoon:list():select(5) end, { desc = "Go to harp 5" })
-        end
-    },
-    {
         'stevearc/oil.nvim',
         config = function ()
             vim.g.loaded_netrw = 1
