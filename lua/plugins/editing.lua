@@ -171,11 +171,6 @@ return {
         end
     },
     {
-	'dkarter/bullets.vim',
-	lazy = true,
-	ft = { 'md' },
-    },
-    {
         'github/copilot.vim',
 
         vim.keymap.set("n", "<leader>ai", ":Copilot enable<CR>", { desc = "Enable Copilot" });
