@@ -5,7 +5,7 @@ local M = {}
 local BP_FILE = persist.getPersistPath() .. '/breakpoints.json'
 
 function M.saveBreakpoints()
-    vim.notify('Saving breakpoints', 'info', { title = 'DAP' })
+    vim.notify('Saving breakpoints...', 'info', { title = 'DAP' })
     if not persist.persistPathExists() then
         return
     end

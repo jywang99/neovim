@@ -126,13 +126,6 @@ if v:version >= 700
     autocmd BufEnter * call AutoRestoreWinView()
 endif
 
-
-""" WSL clipboard
-" if filereadable('/etc/wsl.conf')
-"     vmap <C-c> :w<Home>silent <End> !clip.exe<CR>
-" endif
-
-
 """ quickfix
 
 nmap <M-c> <CMD>cnext<CR>zz
