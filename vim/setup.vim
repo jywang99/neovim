@@ -76,10 +76,12 @@ vmap K :m '<-2<CR>gv=gv
 imap <C-c> <Esc>O
 
 " tabs
-nmap <leader>t :tabnew %<CR>
+nmap <leader>tt :tabnew %<CR>
 nmap <leader>z <C-w>T
-nmap <C-n> :tabnext<CR>
 nmap <C-p> :tabprevious<CR>
+nmap <C-n> :tabnext<CR>
+nmap <leader>tp :tabm -1<CR>
+nmap <leader>tn :tabm +1<CR>
 nmap <C-c> <CMD>tabclose<CR>
 
 " windows
@@ -87,7 +89,7 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
-nmap <C-q> <C-\><C-n><C-w>q
+nmap <C-q> :q<CR>
 
 " buffers
 nmap <BS> <CMD>b#<CR>
@@ -95,6 +97,9 @@ nmap <BS> <CMD>b#<CR>
 " diff
 nmap ]c ]czz
 nmap [c [czz
+
+" marks
+nmap <leader>md :delmarks a-zA-Z0-9<CR>
 
 
 """ Autocmds

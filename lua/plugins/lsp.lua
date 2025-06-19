@@ -52,22 +52,22 @@ return {
             lsp_zero.setup()
         end
     },
-    {
-        'Hoffs/omnisharp-extended-lsp.nvim',
-        lazy = true,
-        ft = { 'cs' },
-        dependencies = { 'VonHeikemen/lsp-zero.nvim' },
-        config = function()
-            local omni_ext = require('omnisharp_extended')
-            require('lspconfig').omnisharp.setup {
-                handlers = {
-                    ["textDocument/definition"] = omni_ext.definition_handler,
-                    ["textDocument/typeDefinition"] = omni_ext.type_definition_handler,
-                    ["textDocument/references"] = omni_ext.references_handler,
-                    ["textDocument/implementation"] = omni_ext.implementation_handler,
-                },
-            }
-        end
-    },
+    -- {
+    --     'Hoffs/omnisharp-extended-lsp.nvim',
+    --     lazy = true,
+    --     ft = { 'cs' },
+    --     dependencies = { 'VonHeikemen/lsp-zero.nvim' },
+    --     config = function()
+    --         local omni_ext = require('omnisharp_extended')
+    --         require('lspconfig').omnisharp.setup {
+    --             handlers = {
+    --                 ["textDocument/definition"] = omni_ext.definition_handler,
+    --                 ["textDocument/typeDefinition"] = omni_ext.type_definition_handler,
+    --                 ["textDocument/references"] = omni_ext.references_handler,
+    --                 ["textDocument/implementation"] = omni_ext.implementation_handler,
+    --             },
+    --         }
+    --     end
+    -- },
 }
 
