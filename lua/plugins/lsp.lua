@@ -36,13 +36,6 @@ return {
                     }
                 }
             })
-            lsp_config.pyright.setup {}
-            lsp_config.dockerls.setup {}
-            lsp_config.docker_compose_language_service.setup {}
-            lsp_config.bashls.setup {}
-            lsp_config.jsonls.setup {}
-            lsp_config.lemminx.setup {}
-            lsp_config.clangd.setup {}
 
             lsp_zero.setup()
         end
