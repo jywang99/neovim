@@ -20,10 +20,9 @@ return {
         config = function()
             local lsp_zero = require('lsp-zero')
             require('mason-lspconfig').setup({
-                ensure_installed = { 'eslint', 'lua_ls', 'jdtls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls', 'jsonls', 'gopls', 'clangd', 'svelte', 'omnisharp' },
+                ensure_installed = { 'eslint', 'lua_ls', 'pyright', 'dockerls', 'docker_compose_language_service', 'bashls', 'jsonls', 'gopls', 'clangd', 'svelte', 'omnisharp' },
                 handlers = {
                     lsp_zero.default_setup,
-                    jdtls = lsp_zero.noop,
                 }
             })
 
@@ -45,29 +44,16 @@ return {
             lsp_config.lemminx.setup {}
             lsp_config.clangd.setup {}
 
-            lsp_config.gopls.setup {
-                staticcheck = true,
-            }
-
             lsp_zero.setup()
         end
     },
-    -- {
-    --     'Hoffs/omnisharp-extended-lsp.nvim',
-    --     lazy = true,
-    --     ft = { 'cs' },
-    --     dependencies = { 'VonHeikemen/lsp-zero.nvim' },
-    --     config = function()
-    --         local omni_ext = require('omnisharp_extended')
-    --         require('lspconfig').omnisharp.setup {
-    --             handlers = {
-    --                 ["textDocument/definition"] = omni_ext.definition_handler,
-    --                 ["textDocument/typeDefinition"] = omni_ext.type_definition_handler,
-    --                 ["textDocument/references"] = omni_ext.references_handler,
-    --                 ["textDocument/implementation"] = omni_ext.implementation_handler,
-    --             },
-    --         }
-    --     end
-    -- },
+    {
+        'nvim-java/nvim-java',
+        ft = { 'java' },
+        config = function()
+            require('java').setup()
+            require('lspconfig').jdtls.setup({})
+        end
+    }
 }
 

@@ -134,7 +134,7 @@ endif
 """ quickfix
 
 nmap <M-c> <CMD>cnext<CR>zz
-nmap <M-q> <CMD>cprev<CR>zz
+nmap <M-x> <CMD>cprev<CR>zz
 nmap <leader>co <cmd>copen<cr>
 nmap <leader>cc <cmd>cclose<cr>
 nmap <leader>cp <cmd>colder<cr>
