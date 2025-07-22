@@ -9,6 +9,9 @@ return {
 
             map("n", "<leader>gl", gitsigns.blame_line, { desc = "Blame" })
             map("n", "<leader>gp", gitsigns.preview_hunk, { desc = "Preview Hunk" })
+            map("n", "<leader>gs", gitsigns.stage_hunk, { desc = "Stage Hunk" })
+            map("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Reset Hunk" })
+            map("n", "<leader>gq", gitsigns.setqflist, { desc = "Show in QF" })
 
             map("n", "]g", gitsigns.next_hunk, { desc = "Next Git Hunk" })
             map("n", "[g", gitsigns.prev_hunk, { desc = "Previous Git Hunk" })
