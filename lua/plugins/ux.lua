@@ -48,6 +48,7 @@ return {
                     lualine_a = {'mode'},
                     lualine_b = {'branch', 'diff', 'diagnostics'},
                     lualine_c = {'filename'},
+                    lualine_x = {},
                     lualine_y = {{ 'encoding', show_bomb = true, }, 'fileformat', 'filetype'},
                     lualine_z = {'progress', 'location'},
                 },
