@@ -17,49 +17,6 @@ nvim
 ```
 Dependencies will be automatically installed by Lazy.nvim
 
-### Offline installation
-
-**Prerequisite**: you have a working neovim installation that you want to copy to another machine
-
-**Step 1.** Transfer `~/.local/share/nvim`
-1. Generate a tarball containing all Neovim config files and dependencies
-```bash
-make tarball
-```
-2. Copy the tarball to the target machine, and apply configs
-On source machine:
-```bash
-scp ./dist/nvim.tar.gz user@target-machine:/path/to/destination
-```
-3. On target machine:
-```bash
-tar -xzf /path/to/destination/nvim.tar.gz -C ~/.config
-```
-
-**Step 2.** Transfer `~/.config/nvim`
-1. Copy this repository to the target machine
-```bash
-scp -r . user@target-machine:/path/to/destination
-```
-2. Follow steps 3 and 4 of [Setup locally](#setup-locally)
-
-### Nerdfont support
-
-Make sure to install a [Nerdfont](https://www.nerdfonts.com/) for icons to display correctly.\
-The terminal emulator of your choice must be set up to use the font.
-
-## The `.nvim` directory
-
-This directory is used to store configuration files and temporary files that are specific to a workspace. It's like the `.idea` or `.vscode` directory, but specifically for my version of Neovim configuration.
-
-Within nvim, use the command `:W` to create a `.nvim` directory under cwd. By default it will just contain a `.gitignore` file, and when the workspace is closed, the following will be created inside:
-1. `workspace.vim` - used to save/restore the nvim workspace (like windows, tabs, etc.)
-2. `shada` - used to save/restore the command history, search history, and marks
-
-The following files can be created manually according to the needs of the project:
-1. `launch.json` - configurations for debugging (see below)
-2. `tsignore` - list of file patterns to ignore for `telescope` searches
-
 ### launch.json
 
 `launch.json` is supported for debugging using `nvim-dap` (see [dap documentation](https://github.com/mfussenegger/nvim-dap/blob/master/doc/dap.txt) for more info).
