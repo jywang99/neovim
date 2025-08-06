@@ -78,7 +78,7 @@ return {
 
             -- debugging controls
             map("n", "<M-d>", dbg.readConfigAndDebug, { desc = "Load launch.json and debug" })
-            map("n", "<M-r>", dap.continue, { desc = "Debug continue" })
+            map("n", "<M-s>", dap.continue, { desc = "Debug continue" })
             map("n", "<M-a>", dap.run_last, { desc = "Rerun last debug" })
             map("n", "<M-n>", dap.step_over, { desc = "Debug step over" })
             map("n", "<M-i>", dap.step_into, { desc = "Debug step into" })
