@@ -22,7 +22,7 @@ Dependencies will be automatically installed by Lazy.nvim
 `launch.json` is supported for debugging using `nvim-dap` (see [dap documentation](https://github.com/mfussenegger/nvim-dap/blob/master/doc/dap.txt) for more info).
 
 #### pytest example
-```
+```json
 {
     "name": "Pytest integration",
     "type": "python",
@@ -32,13 +32,28 @@ Dependencies will be automatically installed by Lazy.nvim
 ```
 
 #### Java example
-```
+```json
 {
     "name": "Launch",
     "type": "java",
     "request": "launch",
     "mainClass": "com.example.demo.DemoApplication",
     "args": "--spring.profiles.active=dev"
+}
+```
+
+Full example:
+```json
+{
+    "configurations": [
+        {
+            "name": "Pytest integration",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "args": ["-k", "example_test"]
+        }
+    ]
 }
 ```
 
