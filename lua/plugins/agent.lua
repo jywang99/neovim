@@ -30,22 +30,25 @@ return {
             behaviour = {
                 auto_approve_tool_permissions = false,
             },
-        mappings = {
-            submit = {
-                insert = "<C-j>",
-            },
-            sidebar = {
-                close_from_input = {
-                    normal = "<Esc>",
+            mappings = {
+                submit = {
+                    insert = "<C-j>",
+                },
+                sidebar = {
+                    close_from_input = {
+                        normal = "<Esc>",
+                    },
                 },
             },
-        },
+            selection = {
+                hint_display = "none",
+            },
         },
         dependencies = {
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
             "zbirenbaum/copilot.lua",
         },
-    }
+    },
 }
 
