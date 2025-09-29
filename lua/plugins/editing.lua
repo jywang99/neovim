@@ -170,20 +170,5 @@ return {
             require('nvim-ts-autotag').setup()
         end
     },
-    {
-        'github/copilot.vim',
-
-        vim.keymap.set("n", "<leader>ai", ":Copilot enable<CR>", { desc = "Enable Copilot" });
-        vim.keymap.set("n", "<leader>an", ":Copilot disable<CR>", { desc = "Disable Copilot" });
-
-        config = function()
-            local function acceptWord()
-                vim.fn['copilot#Accept']("")
-                local bar = vim.fn['copilot#TextQueuedForInsertion']()
-                return vim.fn.split(bar,  [[[ *.]\zs]])[1]
-            end
-            map('i', '<C-f>', acceptWord, {expr = true, remap = false})
-        end
-    },
 }
 
